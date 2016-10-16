@@ -1,0 +1,73 @@
+{% extends 'layout.html.twig' %}
+
+{% block body %}
+    {{ parent() }}
+    <div class="main container">
+        <div class="row well">
+            <div class="col-md-6">
+                <div class="page-header">
+                    <h2>Nuevo Usuario</h2>
+                </div>
+                {{ form_start(form, {'attr' : {'novalidate':'novalidate', 'role' : 'form'} }) }}
+                
+                <div class="form-group">
+                    {{ form_label(form.nombre) }}
+                    {{ form_widget(form.nombre, {'attr' : {'class' : 'form-control', 'placeholder' : 'Tu nombre'} }) }}
+                    <span class="text-danger">{{ form_errors(form.nombre) }}</span>
+                </div>
+            
+                <div class="form-group">
+                    {{ form_label(form.apellidos) }}
+                    {{ form_widget(form.apellidos, {'attr' : {'class' : 'form-control', 'placeholder' : 'Tus apellidos'} }) }}
+                    <span class="text-danger">{{ form_errors(form.apellidos) }}</span>
+                </div>
+                
+                <div class="form-group">
+                    {{ form_label(form.fNacimiento) }}
+                    {{ form_widget(form.fNacimiento, {'attr' : {'class' : 'form-control', 'placeholder' : 'Tu fecha de nacimiento'} }) }}
+                    <span class="text-danger">{{ form_errors(form.fNacimiento) }}</span>
+                </div>
+                
+                <div class="form-group">
+                    {{ form_label(form.sexo) }}
+                    {{ form_widget(form.sexo, {'attr' : {'class' : 'form-control', 'placeholder' : 'Hombre(H) o Mujer(M)'} }) }}
+                    <span class="text-danger">{{ form_errors(form.sexo) }}</span>
+                </div>
+                
+                <div class="form-group">
+                    {{ form_label(form.email) }}
+                    {{ form_widget(form.email, {'attr' : {'class' : 'form-control', 'placeholder' : 'Tu email'} }) }}
+                    <span class="text-danger">{{ form_errors(form.email) }}</span>
+                </div>
+                
+                <div class="form-group">
+                    {{ form_label(form.telefono) }}
+                    {{ form_widget(form.telefono, {'attr' : {'class' : 'form-control', 'placeholder' : 'Tu telefono'} }) }}
+                    <span class="text-danger">{{ form_errors(form.telefono) }}</span>
+                </div>
+                
+                <div class="form-group">
+                    {{ form_label(form.tipo) }}
+                    {{ form_widget(form.tipo, {'attr' : {'class' : 'form-control'} }) }}
+                    <span class="text-danger">{{ form_errors(form.tipo) }}</span>
+                </div>
+                
+                <div class="form-group">
+                    {{ form_label(form.usuario) }}
+                    {{ form_widget(form.usuario, {'attr' : {'class' : 'form-control', 'placeholder' : 'Tu usuario'} }) }}
+                    <span class="text-danger">{{ form_errors(form.usuario) }}</span>
+                </div>
+                
+                <div class="form-group">
+                    {{ form_label(form.password) }}
+                    {{ form_widget(form.password, {'attr' : {'class' : 'form-control', 'placeholder' : 'Tu password'} }) }}
+                    <span class="text-danger">{{ form_errors(form.password) }}</span>
+                </div>
+                <p>
+                    {{ form_widget(form.save, {'label': 'Crear usuario', 'attr':{'class':'btn btn-success'}}) }}
+                </p>
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}
