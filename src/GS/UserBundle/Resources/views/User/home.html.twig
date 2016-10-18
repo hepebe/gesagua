@@ -1,0 +1,23 @@
+{% extends 'layout.html.twig' %}
+
+{% block body %}
+	{{ parent() }}
+	<div class="container">
+        <h2 class="text-center">
+            Bienvenido
+            {% if app.user.tipo == 'Gestor' %}
+                Gestor
+            {% elseif app.user.tipo == 'Administrador' %}
+                Administrador
+            {% elseif app.user.tipo == 'Lecturista' %}
+                Lecturista
+            {% elseif app.user.tipo == 'Fontanero' %}
+                Fontanero
+            {% elseif app.user.tipo == 'Auxiliar' %}
+                Auxiliar
+            {% endif %}
+            :
+            {{ app.user.usuario }}
+        </h2>
+	</div>
+{% endblock %}

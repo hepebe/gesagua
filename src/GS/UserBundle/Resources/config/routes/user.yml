@@ -1,0 +1,48 @@
+gs_user_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: GSUserBundle:Default:index }
+
+gs_user_index:
+    path:     /index
+    defaults: { _controller: GSUserBundle:User:index }
+
+gs_user_add:
+    path:     /add
+    defaults: { _controller: GSUserBundle:User:add }
+
+gs_user_create:
+    path:     /create
+    defaults: { _controller: GSUserBundle:User:create }
+    methods: POST
+    
+gs_user_edit:
+    path:     /edit/{id}
+    defaults: { _controller: GSUserBundle:User:edit }
+
+gs_user_update:
+    path:     /update/{id}
+    defaults: { _controller: GSUserBundle:User:update }
+    methods: [POST, PUT]
+
+gs_user_view:
+    path:     /view/{id}
+    defaults: { _controller: GSUserBundle:User:view }
+
+gs_user_delete:
+    path:     /delete/{id}
+    defaults: { _controller: GSUserBundle:User:delete }
+    methods: [POST, DELETE]
+
+gs_user_redirect_add:
+    path:     /create
+    defaults: 
+        _controller: GSUserBundle:User:add
+        path:   /add
+        permanent: true
+
+gs_user_redirect_edit:
+    path:     /update/{id}
+    defaults: 
+        _controller: GSUserBundle:User:edit
+        path:   /edit/{id}
+        permanent: true

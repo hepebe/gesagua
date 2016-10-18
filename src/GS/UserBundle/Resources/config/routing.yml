@@ -1,48 +1,20 @@
+gs_user_user:
+    resource: "@GSUserBundle/Resources/config/routes/user.yml"
+    prefix: /user
+
+# Autentication
+
 gs_user_homepage:
-    path:     /hello/{name}
-    defaults: { _controller: GSUserBundle:Default:index }
+    path:   /
+    defaults: { _controller: GSUserBundle:User:home }
 
-gs_user_index:
-    path:     /user/index
-    defaults: { _controller: GSUserBundle:User:index }
+gs_user_login:
+    path:   /login
+    defaults: { _controller: GSUserBundle:Security:login }
 
-gs_user_add:
-    path:     /user/add
-    defaults: { _controller: GSUserBundle:User:add }
-
-gs_user_create:
-    path:     /user/create
-    defaults: { _controller: GSUserBundle:User:create }
-    methods: POST
+gs_user_login_check:
+    path:   /login_check
+    defaults: { _controller: GSUserBundle:User:loginCheck }
     
-gs_user_edit:
-    path:     /user/edit/{id}
-    defaults: { _controller: GSUserBundle:User:edit }
-
-gs_user_update:
-    path:     /user/update/{id}
-    defaults: { _controller: GSUserBundle:User:update }
-    methods: [POST, PUT]
-
-gs_user_view:
-    path:     /user/view/{id}
-    defaults: { _controller: GSUserBundle:User:view }
-
-gs_user_delete:
-    path:     /user/delete/{id}
-    defaults: { _controller: GSUserBundle:User:delete }
-    methods: [POST, DELETE]
-
-gs_user_redirect_add:
-    path:     /user/create
-    defaults: 
-        _controller: GSUserBundle:User:add
-        path:   /user/add
-        permanent: true
-
-gs_user_redirect_edit:
-    path:     /user/update/{id}
-    defaults: 
-        _controller: GSUserBundle:User:edit
-        path:   /user/edit/{id}
-        permanent: true
+gs_user_logout:
+    path:   /logout

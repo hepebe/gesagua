@@ -12,7 +12,10 @@
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
+    
+   
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      {% if(app.user.tipo=='Gestor') %}
       <ul class="nav navbar-nav">
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Usuarios <span class="caret"></span></a>
@@ -20,6 +23,63 @@
             <li><a href="{{path('gs_user_index')}}">Lista usuarios</a></li>
             <li><a href="{{path('gs_user_add')}}">Nuevo usuario</a></li>
           </ul>
+        </li>
+      </ul>
+      {% elseif(app.user.tipo=='Administrador') %}
+      <ul class="nav navbar-nav">
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Clientes <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="#">Lista clientes</a></li>
+            <li><a href="#">Nuevo clientes</a></li>
+          </ul>
+        </li>
+      </ul>
+      <ul class="nav navbar-nav">
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Contadores <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="#">Lista contadores</a></li>
+            <li><a href="#">Nuevo contador</a></li>
+          </ul>
+        </li>
+      </ul>
+      {% elseif(app.user.tipo=='Lecturista') %}
+      <ul class="nav navbar-nav">
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Lecturas <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="#">Rutas de lecturas</a></li>
+            <li><a href="#">Registro de consumo</a></li>
+          </ul>
+        </li>
+      </ul>
+      {% elseif(app.user.tipo=='Fontanero') %}
+      <ul class="nav navbar-nav">
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Averías <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="#">Lista averias</a></li>
+            <li><a href="#">Nueva avería</a></li>
+            <li><a href="#">Resolución avería</a></li>
+          </ul>
+        </li>
+      </ul>
+      {% elseif(app.user.tipo=='Auxiliar') %}
+      <ul class="nav navbar-nav">
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Reclamaciones <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="#">Lista reclamaciones</a></li>
+            <li><a href="#">Nueva reclamación</a></li>
+            <li><a href="#">Resolución reclamaciones</a></li>
+          </ul>
+        </li>
+      </ul>
+      {% endif %}
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+          <a href="{{ path('gs_user_logout') }}">Cerrar sesión</a>
         </li>
       </ul>
     </div><!-- /.navbar-collapse -->

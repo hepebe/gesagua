@@ -12,6 +12,10 @@ use GS\UserBundle\Form\UserType;
 
 class UserController extends Controller
 {
+    public function homeAction(){
+        return $this->render('GSUserBundle:User:home.html.twig');
+    }
+    
     public function indexAction()
     {
         $gs = $this->getDoctrine()->getManager();
