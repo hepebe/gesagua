@@ -24,7 +24,10 @@ class UserController extends Controller
         }
         
         return new Response($res);*/
-        return $this ->render('GSUserBundle:User:index.html.twig', array('users'=>$users));
+        
+        $deleteFormAjax = $this->createCustomForm(':USER_ID', 'DELETE', 'gs_user_delete');
+        
+        return $this ->render('GSUserBundle:User:index.html.twig', array('users'=>$users, 'delete_form_ajax' => $deleteFormAjax->createView()));
         
     }
     
@@ -158,17 +161,9 @@ class UserController extends Controller
             throw $this->createNotFoundException('Usuario no encontrado');
         }
         
-        $deleteForm= $this->createDeleteForm($user);
+        $deleteForm= $this->createCustomForm($user->getId(),'DELETE','gs_user_delete');
         
         return $this->render('GSUserBundle:User:view.html.twig', array('user'=>$user, 'delete_form'=>$deleteForm->createView()));
-    }
-    
-    private function createDeleteForm($user)
-    {
-      return $this->createFormBuilder()
-        ->setAction($this->generateUrl('gs_user_delete', array('id' =>$user->getId())))
-        ->setMethod('DELETE')
-        ->getForm();
     }
 
     public function deleteAction(Request $request, $id)
@@ -181,15 +176,51 @@ class UserController extends Controller
             throw $this->createNotFoundException('Usuario no encontrado');
         }
         
-        $form = $this->createDeleteForm($user);
+        
+        //$form = $this->createDeleteForm($user);
+        $form= $this->createCustomForm($user->getId(), 'DELETE', 'gs_user_delete');
         $form->handleRequest($request);
         
         if($form->isSubmitted() &&  $form->isValid())
         {
-            $gs->remove($user);
-            $gs->flush();
-            $this->addFlash('mensaje','El usuario se ha eliminado correctamente.');
+            if($request->isXMLHttpRequest()){
+                $res = $this->deleteUser($user->getTipo(), $gs, $user);
+                return new Response(
+                        json_encode(array('removed' => $res['removed'], 
+                                          'message' => $res['message'])),
+                        200,
+                        array('Content-Type' => 'application/json')
+                    );
+            }
+            
+            $res = $this->deleteUser($user->getTipo(), $gs, $user);
+            $this->addFlash($res['alert'], $res['message']);
             return $this->redirectToRoute('gs_user_index');
         }
+    }
+    
+    private function deleteUser($tipo, $gs, $user)
+    {
+        if($tipo == 'Administrador' || $tipo == 'Lecturista' || $tipo == 'Fontanero' || $tipo == 'Auxiliar'){
+            $gs->remove($user);
+            $gs->flush();
+            $message = 'El usuario se ha eliminado correctamente.';
+            $removed = 1;
+            $alert = 'mensaje';
+        }
+        elseif($tipo == 'Gestor'){
+             $message = 'El usuario no se ha eliminado.';
+             $removed= 0;
+             $alert = 'error';
+        }
+        
+        return array('removed'=>$removed, 'message'=>$message, 'alert'=>$alert);
+    }
+    private function createCustomForm($id, $method, $route)
+    {
+        return $this->createFormBuilder()
+            ->setAction($this->generateUrl($route, array('id'=>$id)))
+            ->setMethod($method)
+            ->getForm();
     }
 }

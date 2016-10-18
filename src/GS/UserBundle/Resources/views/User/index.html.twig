@@ -2,8 +2,25 @@
 
 {% block body %}
     {{ parent() }}
+    {% if flashMessage is not defined %}
+        <div class="alert alert-success hidden" id="message" role="alert">
+            <div class="container"> 
+                <span id="user-message"></span>
+            </div>
+        </div>
+        <div class="alert alert-danger hidden" id="message-danger" role="alert">
+            <div class="container"> 
+                <span id="user-message-danger"></span>
+            </div>
+        </div>
+    {% endif %}
     {% for flashMessage in app.session.flashbag.get('mensaje') %}
         <div class="alert alert-success" role="alert">
+            <div class="container"> {{ flashMessage }}</div>
+        </div>
+    {% endfor %}
+    {% for flashMessage in app.session.flashbag.get('error') %}
+        <div class="alert alert-danger" role="alert">
             <div class="container"> {{ flashMessage }}</div>
         </div>
     {% endfor %}
@@ -27,7 +44,7 @@
                     </thead>
                     <tbody>
                        {% for user in users %}
-                            <tr>
+                            <tr data-id="{{user.id}}">
                                 <td>{{ user.nombre }}</td>
                                 <td>{{ user.apellidos }}</td>
                                 <td>{{ user.fNacimiento |date('d-m-Y') }}</td>
@@ -38,6 +55,7 @@
                                 <td class="actions">
                                     <a href="{{ path('gs_user_view', { id:user.id }) }}" class="btn btn-sm btn-info">Ver</a>
                                     <a href="{{ path('gs_user_edit', { id:user.id }) }}" class="btn btn-sm btn-primary">Editar</a>
+                                    <a href="#" class="btn btn-sm btn-danger btn-delete">Eliminar</a>
                                 </td>
                             </tr>
                         {% endfor %} 
@@ -46,4 +64,10 @@
             </div>
         </div>
     </div>
+    {{ include('GSUserBundle:User:forms/form.html.twig', { form: delete_form_ajax, message: '¿Estás seguro?', id:'form-delete', with_submit: false}) }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('bundles/gsuser/js/delete-user.js') }}"></script>
 {% endblock %}
