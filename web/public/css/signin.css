@@ -15,7 +15,15 @@ body {
   margin: 0 auto;
   background-color: #eee;
   border-radius: 5px;
+  text-align: center;
 }
+
+.form-signin #logotipo {
+  width: 100px;
+  height: 85px;
+  border-radius: 30%;
+}
+
 .form-signin .form-signin-heading,
 .form-signin .checkbox {
   margin-bottom: 10px;

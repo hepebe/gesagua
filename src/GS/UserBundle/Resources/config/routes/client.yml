@@ -1,0 +1,48 @@
+gs_client_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: GSUserBundle:Default:index }
+
+gs_client_index:
+    path:     /index
+    defaults: { _controller: GSUserBundle:Client:index }
+
+gs_client_add:
+    path:     /add
+    defaults: { _controller: GSUserBundle:Client:add }
+
+gs_client_create:
+    path:     /create
+    defaults: { _controller: GSUserBundle:Client:create }
+    methods: POST
+    
+gs_client_edit:
+    path:     /edit/{id}
+    defaults: { _controller: GSUserBundle:Client:edit }
+
+gs_client_update:
+    path:     /update/{id}
+    defaults: { _controller: GSUserBundle:Client:update }
+    methods: [POST, PUT]
+
+gs_client_view:
+    path:     /view/{id}
+    defaults: { _controller: GSUserBundle:Client:view }
+
+gs_client_delete:
+    path:     /delete/{id}
+    defaults: { _controller: GSUserBundle:Client:delete }
+    methods: [POST, DELETE]
+
+gs_client_redirect_add:
+    path:     /create
+    defaults: 
+        _controller: GSUserBundle:Client:add
+        path:   /add
+        permanent: true
+
+gs_client_redirect_edit:
+    path:     /update/{id}
+    defaults: 
+        _controller: GSUserBundle:Client:edit
+        path:   /edit/{id}
+        permanent: true

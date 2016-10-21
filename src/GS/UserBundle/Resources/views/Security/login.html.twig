@@ -10,7 +10,7 @@
 
     <div class="container">
 		<form action="{{ path('gs_user_login_check') }}" method="post" class="form-signin">
-			<h2 class="form-signin-heading">LOGIN</h2>
+			<img src="{{ asset('public/images/logotipo.png') }}" id="logotipo" /></br></br>
 			
 			{% if error %}
 			<div class="text-danger">
@@ -24,7 +24,7 @@
 
 		    <label for="username" class="sr-only">Usuario:</label>
 		    <input type="text" id="username" class="form-control" name="_username" value="{{ last_username }}" placeholder="Usuario" required autofocus />
-
+		    
 		    <label for="password" class="sr-only">Contraseña:</label>
 		    <input type="password" id="password" class="form-control" name="_password" placeholder="Contraseña" required />
 		    

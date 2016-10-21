@@ -2,6 +2,10 @@ gs_user_user:
     resource: "@GSUserBundle/Resources/config/routes/user.yml"
     prefix: /user
 
+gs_client_client:
+    resource: "@GSUserBundle/Resources/config/routes/client.yml"
+    prefix: /client
+
 # Autentication
 
 gs_user_homepage:

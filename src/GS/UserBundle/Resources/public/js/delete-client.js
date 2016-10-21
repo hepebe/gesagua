@@ -10,7 +10,7 @@ $(document).ready(function(){
        
        var form= $('#form-delete');
        
-       var url = form.attr('action').replace(':USER_ID', id);
+       var url = form.attr('action').replace(':CLIENT_ID', id);
        
        var data = form.serialize();
        
@@ -23,9 +23,6 @@ $(document).ready(function(){
                      row.fadeOut();
                      $('#message').removeClass('hidden');
                      $('#user-message').text(result.message);
-                 } else{
-                     $('#message-danger').removeClass('hidden');
-                     $('#user-message-danger').text(result.message);
                  }
               });
           } 

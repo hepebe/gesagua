@@ -15,7 +15,7 @@
     
    
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      {% if(app.user.tipo=='Gestor') %}
+      {% if(app.user.tipo=='Administrador') %}
       <ul class="nav navbar-nav">
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Usuarios <span class="caret"></span></a>
@@ -25,13 +25,13 @@
           </ul>
         </li>
       </ul>
-      {% elseif(app.user.tipo=='Administrador') %}
+      {% elseif(app.user.tipo=='Gestor') %}
       <ul class="nav navbar-nav">
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Clientes <span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="#">Lista clientes</a></li>
-            <li><a href="#">Nuevo clientes</a></li>
+            <li><a href="{{path('gs_client_index')}}">Lista clientes</a></li>
+            <li><a href="{{path('gs_client_add')}}">Nuevo clientes</a></li>
           </ul>
         </li>
       </ul>
@@ -44,12 +44,22 @@
           </ul>
         </li>
       </ul>
+      <ul class="nav navbar-nav">
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Facturas <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="#">Lista facturas</a></li>
+            <li><a href="#">Nueva factura</a></li>
+          </ul>
+        </li>
+      </ul>
       {% elseif(app.user.tipo=='Lecturista') %}
       <ul class="nav navbar-nav">
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Lecturas <span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="#">Rutas de lecturas</a></li>
+            <li><a href="#">Lista rutas</a></li>
+            <li><a href="#">Nueva ruta</a></li>
             <li><a href="#">Registro de consumo</a></li>
           </ul>
         </li>

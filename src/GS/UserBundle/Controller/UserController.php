@@ -181,7 +181,6 @@ class UserController extends Controller
         }
         
         
-        //$form = $this->createDeleteForm($user);
         $form= $this->createCustomForm($user->getId(), 'DELETE', 'gs_user_delete');
         $form->handleRequest($request);
         
@@ -205,14 +204,14 @@ class UserController extends Controller
     
     private function deleteUser($tipo, $gs, $user)
     {
-        if($tipo == 'Administrador' || $tipo == 'Lecturista' || $tipo == 'Fontanero' || $tipo == 'Auxiliar'){
+        if($tipo == 'Gestor' || $tipo == 'Lecturista' || $tipo == 'Fontanero' || $tipo == 'Auxiliar'){
             $gs->remove($user);
             $gs->flush();
             $message = 'El usuario se ha eliminado correctamente.';
             $removed = 1;
             $alert = 'mensaje';
         }
-        elseif($tipo == 'Gestor'){
+        elseif($tipo == 'Administrador'){
              $message = 'El usuario no se ha eliminado.';
              $removed= 0;
              $alert = 'error';
@@ -220,6 +219,7 @@ class UserController extends Controller
         
         return array('removed'=>$removed, 'message'=>$message, 'alert'=>$alert);
     }
+    
     private function createCustomForm($id, $method, $route)
     {
         return $this->createFormBuilder()
