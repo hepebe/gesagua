@@ -1,0 +1,48 @@
+gs_zone_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: GSUserBundle:Default:index }
+
+gs_zone_index:
+    path:     /index
+    defaults: { _controller: GSUserBundle:Zone:index }
+
+gs_zone_add:
+    path:     /add
+    defaults: { _controller: GSUserBundle:Zone:add }
+
+gs_zone_create:
+    path:     /create
+    defaults: { _controller: GSUserBundle:Zone:create }
+    methods: POST
+    
+gs_zone_edit:
+    path:     /edit/{id}
+    defaults: { _controller: GSUserBundle:Zone:edit }
+
+gs_zone_update:
+    path:     /update/{id}
+    defaults: { _controller: GSUserBundle:Zone:update }
+    methods: [POST, PUT]
+
+gs_zone_view:
+    path:     /view/{id}
+    defaults: { _controller: GSUserBundle:Zone:view }
+
+gs_zone_delete:
+    path:     /delete/{id}
+    defaults: { _controller: GSUserBundle:Zone:delete }
+    methods: [POST, DELETE]
+
+gs_zone_redirect_add:
+    path:     /create
+    defaults: 
+        _controller: GSUserBundle:Zone:add
+        path:   /add
+        permanent: true
+
+gs_zone_redirect_edit:
+    path:     /update/{id}
+    defaults: 
+        _controller: GSUserBundle:Zone:edit
+        path:   /edit/{id}
+        permanent: true

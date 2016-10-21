@@ -25,6 +25,24 @@
           </ul>
         </li>
       </ul>
+      <ul class="nav navbar-nav">
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Zonas <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="{{path('gs_zone_index')}}">Lista zonas</a></li>
+            <li><a href="{{path('gs_zone_add')}}">Nueva zona</a></li>
+          </ul>
+        </li>
+      </ul>
+      <ul class="nav navbar-nav">
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Calles <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="{{path('gs_zone_index')}}">Lista calles</a></li>
+            <li><a href="{{path('gs_zone_add')}}">Nueva calle</a></li>
+          </ul>
+        </li>
+      </ul>
       {% elseif(app.user.tipo=='Gestor') %}
       <ul class="nav navbar-nav">
         <li class="dropdown">

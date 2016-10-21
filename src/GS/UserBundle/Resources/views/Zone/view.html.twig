@@ -1,0 +1,38 @@
+{% extends 'layout.html.twig' %}
+
+{% block body %}
+	{{ parent() }}
+	<div class="container well">
+	    <div class="col-md-9">
+	    <h2>{{ zone.nombre }}</h2>
+	        <br>
+	        <dl>
+	            <dt>{{'Nombre'}}</dt>
+	            <dd>
+	                {{ zone.nombre }}
+	                &nbsp;
+	            </dd>
+	            <br>
+
+	            <dt>{{'Municipio'}}</dt>
+	            <dd>
+	                {{ zone.municipio }}
+	                &nbsp;
+	            </dd>
+	            <br>
+	        </dl>
+	    </div>
+	    <div class="col-md-3">
+	    	<h3>{{ 'Acciones'}}:</h3>
+			<p>
+		    	<a href="{{ path('gs_zone_edit', { id: zone.id }) }}" class="btn btn-primary btn-lg btn-block">
+		    		<span class="glyphicon glyphicon-edit"></span>
+		        	{{ 'Editar zona' }}
+				 </a>
+			</p>
+		    <p>
+			   {{ include('GSUserBundle:Zone:forms/form.html.twig', { form: delete_form, message: '¿Estás seguro?'}) }}
+			</p>
+	    </div>
+	</div>
+{% endblock %}

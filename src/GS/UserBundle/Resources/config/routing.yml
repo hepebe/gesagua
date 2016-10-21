@@ -6,6 +6,9 @@ gs_client_client:
     resource: "@GSUserBundle/Resources/config/routes/client.yml"
     prefix: /client
 
+gs_zone_zone:
+    resource: "@GSUserBundle/Resources/config/routes/zone.yml"
+    prefix: /zone
 # Autentication
 
 gs_user_homepage:

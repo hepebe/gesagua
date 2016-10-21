@@ -1,0 +1,54 @@
+{% extends 'layout.html.twig' %}
+
+{% block body %}
+    {{ parent() }}
+    {% if flashMessage is not defined %}
+        <div class="alert alert-success hidden" id="message" role="alert">
+            <div class="container"> 
+                <span id="user-message"></span>
+            </div>
+        </div>
+    {% endif %}
+    {% for flashMessage in app.session.flashbag.get('mensaje') %}
+        <div class="alert alert-success" role="alert">
+            <div class="container"> {{ flashMessage }}</div>
+        </div>
+    {% endfor %}
+    <div class="container">
+        <div class="col-md-12">
+            <div class="page-header margin-none">
+                <h2 class="padding-none">Zonas</h2>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-stripted table-hover">
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Municipio</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                       {% for zone in zones %}
+                            <tr data-id="{{ zone.id }}">
+                                <td>{{ zone.nombre }}</td>
+                                <td>{{ zone.municipio }}</td>
+                                <td class="actions">
+                                    <a href="{{ path('gs_zone_view', {id: zone.id}) }}" class="btn btn-sm btn-info">Ver</a>
+                                    <a href="{{ path('gs_zone_edit', {id: zone.id}) }}" class="btn btn-sm btn-primary">Editar</a>
+                                    <a href="#" class="btn btn-sm btn-danger btn-delete">Eliminar</a>
+                                </td>
+                            </tr>
+                        {% endfor %} 
+                    </tbody>  
+                </table>
+            </div>
+        </div>
+    </div>
+    {{ include('GSUserBundle:Zone:forms/form.html.twig', { form: delete_form_ajax, message: '¿Estás seguro?', id: 'form-delete', with_submit: false}) }}
+{% endblock %}
+
+{% block javascripts%}
+    {{ parent() }}
+    <script src="{{ asset('bundles/gsuser/js/delete-zone.js') }}"></script>
+{% endblock %}
+
