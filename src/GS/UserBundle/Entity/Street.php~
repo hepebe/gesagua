@@ -1,0 +1,101 @@
+<?php
+
+namespace GS\UserBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Street
+ *
+ * @ORM\Table(name="Calles")
+ * @ORM\Entity(repositoryClass="GS\UserBundle\Entity\StreetRepository")
+ */
+class Street
+{
+    /**
+     * @ORM\ManyToOne(targetEntity="Zone", inversedBy="streets")
+     * @ORM\JoinColumn(name="zone_id", referencedColumnName="id", onDelete="CASCADE")
+     */
+     
+    protected $zone;
+    
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="nombre", type="string", length=255)
+     */
+    private $nombre;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="idZona", type="integer")
+     */
+    private $idZona;
+
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set nombre
+     *
+     * @param string $nombre
+     * @return Street
+     */
+    public function setNombre($nombre)
+    {
+        $this->nombre = $nombre;
+
+        return $this;
+    }
+
+    /**
+     * Get nombre
+     *
+     * @return string 
+     */
+    public function getNombre()
+    {
+        return $this->nombre;
+    }
+
+    /**
+     * Set idZona
+     *
+     * @param integer $idZona
+     * @return Street
+     */
+    public function setIdZona($idZona)
+    {
+        $this->idZona = $idZona;
+
+        return $this;
+    }
+
+    /**
+     * Get idZona
+     *
+     * @return integer 
+     */
+    public function getIdZona()
+    {
+        return $this->idZona;
+    }
+}

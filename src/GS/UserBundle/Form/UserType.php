@@ -43,6 +43,6 @@ class UserType extends AbstractType
      */
     public function getName()
     {
-        return 'gs_userbundle_user';
+        return 'user';
     }
 }

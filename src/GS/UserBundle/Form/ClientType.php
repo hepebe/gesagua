@@ -42,6 +42,6 @@ class ClientType extends AbstractType
      */
     public function getName()
     {
-        return 'gs_userbundle_client';
+        return 'client';
     }
 }

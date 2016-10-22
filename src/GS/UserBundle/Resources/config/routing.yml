@@ -9,6 +9,11 @@ gs_client_client:
 gs_zone_zone:
     resource: "@GSUserBundle/Resources/config/routes/zone.yml"
     prefix: /zone
+    
+gs_street_street:
+    resource: "@GSUserBundle/Resources/config/routes/street.yml"
+    prefix: /street
+    
 # Autentication
 
 gs_user_homepage:

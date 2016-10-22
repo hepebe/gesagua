@@ -21,14 +21,6 @@ class UserController extends Controller
         $gs = $this->getDoctrine()->getManager();
         $users = $gs->getRepository('GSUserBundle:User')->findAll();
         
-       /* $res = 'lista de usuarios: </br>';
-        
-        foreach($users as $user){
-            $res .='Usuario: ' . $user->getNombre() . ' - Email: ' . $user->getEmail() . '</br>';
-        }
-        
-        return new Response($res);*/
-        
         $deleteFormAjax = $this->createCustomForm(':USER_ID', 'DELETE', 'gs_user_delete');
         
         return $this ->render('GSUserBundle:User:index.html.twig', array('users'=>$users, 'delete_form_ajax' => $deleteFormAjax->createView()));

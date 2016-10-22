@@ -132,42 +132,4 @@ class Zone implements UserInterface
     {
         
     }
-
-    /**
-     * Add streets
-     *
-     * @param \GS\UserBundle\Entity\Street $streets
-     * @return Zone
-     */
-    public function addStreet(\GS\UserBundle\Entity\Street $streets)
-    {
-        $this->streets[] = $streets;
-
-        return $this;
-    }
-
-    /**
-     * Remove streets
-     *
-     * @param \GS\UserBundle\Entity\Street $streets
-     */
-    public function removeStreet(\GS\UserBundle\Entity\Street $streets)
-    {
-        $this->streets->removeElement($streets);
-    }
-
-    /**
-     * Get streets
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getStreets()
-    {
-        return $this->streets;
-    }
-    
-    public function getfullzone()
-    {
-        return $this-> nombre . " " . $this->municipio;
-    }
 }
