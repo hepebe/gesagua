@@ -143,4 +143,9 @@ class Street
     {
         return $this->contracts;
     }
+    
+    public function getfullstreet()
+    {
+        return "C/" . $this-> nombre;
+    }
 }

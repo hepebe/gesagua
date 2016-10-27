@@ -1,0 +1,43 @@
+{% extends 'layout.html.twig' %}
+
+{% block body %}
+	{{ parent() }}
+	<div class="container well">
+	    <div class="col-md-9">
+	    <h2><b>Referencia: </b>{{ contract.id }}</h2>
+	        <br>
+	        <dl>
+	            <dt>{{'Cliente'}}</dt>
+	            <dd>
+	                {{ contract.client.fullclient }}
+	                &nbsp;
+	            </dd>
+	            <br>
+
+                <dt>{{'Calle'}}</dt>
+	            <dd>
+	                {{ contract.street.fullstreet }}
+	                &nbsp;
+	            </dd>
+	            <br>
+                
+                <dt>{{'Número de la vivienda'}}</dt>
+	            <dd>
+	                {{ contract.nVivienda }}
+	                &nbsp;
+	            </dd>
+	            <br>
+	            
+	        </dl>
+	    </div>
+	    <div class="col-md-3">
+	    	<h3>{{ 'Acciones'}}:</h3>
+			<p>
+		    	<a href="{{ path('gs_contract_edit', { id: contract.id }) }}" class="btn btn-primary btn-lg btn-block">
+		    		<span class="glyphicon glyphicon-edit"></span>
+		        	{{ 'Editar titular' }}
+				 </a>
+			</p>
+	    </div>
+	</div>
+{% endblock %}

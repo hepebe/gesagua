@@ -11,13 +11,13 @@
                 {{ form_start(form, {'attr' : {'novalidate':'novalidate', 'role' : 'form'} }) }}
                 
                 <div class="form-group">
-                    <b>Trabajador:</b>
+                    <b>Trabajador</b>
                     {{ form_widget(form.user, {'attr' : {'class' : 'form-control', 'placeholder' : 'usuario'} }) }}
                     <span class="text-danger">{{ form_errors(form.user) }}</span>
                 </div>
                 
                 <div class="form-group">
-                    <b>Cliente:</b>
+                    <b>Cliente</b>
                     {{ form_widget(form.client, {'attr' : {'class' : 'form-control', 'placeholder' : 'cliente'} }) }}
                     <span class="text-danger">{{ form_errors(form.client) }}</span>
                 </div>

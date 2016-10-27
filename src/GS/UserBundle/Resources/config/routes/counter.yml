@@ -1,0 +1,44 @@
+gs_counter_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: GSUserBundle:Default:index }
+
+gs_counter_index:
+    path:     /index
+    defaults: { _controller: GSUserBundle:Counter:index }
+
+gs_counter_add:
+    path:     /add
+    defaults: { _controller: GSUserBundle:Counter:add }
+
+gs_counter_create:
+    path:     /create
+    defaults: { _controller: GSUserBundle:Counter:create }
+    methods: POST
+    
+gs_counter_edit:
+    path:     /edit/{id}
+    defaults: { _controller: GSUserBundle:Counter:edit }
+
+gs_counter_update:
+    path:     /update/{id}
+    defaults: { _controller: GSUserBundle:Counter:update }
+    methods: [POST, PUT]
+
+gs_counter_view:
+    path:     /view/{id}
+    defaults: { _controller: GSUserBundle:Counter:view }
+
+
+gs_counter_redirect_add:
+    path:     /create
+    defaults: 
+        _controller: GSUserBundle:Counter:add
+        path:   /add
+        permanent: true
+
+gs_counter_redirect_edit:
+    path:     /update/{id}
+    defaults: 
+        _controller: GSUserBundle:Counter:edit
+        path:   /edit/{id}
+        permanent: true

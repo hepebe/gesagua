@@ -197,4 +197,9 @@ class Contract
     {
         return $this->counters;
     }
+    
+    public function getfullcontract()
+    {
+        return $this-> id . "- C/" . $this->street . " " . $this->nVivienda;
+    }
 }

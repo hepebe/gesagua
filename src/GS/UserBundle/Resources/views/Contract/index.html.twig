@@ -17,24 +17,26 @@
     <div class="container">
         <div class="col-md-12">
             <div class="page-header margin-none">
-                <h2 class="padding-none">Calles</h2>
+                <h2 class="padding-none">Contratos</h2>
             </div>
             <div class="table-responsive">
                 <table class="table table-stripted table-hover">
                     <thead>
                         <tr>
-                            <th>Nombre</th>
-                            <th>Zona</th>
+                            <th>Cliente</th>
+                            <th>Calle</th>
+                            <th>Número de la vivienda</th>
                         </tr>
                     </thead>
                     <tbody>
-                       {% for street in streets %}
-                            <tr data-id="{{ street.id }}">
-                                <td>{{ street.nombre }}</td>
-                                <td>{{ street.zone.fullzone }}</td>
+                       {% for contract in contracts %}
+                            <tr data-id="{{ contract.id }}">
+                                <td>{{ contract.client.fullclient }}</td>
+                                <td>{{ contract.street.fullstreet}}</td>
+                                <td>{{ contract.nVivienda }}</td>
                                 <td class="actions">
-                                    <a href="{{ path('gs_street_view', {id: street.id}) }}" class="btn btn-sm btn-info">Ver</a>
-                                    <a href="{{ path('gs_street_edit', {id: street.id}) }}" class="btn btn-sm btn-primary">Editar</a>
+                                    <a href="{{ path('gs_contract_view', {id: contract.id}) }}" class="btn btn-sm btn-info">Ver</a>
+                                    <a href="{{ path('gs_contract_edit', {id: contract.id}) }}" class="btn btn-sm btn-primary">Editar titular</a>
                                 </td>
                             </tr>
                         {% endfor %} 
@@ -43,11 +45,6 @@
             </div>
         </div>
     </div>
-    {{ include('GSUserBundle:Street:forms/form.html.twig', { form: delete_form_ajax, message: '¿Estás seguro?', id: 'form-delete', with_submit: false}) }}
 {% endblock %}
 
-{% block javascripts%}
-    {{ parent() }}
-    <script src="{{ asset('bundles/gsuser/js/delete-street.js') }}"></script>
-{% endblock %}
 

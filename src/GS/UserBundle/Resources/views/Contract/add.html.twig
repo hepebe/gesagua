@@ -1,0 +1,38 @@
+{% extends 'layout.html.twig' %}
+
+{% block body %}
+    {{ parent() }}
+    <div class="main container">
+        <div class="row well">
+            <div class="col-md-6">
+                <div class="page-header">
+                    <h2>Nuevo Contrato</h2>
+                </div>
+                {{ form_start(form, {'attr' : {'novalidate':'novalidate', 'role' : 'form'} }) }}
+                
+                <div class="form-group">
+                    <b>Cliente</b>
+                    {{ form_widget(form.client, {'attr' : {'class' : 'form-control', 'placeholder' : 'cliente'} }) }}
+                    <span class="text-danger">{{ form_errors(form.client) }}</span>
+                </div>
+            
+                <div class="form-group">
+                    <b>Calle</b>
+                    {{ form_widget(form.street, {'attr' : {'class' : 'form-control', 'placeholder' : 'calle'} }) }}
+                    <span class="text-danger">{{ form_errors(form.street) }}</span>
+                </div>
+                
+                <div class="form-group">
+                    <b>Número de la vivienda</b>
+                    {{ form_widget(form.nVivienda, {'attr' : {'class' : 'form-control', 'placeholder' : 'Número de la vivienda'} }) }}
+                    <span class="text-danger">{{ form_errors(form.nVivienda) }}</span>
+                </div>
+        
+                <p>
+                    {{ form_widget(form.save, {'label': 'Crear Contrato', 'attr':{'class':'btn btn-success'}}) }}
+                </p>
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}
