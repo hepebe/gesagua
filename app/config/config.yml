@@ -67,6 +67,7 @@ doctrine:
         #     path:     "%database_path%"
         mapping_types:
             enum: string
+            date: date
 
     orm:
         auto_generate_proxy_classes: "%kernel.debug%"

@@ -28,18 +28,6 @@
                 </div>
                 
                 <div class="form-group">
-                    {{ form_label(form.fNacimiento) }}
-                    {{ form_widget(form.fNacimiento, {'attr' : {'class' : 'form-control', 'placeholder' : 'Tu fecha de nacimiento'} }) }}
-                    <span class="text-danger">{{ form_errors(form.fNacimiento) }}</span>
-                </div>
-                
-                <div class="form-group">
-                    {{ form_label(form.sexo) }}
-                    {{ form_widget(form.sexo, {'attr' : {'class' : 'form-control', 'placeholder' : 'Hombre(H) o Mujer(M)'} }) }}
-                    <span class="text-danger">{{ form_errors(form.sexo) }}</span>
-                </div>
-                
-                <div class="form-group">
                     {{ form_label(form.email) }}
                     {{ form_widget(form.email, {'attr' : {'class' : 'form-control', 'placeholder' : 'Tu email'} }) }}
                     <span class="text-danger">{{ form_errors(form.email) }}</span>

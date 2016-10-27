@@ -19,6 +19,11 @@ use Symfony\Component\Security\Core\User\AdvancedUserInterface;
 class User implements AdvancedUserInterface, \Serializable
 {
     /**
+     * @ORM\OneToMany(targetEntity="Claims", mappedBy="user")
+    */
+    protected $claimss1;
+    
+    /**
      * @var integer
      *
      * @ORM\Column(name="id", type="integer")
@@ -69,9 +74,9 @@ class User implements AdvancedUserInterface, \Serializable
     private $email;
 
     /**
-     * @var integer
+     * @var string
      *
-     * @ORM\Column(name="Telefono", type="integer")
+     * @ORM\Column(name="Telefono", type="string")
      * @Assert\NotBlank(message="Este campo es obligatorio")
      */
     private $telefono;
@@ -229,7 +234,7 @@ class User implements AdvancedUserInterface, \Serializable
     /**
      * Set telefono
      *
-     * @param integer $telefono
+     * @param string $telefono
      * @return User
      */
     public function setTelefono($telefono)
@@ -242,7 +247,7 @@ class User implements AdvancedUserInterface, \Serializable
     /**
      * Get telefono
      *
-     * @return integer 
+     * @return string 
      */
     public function getTelefono()
     {
@@ -318,6 +323,11 @@ class User implements AdvancedUserInterface, \Serializable
         return $this->password;
     }
     
+    public function __construct()
+    {
+        $this->claimss1 =  new ArrayCollection();
+    }
+    
     public function getUsername()
     {
         return $this->usuario;
@@ -376,5 +386,44 @@ class User implements AdvancedUserInterface, \Serializable
     public function isEnabled()
     {
         return true;
+    }
+
+    /**
+     * Add claimss1
+     *
+     * @param \GS\UserBundle\Entity\Claims $claimss1
+     * @return User
+     */
+    public function addClaimss1(\GS\UserBundle\Entity\Claims $claimss1)
+    {
+        $this->claimss1[] = $claimss1;
+
+        return $this;
+    }
+
+    /**
+     * Remove claimss1
+     *
+     * @param \GS\UserBundle\Entity\Claims $claimss1
+     */
+    public function removeClaimss1(\GS\UserBundle\Entity\Claims $claimss1)
+    {
+        $this->claimss1->removeElement($claimss1);
+    }
+
+    /**
+     * Get claimss1
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getClaimss1()
+    {
+        return $this->claimss1;
+    }
+    
+    public function getfulluser()
+    {
+           return $this-> nombre . " " . $this->apellidos . " (" . $this->tipo . ")"; 
+        
     }
 }

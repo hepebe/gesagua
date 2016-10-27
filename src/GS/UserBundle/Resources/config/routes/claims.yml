@@ -1,0 +1,48 @@
+gs_claims_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: GSUserBundle:Default:index }
+
+gs_claims_index:
+    path:     /index
+    defaults: { _controller: GSUserBundle:Claims:index }
+
+gs_claims_add:
+    path:     /add
+    defaults: { _controller: GSUserBundle:Claims:add }
+
+gs_claims_create:
+    path:     /create
+    defaults: { _controller: GSUserBundle:Claims:create }
+    methods: POST
+    
+gs_claims_edit:
+    path:     /edit/{id}
+    defaults: { _controller: GSUserBundle:Claims:edit }
+
+gs_claims_update:
+    path:     /update/{id}
+    defaults: { _controller: GSUserBundle:Claims:update }
+    methods: [POST, PUT]
+
+gs_claims_view:
+    path:     /view/{id}
+    defaults: { _controller: GSUserBundle:Claims:view }
+
+gs_claims_delete:
+    path:     /delete/{id}
+    defaults: { _controller: GSUserBundle:Claims:delete }
+    methods: [POST, DELETE]
+
+gs_claims_redirect_add:
+    path:     /create
+    defaults: 
+        _controller: GSUserBundle:Claims:add
+        path:   /add
+        permanent: true
+
+gs_claims_redirect_edit:
+    path:     /update/{id}
+    defaults: 
+        _controller: GSUserBundle:Claims:edit
+        path:   /edit/{id}
+        permanent: true

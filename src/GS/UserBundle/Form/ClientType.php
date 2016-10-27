@@ -17,8 +17,6 @@ class ClientType extends AbstractType
         $builder
             ->add('nombre')
             ->add('apellidos')
-            ->add('fNacimiento','date', array('widget'=>'choice', 'format'=>'dd MM yyyy', 'years'=>range(1950,2016), 'placeholder'=>array('year'=>'Año','month'=>'Mes','day'=>'Día')))
-            ->add('sexo','choice', array('choices'=>array('H'=>'H','M'=>'M'), 'choices_as_values'=>true,'multiple'=>false,'expanded'=>true))
             ->add('email', 'email')
             ->add('telefono')
             ->add('empadronado', 'choice', array('choices'=>array('Sí'=>'Sí','No'=>'No'), 'choices_as_values'=>true,'multiple'=>false,'expanded'=>true))

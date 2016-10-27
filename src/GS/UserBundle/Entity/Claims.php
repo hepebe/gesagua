@@ -1,0 +1,248 @@
+<?php
+
+namespace GS\UserBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Claims
+ *
+ * @ORM\Table(name="Reclamaciones")
+ * @ORM\Entity(repositoryClass="GS\UserBundle\Entity\ClaimsRepository")
+ */
+class Claims
+{
+    /**
+     * @ORM\ManyToOne(targetEntity="Client", inversedBy="claimss")
+     * @ORM\JoinColumn(name="client_id", referencedColumnName="id", onDelete="CASCADE")
+     */
+     
+    protected $client;
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="claimss1")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id", onDelete="CASCADE")
+     */
+     
+    protected $user;
+    
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var Date
+     *
+     * @ORM\Column(name="fReclamacion", type="date")
+     */
+    private $fReclamacion;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="titulo", type="string", length=255)
+     */
+    private $titulo;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="informacion", type="string", length=255)
+     */
+    private $informacion;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="estado", type="string", columnDefinition="ENUM('Pendiente','Resuelto')")
+     */
+    private $estado;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="resolucion", type="string", length=255)
+     */
+    private $resolucion;
+
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set fReclamacion
+     *
+     * @param \Date $fReclamacion
+     * @return Claims
+     */
+    public function setfReclamacion($fReclamacion)
+    {
+        $this->fReclamacion = $fReclamacion;
+
+        return $this;
+    }
+
+    /**
+     * Get fReclamacion
+     *
+     * @return \Date 
+     */
+    public function getfReclamacion()
+    {
+        return $this->fReclamacion;
+    }
+    
+    
+    /**
+     * Set titulo
+     *
+     * @param string $titulo
+     * @return Claims
+     */
+    public function setTitulo($titulo)
+    {
+        $this->titulo = $titulo;
+
+        return $this;
+    }
+
+    /**
+     * Get titulo
+     *
+     * @return string 
+     */
+    public function getTitulo()
+    {
+        return $this->titulo;
+    }
+
+
+    /**
+     * Set informacion
+     *
+     * @param string $informacion
+     * @return Claims
+     */
+    public function setInformacion($informacion)
+    {
+        $this->informacion = $informacion;
+
+        return $this;
+    }
+
+    /**
+     * Get informacion
+     *
+     * @return string 
+     */
+    public function getInformacion()
+    {
+        return $this->informacion;
+    }
+
+    /**
+     * Set estado
+     *
+     * @param boolean $estado
+     * @return Claims
+     */
+    public function setEstado($estado)
+    {
+        $this->estado = $estado;
+
+        return $this;
+    }
+
+    /**
+     * Get estado
+     *
+     * @return boolean 
+     */
+    public function getEstado()
+    {
+        return $this->estado;
+    }
+
+    /**
+     * Set resolucion
+     *
+     * @param string $resolucion
+     * @return Claims
+     */
+    public function setResolucion($resolucion)
+    {
+        $this->resolucion = $resolucion;
+
+        return $this;
+    }
+
+    /**
+     * Get resolucion
+     *
+     * @return string 
+     */
+    public function getResolucion()
+    {
+        return $this->resolucion;
+    }
+
+    /**
+     * Set client
+     *
+     * @param \GS\UserBundle\Entity\Client $client
+     * @return Claims
+     */
+    public function setClient(\GS\UserBundle\Entity\Client $client = null)
+    {
+        $this->client = $client;
+
+        return $this;
+    }
+
+    /**
+     * Get client
+     *
+     * @return \GS\UserBundle\Entity\Client 
+     */
+    public function getClient()
+    {
+        return $this->client;
+    }
+
+    /**
+     * Set user
+     *
+     * @param \GS\UserBundle\Entity\User $user
+     * @return Claims
+     */
+    public function setUser(\GS\UserBundle\Entity\User $user = null)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \GS\UserBundle\Entity\User 
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    
+}

@@ -19,6 +19,7 @@ class Zone implements UserInterface
     /**
      * @ORM\OneToMany(targetEntity="Street", mappedBy="zone")
     */
+    
     protected $streets;
     
     /**
@@ -46,7 +47,13 @@ class Zone implements UserInterface
      */
     private $municipio;
 
-
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="inicio", type="integer")
+     */
+    private $inicio;
+    
     /**
      * Get id
      *
@@ -101,6 +108,29 @@ class Zone implements UserInterface
     public function getMunicipio()
     {
         return $this->municipio;
+    }
+    
+    /**
+     * Set inicio
+     *
+     * @param integer $inicio
+     * @return Zone
+     */
+    public function setInicio($inicio)
+    {
+        $this->inicio = $inicio;
+
+        return $this;
+    }
+
+    /**
+     * Get inicio
+     *
+     * @return integer 
+     */
+    public function getInicio()
+    {
+        return $this->inicio;
     }
     
     public function __construct()

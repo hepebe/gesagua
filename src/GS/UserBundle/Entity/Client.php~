@@ -11,11 +11,21 @@ use Symfony\Component\Validator\Constraints as Assert;
  * Client
  *
  * @ORM\Table(name="Clientes")
- * @ORM\Entity(repositoryClass="GS\UserBundle\Entity\ClientRepository") * 
+ * @ORM\Entity(repositoryClass="GS\UserBundle\Entity\ClientRepository") 
  * @UniqueEntity(fields={"email"}, message="El email ya está registrado")
  */
 class Client implements UserInterface
 {
+    /**
+     * @ORM\OneToMany(targetEntity="Claims", mappedBy="client")
+    */
+    protected $claimss;
+    
+    /**
+     * @ORM\OneToMany(targetEntity="Contract", mappedBy="client")
+    */
+    protected $contracts1;
+    
     /**
      * @var integer
      *
@@ -42,22 +52,6 @@ class Client implements UserInterface
     private $apellidos;
 
     /**
-     * @var \Date
-     *
-     * @ORM\Column(name="fNacimiento", type="date")
-     * @Assert\NotBlank(message="Este campo es obligatorio")
-     */
-    private $fNacimiento;
-
-    /**
-     * @var boolean
-     *
-     * @ORM\Column(name="sexo", type="string", columnDefinition="ENUM('H','M')")
-     * @Assert\NotBlank(message="Este campo es obligatorio")
-     */
-    private $sexo;
-
-    /**
      * @var string
      *
      * @ORM\Column(name="email", type="string", length=255)
@@ -67,9 +61,9 @@ class Client implements UserInterface
     private $email;
 
     /**
-     * @var integer
+     * @var string
      *
-     * @ORM\Column(name="telefono", type="integer")
+     * @ORM\Column(name="telefono", type="string")
      * @Assert\NotBlank(message="Este campo es obligatorio")
      */
     private $telefono;
@@ -148,52 +142,6 @@ class Client implements UserInterface
     }
 
     /**
-     * Set fNacimiento
-     *
-     * @param \DateTime $fNacimiento
-     * @return Client
-     */
-    public function setFNacimiento($fNacimiento)
-    {
-        $this->fNacimiento = $fNacimiento;
-
-        return $this;
-    }
-
-    /**
-     * Get fNacimiento
-     *
-     * @return \DateTime 
-     */
-    public function getFNacimiento()
-    {
-        return $this->fNacimiento;
-    }
-
-    /**
-     * Set sexo
-     *
-     * @param boolean $sexo
-     * @return Client
-     */
-    public function setSexo($sexo)
-    {
-        $this->sexo = $sexo;
-
-        return $this;
-    }
-
-    /**
-     * Get sexo
-     *
-     * @return boolean 
-     */
-    public function getSexo()
-    {
-        return $this->sexo;
-    }
-
-    /**
      * Set email
      *
      * @param string $email
@@ -219,7 +167,7 @@ class Client implements UserInterface
     /**
      * Set telefono
      *
-     * @param integer $telefono
+     * @param string $telefono
      * @return Client
      */
     public function setTelefono($telefono)
@@ -232,7 +180,7 @@ class Client implements UserInterface
     /**
      * Get telefono
      *
-     * @return integer 
+     * @return string 
      */
     public function getTelefono()
     {
@@ -240,20 +188,20 @@ class Client implements UserInterface
     }
 
     /**
-     * Set empadronado
+     * Set empradronado
      *
-     * @param boolean $empadronado
+     * @param boolean $empradronado
      * @return Client
      */
-    public function setEmpadronado($empadronado)
+    public function setEmpadronado($empradronado)
     {
-        $this->empadronado = $empadronado;
+        $this->empadronado = $empradronado;
 
         return $this;
     }
 
     /**
-     * Get empadronado
+     * Get empradronado
      *
      * @return boolean 
      */
@@ -285,7 +233,12 @@ class Client implements UserInterface
         return $this->direccion;
     }
     
-    public function getPassword()
+    public function __construct()
+    {
+        $this->claimss =  new ArrayCollection();
+    }
+    
+      public function getPassword()
     {
         
     }
@@ -309,5 +262,42 @@ class Client implements UserInterface
     {
         
     }
+
+    /**
+     * Add claimss
+     *
+     * @param \GS\UserBundle\Entity\Claims $claimss
+     * @return Client
+     */
+    public function addClaimss(\GS\UserBundle\Entity\Claims $claimss)
+    {
+        $this->claimss[] = $claimss;
+
+        return $this;
+    }
+
+    /**
+     * Remove claimss
+     *
+     * @param \GS\UserBundle\Entity\Claims $claimss
+     */
+    public function removeClaimss(\GS\UserBundle\Entity\Claims $claimss)
+    {
+        $this->claimss->removeElement($claimss);
+    }
+
+    /**
+     * Get claimss
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getClaimss()
+    {
+        return $this->claimss;
+    }
     
+    public function getfullclient()
+    {
+        return $this-> nombre . " " . $this->apellidos;
+    }
 }

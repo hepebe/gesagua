@@ -52,7 +52,7 @@ class ClientController extends Controller
             $gs-> persist($client);
             $gs-> flush();
             
-            $this->addFlash('mensaje','El usuario se ha creado correctamente.');
+            $this->addFlash('mensaje','El cliente se ha creado correctamente.');
             
             return $this->redirectToRoute('gs_client_index');
         }

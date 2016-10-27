@@ -19,6 +19,7 @@ class Zone implements UserInterface
     /**
      * @ORM\OneToMany(targetEntity="Street", mappedBy="zone")
     */
+    
     protected $streets;
     
     /**
@@ -46,7 +47,13 @@ class Zone implements UserInterface
      */
     private $municipio;
 
-
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="inicio", type="integer")
+     */
+    private $inicio;
+    
     /**
      * Get id
      *
@@ -103,6 +110,29 @@ class Zone implements UserInterface
         return $this->municipio;
     }
     
+    /**
+     * Set inicio
+     *
+     * @param integer $inicio
+     * @return Zone
+     */
+    public function setInicio($inicio)
+    {
+        $this->inicio = $inicio;
+
+        return $this;
+    }
+
+    /**
+     * Get inicio
+     *
+     * @return integer 
+     */
+    public function getInicio()
+    {
+        return $this->inicio;
+    }
+    
     public function __construct()
     {
         $this->streets =  new ArrayCollection();
@@ -131,5 +161,43 @@ class Zone implements UserInterface
     public function eraseCredentials()
     {
         
+    }
+
+    /**
+     * Add streets
+     *
+     * @param \GS\UserBundle\Entity\Street $streets
+     * @return Zone
+     */
+    public function addStreet(\GS\UserBundle\Entity\Street $streets)
+    {
+        $this->streets[] = $streets;
+
+        return $this;
+    }
+
+    /**
+     * Remove streets
+     *
+     * @param \GS\UserBundle\Entity\Street $streets
+     */
+    public function removeStreet(\GS\UserBundle\Entity\Street $streets)
+    {
+        $this->streets->removeElement($streets);
+    }
+
+    /**
+     * Get streets
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getStreets()
+    {
+        return $this->streets;
+    }
+    
+    public function getfullzone()
+    {
+        return $this-> nombre . " " . $this->municipio;
     }
 }

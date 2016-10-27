@@ -4,47 +4,47 @@
 	{{ parent() }}
 	<div class="container well">
 	    <div class="col-md-9">
-	    <h2>{{ client.nombre }} {{ client.apellidos }}</h2>
+	    <h2>{{ claims.titulo }}</h2>
 	        <br>
 	        <dl>
-	            <dt>{{'Nombre'}}</dt>
+	            <dt>{{'Cliente'}}</dt>
 	            <dd>
-	                {{ client.nombre }}
+	                {{ claims.client.fullclient }}
 	                &nbsp;
 	            </dd>
 	            <br>
 
-	            <dt>{{'Apellidos'}}</dt>
+	            <dt>{{'Usuario'}}</dt>
 	            <dd>
-	                {{ client.apellidos }}
+	                {{ claims.user.fulluser }}
 	                &nbsp;
 	            </dd>
 	            <br>
                 
-	            <dt>{{'Email'}}</dt>
+	            <dt>{{'Fecha Reclamación'}}</dt>
 	            <dd>
-	                {{ client.email }}
+	                {{ claims.fReclamacion |date('d-m-Y') }}
 	                &nbsp;
 	            </dd>
 	            <br>
                 
-                <dt>{{'Teléfono'}}</dt>
+                <dt>{{'Información'}}</dt>
 	            <dd>
-	                {{ client.telefono }}
+	                {{ claims.informacion }}
 	                &nbsp;
 	            </dd>
 	            <br>
                 
-                <dt>{{'Empadronado'}}</dt>
+                <dt>{{'Estado'}}</dt>
 	            <dd>
-	                {{ client.empadronado }}
+	                {{ claims.estado }}
 	                &nbsp;
 	            </dd>
 	            <br>
 	            
-	            <dt>{{'Dirección'}}</dt>
+	            <dt>{{'Resolución'}}</dt>
 	            <dd>
-                	 {{ client.direccion }}
+                	 {{ claims.resolucion }}
 	                &nbsp;
 	            </dd>
 	            <br>
@@ -54,13 +54,13 @@
 	    <div class="col-md-3">
 	    	<h3>{{ 'Acciones'}}:</h3>
 			<p>
-		    	<a href="{{ path('gs_client_edit', { id: client.id }) }}" class="btn btn-primary btn-lg btn-block">
+		    	<a href="{{ path('gs_claims_edit', { id: claims.id }) }}" class="btn btn-primary btn-lg btn-block">
 		    		<span class="glyphicon glyphicon-edit"></span>
 		        	{{ 'Editar cliente' }}
 				 </a>
 			</p>
 		    <p>
-			   {{ include('GSUserBundle:Client:forms/form.html.twig', { form: delete_form, message: '¿Estás seguro?'}) }}
+			   {{ include('GSUserBundle:Claims:forms/form.html.twig', { form: delete_form, message: '¿Estás seguro?'}) }}
 			</p>
 	    </div>
 	</div>

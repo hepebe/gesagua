@@ -1,0 +1,62 @@
+{% extends 'layout.html.twig' %}
+
+{% block body %}
+    {{ parent() }}
+    {% if flashMessage is not defined %}
+        <div class="alert alert-success hidden" id="message" role="alert">
+            <div class="container"> 
+                <span id="user-message"></span>
+            </div>
+        </div>
+    {% endif %}
+    {% for flashMessage in app.session.flashbag.get('mensaje') %}
+        <div class="alert alert-success" role="alert">
+            <div class="container"> {{ flashMessage }}</div>
+        </div>
+    {% endfor %}
+    <div class="container">
+        <div class="col-md-12">
+            <div class="page-header margin-none">
+                <h2 class="padding-none">Reclamaciones</h2>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-stripted table-hover">
+                    <thead>
+                        <tr>
+                            <th>Usuario</th>
+                            <th>Cliente</th>
+                            <th>Fecha Reclamación</th>
+                            <th>Título</th>
+                            <th>Estado</th>
+                            <th>Resolución</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                       {% for claims in claimss %}
+                            <tr data-id="{{ claims.id }}">
+                                <td>{{ claims.user.fulluser }}</td>
+                                <td>{{ claims.client.fullclient }}</td>
+                                <td>{{ claims.fReclamacion |date('d-m-Y') }}</td>
+                                <td>{{ claims.titulo }}</td>
+                                <td>{{ claims.estado }}</td>
+                                <td>{{ claims.resolucion }}</td>
+                                <td class="actions">
+                                    <a href="{{ path('gs_claims_view', {id: claims.id}) }}" class="btn btn-sm btn-info">Ver</a>
+                                    <a href="{{ path('gs_claims_edit', {id: claims.id}) }}" class="btn btn-sm btn-primary">Editar</a>
+                                    <a href="#" class="btn btn-sm btn-danger btn-delete">Eliminar</a>
+                                </td>
+                            </tr>
+                        {% endfor %} 
+                    </tbody>  
+                </table>
+            </div>
+        </div>
+    </div>
+    {{ include('GSUserBundle:Claims:forms/form.html.twig', { form: delete_form_ajax, message: '¿Estás seguro?', id: 'form-delete', with_submit: false}) }}
+{% endblock %}
+
+{% block javascripts%}
+    {{ parent() }}
+    <script src="{{ asset('bundles/gsuser/js/delete-claims.js') }}"></script>
+{% endblock %}
+

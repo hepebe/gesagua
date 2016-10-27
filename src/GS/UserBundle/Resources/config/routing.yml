@@ -14,6 +14,18 @@ gs_street_street:
     resource: "@GSUserBundle/Resources/config/routes/street.yml"
     prefix: /street
     
+gs_claims_claims:
+    resource: "@GSUserBundle/Resources/config/routes/claims.yml"
+    prefix: /claims
+
+gs_contract_contract:
+    resource: "@GSUserBundle/Resources/config/routes/contract.yml"
+    prefix: /contract
+    
+gs_counter_counter:
+    resource: "@GSUserBundle/Resources/config/routes/counter.yml"
+    prefix: /counter
+    
 # Autentication
 
 gs_user_homepage:

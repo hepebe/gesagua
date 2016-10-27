@@ -1,0 +1,67 @@
+{% extends 'layout.html.twig' %}
+
+{% block body %}
+    {{ parent() }}
+    {% for flashMessage in app.session.flashbag.get('mensaje') %}
+        <div class="alert alert-success" role="alert">
+            <div class="container"> {{ flashMessage }}</div>
+        </div>
+    {% endfor %}
+    <div class="main container">
+        <div class="row well">
+            <div class="col-md-6">
+                <div class="page-header">
+                    <h2>Editar Reclamación</h2>
+                </div>
+                {{ form_start(form, {'attr' : {'novalidate':'novalidate', 'role' : 'form'} }) }}
+                
+                <div class="form-group">
+                    <b>Trabajador:</b>
+                    {{ form_widget(form.user, {'attr' : {'class' : 'form-control', 'placeholder' : 'usuario'} }) }}
+                    <span class="text-danger">{{ form_errors(form.user) }}</span>
+                </div>
+                
+                <div class="form-group">
+                    <b>Cliente:</b>
+                    {{ form_widget(form.client, {'attr' : {'class' : 'form-control', 'placeholder' : 'cliente'} }) }}
+                    <span class="text-danger">{{ form_errors(form.client) }}</span>
+                </div>
+            
+                <div class="form-group">
+                    <b>Fecha de la Reclamación</b>
+                    {{ form_widget(form.fReclamacion, {'attr' : {'class' : 'form-control', 'placeholder' : 'Fecha de la Reclamación'} }) }}
+                    <span class="text-danger">{{ form_errors(form.fReclamacion) }}</span>
+                </div>
+                
+                <div class="form-group">
+                    <b>Título</b>
+                    {{ form_widget(form.titulo, {'attr' : {'class' : 'form-control', 'placeholder' : 'Titulo de la Reclamación'} }) }}
+                    <span class="text-danger">{{ form_errors(form.titulo) }}</span>
+                </div>
+                
+                <div class="form-group">
+                    <b>Información</b>
+                    {{ form_widget(form.informacion, {'attr' : {'class' : 'form-control', 'placeholder' : 'Información'} }) }}
+                    <span class="text-danger">{{ form_errors(form.informacion) }}</span>
+                </div>
+                
+                <div class="form-group">
+                    <b>Estado:</b>
+                    {{ form_widget(form.estado, {'attr' : {'class' : 'form-control', 'placeholder' : 'Estado'} }) }}
+                    <span class="text-danger">{{ form_errors(form.estado) }}</span>
+                </div>
+                
+                <div class="form-group">
+                    <b>Resolución:</b>
+                    {{ form_widget(form.resolucion, {'attr' : {'class' : 'form-control', 'placeholder' : 'Resolución'} }) }}
+                    <span class="text-danger">{{ form_errors(form.resolucion) }}</span>
+                </div>
+        
+                <p>
+                    {{ form_widget(form.save, {'label': 'Editar Reclamación', 'attr':{'class':'btn btn-success'}}) }}
+                </p>
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

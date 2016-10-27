@@ -1,0 +1,114 @@
+<?php
+
+namespace GS\UserBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Contract
+ *
+ * @ORM\Table(name="Contratos")
+ * @ORM\Entity(repositoryClass="GS\UserBundle\Entity\ContractRepository")
+ */
+class Contract
+{
+    /**
+     * @ORM\ManyToOne(targetEntity="Street", inversedBy="contracts")
+     * @ORM\JoinColumn(name="street_id", referencedColumnName="id", onDelete="CASCADE")
+     */
+     
+    protected $street;
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="Client", inversedBy="contracts1")
+     * @ORM\JoinColumn(name="client_id", referencedColumnName="id", onDelete="CASCADE")
+     */
+     
+    protected $client;
+    
+    /**
+     * @ORM\OneToMany(targetEntity="Counter", mappedBy="contract")
+    */
+    
+    protected $counters;
+    
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="nVivienda", type="integer")
+     */
+    private $nVivienda;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="next", type="integer")
+     */
+    private $next;
+
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set nVivienda
+     *
+     * @param integer $nVivienda
+     * @return Contract
+     */
+    public function setNVivienda($nVivienda)
+    {
+        $this->nVivienda = $nVivienda;
+
+        return $this;
+    }
+
+    /**
+     * Get nVivienda
+     *
+     * @return integer 
+     */
+    public function getNVivienda()
+    {
+        return $this->nVivienda;
+    }
+
+    /**
+     * Set next
+     *
+     * @param integer $next
+     * @return Contract
+     */
+    public function setNext($next)
+    {
+        $this->next = $next;
+
+        return $this;
+    }
+
+    /**
+     * Get next
+     *
+     * @return integer 
+     */
+    public function getNext()
+    {
+        return $this->next;
+    }
+}

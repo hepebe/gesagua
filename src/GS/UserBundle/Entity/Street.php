@@ -24,6 +24,12 @@ class Street
     protected $zone;
     
     /**
+     * @ORM\OneToMany(targetEntity="Contract", mappedBy="street")
+    */
+    
+    protected $contracts;
+    
+    /**
      * @var integer
      *
      * @ORM\Column(name="id", type="integer")
@@ -97,4 +103,44 @@ class Street
         return $this->zone;
     }
     
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->contracts = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add contracts
+     *
+     * @param \GS\UserBundle\Entity\Contract $contracts
+     * @return Street
+     */
+    public function addContract(\GS\UserBundle\Entity\Contract $contracts)
+    {
+        $this->contracts[] = $contracts;
+
+        return $this;
+    }
+
+    /**
+     * Remove contracts
+     *
+     * @param \GS\UserBundle\Entity\Contract $contracts
+     */
+    public function removeContract(\GS\UserBundle\Entity\Contract $contracts)
+    {
+        $this->contracts->removeElement($contracts);
+    }
+
+    /**
+     * Get contracts
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getContracts()
+    {
+        return $this->contracts;
+    }
 }
