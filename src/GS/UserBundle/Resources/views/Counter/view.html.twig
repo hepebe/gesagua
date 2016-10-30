@@ -1,0 +1,47 @@
+{% extends 'layout.html.twig' %}
+
+{% block body %}
+	{{ parent() }}
+	<div class="container well">
+	    <div class="col-md-9">
+	    <h2>Número del contador: {{ counter.nContador }}</h2>
+	        <br>
+	        <dl>
+	            <dt>{{'Fecha de alta'}}</dt>
+	            <dd>
+	                {{ counter.fAlta |date('d-m-Y') }}
+	                &nbsp;
+	            </dd>
+	            <br>
+	            
+                <dt>{{'Fecha de baja'}}</dt>
+	            {% if counter.fBaja != null %}
+	            <dd>
+	                {{ counter.fBaja |date('d-m-Y') }}
+	                &nbsp;
+	            </dd>
+	            {% endif %}
+	            <br>
+                
+	            <dt>{{'Datos del contrato'}}</dt>
+	            <dd>
+	                {{ counter.contract.fullcontract }}
+	                &nbsp;
+	            </dd>
+	            <br>
+                
+                
+
+	        </dl>
+	    </div>
+	    {% if counter.fBaja == null %}
+	    <div class="col-md-3">
+	    	<h3>{{ 'Acciones'}}:</h3>
+		    <p>
+			   {{ include('GSUserBundle:Counter:forms/form.html.twig', { form: delete_form, message: '¿Estás seguro que quieres darle de baja?'}) }}
+			</p>
+			
+	    </div>
+	    {% endif %}
+	</div>
+{% endblock %}

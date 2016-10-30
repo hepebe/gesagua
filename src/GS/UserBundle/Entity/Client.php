@@ -235,7 +235,7 @@ class Client implements UserInterface
     
     public function __construct()
     {
-        $this->claimss =  new ArrayCollection();
+        $this->claimss =  new \Doctrine\Common\Collections\ArrayCollection();
     }
     
       public function getPassword()

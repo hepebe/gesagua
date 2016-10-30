@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\Table(name="Reclamaciones")
  * @ORM\Entity(repositoryClass="GS\UserBundle\Entity\ClaimsRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 class Claims
 {
@@ -243,4 +244,13 @@ class Claims
     {
         return $this->user;
     }
+
+     /**
+     * @ORM\PrePersist 
+     */
+    public function setfReclamacionValue()
+    {
+        $this->fReclamacion = new \DateTime();
+    }
+    
 }

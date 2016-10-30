@@ -19,6 +19,7 @@ class Contract
      
     protected $street;
     
+   
     /**
      * @ORM\ManyToOne(targetEntity="Client", inversedBy="contracts1")
      * @ORM\JoinColumn(name="client_id", referencedColumnName="id", onDelete="CASCADE")
@@ -32,6 +33,7 @@ class Contract
     
     protected $counters;
     
+
     /**
      * @var integer
      *
@@ -47,6 +49,13 @@ class Contract
      * @ORM\Column(name="nVivienda", type="integer")
      */
     private $nVivienda;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="activo", type="boolean")
+     */
+    private $activo;
 
     /**
      * @var integer
@@ -90,6 +99,29 @@ class Contract
     }
 
     /**
+     * Set activo
+     *
+     * @param boolean $activo
+     * @return Contract
+     */
+    public function setActivo($activo)
+    {
+        $this->activo = $activo;
+
+        return $this;
+    }
+
+    /**
+     * Get activo
+     *
+     * @return boolean 
+     */
+    public function getActivo()
+    {
+        return $this->activo;
+    }
+
+    /**
      * Set next
      *
      * @param integer $next
@@ -110,5 +142,91 @@ class Contract
     public function getNext()
     {
         return $this->next;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->counters = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Set street
+     *
+     * @param \GS\UserBundle\Entity\Street $street
+     * @return Contract
+     */
+    public function setStreet(\GS\UserBundle\Entity\Street $street = null)
+    {
+        $this->street = $street;
+
+        return $this;
+    }
+
+    /**
+     * Get street
+     *
+     * @return \GS\UserBundle\Entity\Street 
+     */
+    public function getStreet()
+    {
+        return $this->street;
+    }
+
+    /**
+     * Set client
+     *
+     * @param \GS\UserBundle\Entity\Client $client
+     * @return Contract
+     */
+    public function setClient(\GS\UserBundle\Entity\Client $client = null)
+    {
+        $this->client = $client;
+
+        return $this;
+    }
+
+    /**
+     * Get client
+     *
+     * @return \GS\UserBundle\Entity\Client 
+     */
+    public function getClient()
+    {
+        return $this->client;
+    }
+
+    /**
+     * Add counters
+     *
+     * @param \GS\UserBundle\Entity\Counter $counters
+     * @return Contract
+     */
+    public function addCounter(\GS\UserBundle\Entity\Counter $counters)
+    {
+        $this->counters[] = $counters;
+
+        return $this;
+    }
+
+    /**
+     * Remove counters
+     *
+     * @param \GS\UserBundle\Entity\Counter $counters
+     */
+    public function removeCounter(\GS\UserBundle\Entity\Counter $counters)
+    {
+        $this->counters->removeElement($counters);
+    }
+
+    /**
+     * Get counters
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getCounters()
+    {
+        return $this->counters;
     }
 }

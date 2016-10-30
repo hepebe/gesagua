@@ -98,7 +98,7 @@ class ClaimsController extends Controller
         {
             $gs->flush();
             $this->addFlash('mensaje','La reclamación se ha editado correctamente.');
-            return $this->redirectToRoute('gs_claims_edit', array('id'=> $claims->getId()));
+            return $this->redirectToRoute('gs_claims_index', array('id'=> $claims->getId()));
         }
         
         return $this->render('GSUserBundle:Claims:edit.html.twig', array('claims'=>$claims, 'form'=>$form->createView()));

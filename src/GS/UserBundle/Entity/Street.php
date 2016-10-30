@@ -29,6 +29,7 @@ class Street
     
     protected $contracts;
     
+   
     /**
      * @var integer
      *

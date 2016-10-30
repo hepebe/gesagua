@@ -235,7 +235,7 @@ class Client implements UserInterface
     
     public function __construct()
     {
-        $this->claimss =  new ArrayCollection();
+        $this->claimss =  new \Doctrine\Common\Collections\ArrayCollection();
     }
     
       public function getPassword()
@@ -299,5 +299,38 @@ class Client implements UserInterface
     public function getfullclient()
     {
         return $this-> nombre . " " . $this->apellidos;
+    }
+
+    /**
+     * Add contracts1
+     *
+     * @param \GS\UserBundle\Entity\Contract $contracts1
+     * @return Client
+     */
+    public function addContracts1(\GS\UserBundle\Entity\Contract $contracts1)
+    {
+        $this->contracts1[] = $contracts1;
+
+        return $this;
+    }
+
+    /**
+     * Remove contracts1
+     *
+     * @param \GS\UserBundle\Entity\Contract $contracts1
+     */
+    public function removeContracts1(\GS\UserBundle\Entity\Contract $contracts1)
+    {
+        $this->contracts1->removeElement($contracts1);
+    }
+
+    /**
+     * Get contracts1
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getContracts1()
+    {
+        return $this->contracts1;
     }
 }

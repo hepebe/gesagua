@@ -12,27 +12,18 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Counter
 {
-     /**
+    /**
      * @ORM\ManyToOne(targetEntity="Contract", inversedBy="counters")
      * @ORM\JoinColumn(name="contract_id", referencedColumnName="id", onDelete="CASCADE")
      */
      
     protected $contract;
-    
-    
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
-    private $id;
 
     /**
      * @var integer
      *
      * @ORM\Column(name="nContador", type="integer")
+     * @ORM\Id
      */
     private $nContador;
 

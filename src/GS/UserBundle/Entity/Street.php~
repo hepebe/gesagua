@@ -29,6 +29,7 @@ class Street
     
     protected $contracts;
     
+   
     /**
      * @var integer
      *
@@ -103,4 +104,49 @@ class Street
         return $this->zone;
     }
     
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->contracts = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add contracts
+     *
+     * @param \GS\UserBundle\Entity\Contract $contracts
+     * @return Street
+     */
+    public function addContract(\GS\UserBundle\Entity\Contract $contracts)
+    {
+        $this->contracts[] = $contracts;
+
+        return $this;
+    }
+
+    /**
+     * Remove contracts
+     *
+     * @param \GS\UserBundle\Entity\Contract $contracts
+     */
+    public function removeContract(\GS\UserBundle\Entity\Contract $contracts)
+    {
+        $this->contracts->removeElement($contracts);
+    }
+
+    /**
+     * Get contracts
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getContracts()
+    {
+        return $this->contracts;
+    }
+    
+    public function getfullstreet()
+    {
+        return "C/" . $this-> nombre;
+    }
 }

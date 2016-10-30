@@ -1,3 +1,7 @@
 h2{
     color:skyblue;
 }
+
+input[type=radio] {
+    margin: 2px -2px 0px 10px !important;
+}

@@ -53,12 +53,14 @@
 	    </div>
 	    <div class="col-md-3">
 	    	<h3>{{ 'Acciones'}}:</h3>
+			{% if claims.estado == "Pendiente" %}
 			<p>
 		    	<a href="{{ path('gs_claims_edit', { id: claims.id }) }}" class="btn btn-primary btn-lg btn-block">
 		    		<span class="glyphicon glyphicon-edit"></span>
 		        	{{ 'Editar cliente' }}
 				 </a>
 			</p>
+			{% endif %}
 		    <p>
 			   {{ include('GSUserBundle:Claims:forms/form.html.twig', { form: delete_form, message: '¿Estás seguro?'}) }}
 			</p>

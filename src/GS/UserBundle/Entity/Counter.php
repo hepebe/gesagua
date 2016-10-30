@@ -3,28 +3,33 @@
 namespace GS\UserBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Counter
  *
  * @ORM\Table(name="Contadores")
  * @ORM\Entity(repositoryClass="GS\UserBundle\Entity\CounterRepository")
+ * @UniqueEntity(fields={"nContador"}, message="Este número de contador ya está registrado")
+ * @ORM\HasLifecycleCallbacks()
  */
 class Counter
 {
-     /**
+    /**
      * @ORM\ManyToOne(targetEntity="Contract", inversedBy="counters")
      * @ORM\JoinColumn(name="contract_id", referencedColumnName="id", onDelete="CASCADE")
+     * @Assert\NotBlank(message="Este campo es obligatorio")
      */
      
     protected $contract;
-    
 
     /**
      * @var integer
      *
      * @ORM\Column(name="nContador", type="integer")
      * @ORM\Id
+     * @Assert\NotBlank(message="Este campo es obligatorio")
      */
     private $nContador;
 
@@ -143,5 +148,21 @@ class Counter
     public function getContract()
     {
         return $this->contract;
+    }
+    
+    /**
+     * @ORM\PrePersist 
+     */
+    public function setactivoValue()
+    {
+        $this->contract->setActivo(1);
+    }
+    
+    /**
+     * @ORM\PreUpdate
+     */
+    public function setinactivoValue()
+    {
+        $this->contract->setActivo(0);
     }
 }

@@ -42,7 +42,9 @@
                                 <td>{{ claims.resolucion }}</td>
                                 <td class="actions">
                                     <a href="{{ path('gs_claims_view', {id: claims.id}) }}" class="btn btn-sm btn-info">Ver</a>
-                                    <a href="{{ path('gs_claims_edit', {id: claims.id}) }}" class="btn btn-sm btn-primary">Editar</a>
+                                    {% if claims.estado == "Pendiente" %}
+                                        <a href="{{ path('gs_claims_edit', {id: claims.id}) }}" class="btn btn-sm btn-primary">Editar</a>
+                                    {% endif %}
                                     <a href="#" class="btn btn-sm btn-danger btn-delete">Eliminar</a>
                                 </td>
                             </tr>

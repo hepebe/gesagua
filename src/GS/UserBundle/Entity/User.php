@@ -325,7 +325,7 @@ class User implements AdvancedUserInterface, \Serializable
     
     public function __construct()
     {
-        $this->claimss1 =  new ArrayCollection();
+        $this->claimss1 =  new \Doctrine\Common\Collections\ArrayCollection();
     }
     
     public function getUsername()

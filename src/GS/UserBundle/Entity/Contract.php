@@ -3,12 +3,18 @@
 namespace GS\UserBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * Contract
  *
  * @ORM\Table(name="Contratos")
  * @ORM\Entity(repositoryClass="GS\UserBundle\Entity\ContractRepository")
+ * @UniqueEntity(
+ *     fields={"street", "nVivienda"},
+ *     message="Esta dirección ya tiene un contrato registrado."
+ * )
+ * @ORM\HasLifecycleCallbacks()
  */
 class Contract
 {
@@ -19,6 +25,7 @@ class Contract
      
     protected $street;
     
+   
     /**
      * @ORM\ManyToOne(targetEntity="Client", inversedBy="contracts1")
      * @ORM\JoinColumn(name="client_id", referencedColumnName="id", onDelete="CASCADE")
@@ -32,6 +39,7 @@ class Contract
     
     protected $counters;
     
+
     /**
      * @var integer
      *
@@ -47,6 +55,13 @@ class Contract
      * @ORM\Column(name="nVivienda", type="integer")
      */
     private $nVivienda;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="activo", type="boolean")
+     */
+    private $activo;
 
     /**
      * @var integer
@@ -87,6 +102,29 @@ class Contract
     public function getNVivienda()
     {
         return $this->nVivienda;
+    }
+
+    /**
+     * Set activo
+     *
+     * @param boolean $activo
+     * @return Contract
+     */
+    public function setActivo($activo)
+    {
+        $this->activo = $activo;
+
+        return $this;
+    }
+
+    /**
+     * Get activo
+     *
+     * @return boolean 
+     */
+    public function getActivo()
+    {
+        return $this->activo;
     }
 
     /**
@@ -200,6 +238,14 @@ class Contract
     
     public function getfullcontract()
     {
-        return $this-> id . "- C/" . $this->street . " " . $this->nVivienda;
+        return $this->id . "- " . $this->street->getfullstreet() . " " . $this->nVivienda;
+    }
+
+    /**
+     * @ORM\PrePersist 
+     */
+    public function setactivodefaultValue()
+    {
+        $this->setActivo(false);
     }
 }

@@ -1,0 +1,47 @@
+{% extends 'layout.html.twig' %}
+
+{% block body %}
+    {{ parent() }}
+    <div class="main container">
+        <div class="row well">
+            <div class="col-md-6">
+                <div class="page-header">
+                    <h2>Nuevo Contador</h2>
+                </div>
+                {{ form_start(form, {'attr' : {'novalidate':'novalidate', 'role' : 'form'} }) }}
+                
+                <div class="form-group">
+                    <b>Número del Contador</b>
+                    {{ form_widget(form.nContador, {'attr' : {'class' : 'form-control', 'placeholder' : 'Número del Contador'} }) }}
+                    <span class="text-danger">{{ form_errors(form.nContador) }}</span>
+                </div>
+                
+                <div class="hidden">
+                    <div class="form-group">
+                        <b>Fecha de Alta</b>
+                        {{ form_widget(form.fAlta, {'attr' : {'class' : 'form-control','placeholder' : 'Fecha de Alta'} }) }}
+                        <span class="text-danger">{{ form_errors(form.fAlta) }}</span>
+                    </div>
+                    
+                    <div class="form-group">
+                        <b>Fecha de Baja</b>
+                        {{ form_widget(form.fBaja, {'attr' : {'class' : 'form-control', 'placeholder' : 'Fecha de Baja'} }) }}
+                        <span class="text-danger">{{ form_errors(form.fBaja) }}</span>
+                    </div>
+                </div>
+                
+                
+                 <div class="form-group">
+                    <b>Número de Referencia del Contrato</b>
+                    {{ form_widget(form.contract, {'attr' : {'class' : 'form-control', 'placeholder' : 'Número de Referencia del Contrato'} }) }}
+                    <span class="text-danger">{{ form_errors(form.contract) }}</span>
+                </div>
+        
+                <p>
+                    {{ form_widget(form.save, {'label': 'Crear Contador', 'attr':{'class':'btn btn-success'}}) }}
+                </p>
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}
