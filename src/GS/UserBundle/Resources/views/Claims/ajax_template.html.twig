@@ -1,0 +1,31 @@
+<table class="table table-stripted table-hover">
+    <thead>
+        <tr>
+            <th>Usuario</th>
+            <th>Cliente</th>
+            <th>Fecha Reclamación</th>
+            <th>Título</th>
+            <th>Estado</th>
+            <th>Resolución</th>
+        </tr>
+    </thead>
+    <tbody>
+       {% for claims in claimss %}
+            <tr data-id="{{ claims.id }}">
+                <td>{{ claims.user.fulluser }}</td>
+                <td>{{ claims.client.fullclient }}</td>
+                <td>{{ claims.fReclamacion |date('d-m-Y') }}</td>
+                <td>{{ claims.titulo }}</td>
+                <td>{{ claims.estado }}</td>
+                <td>{{ claims.resolucion }}</td>
+                <td class="actions">
+                    <a href="{{ path('gs_claims_view', {id: claims.id}) }}" class="btn btn-sm btn-info">Ver</a>
+                    {% if claims.estado == "Pendiente" %}
+                        <a href="{{ path('gs_claims_edit', {id: claims.id}) }}" class="btn btn-sm btn-primary">Editar</a>
+                    {% endif %}
+                    <a href="#" class="btn btn-sm btn-danger btn-delete">Eliminar</a>
+                </td>
+            </tr>
+       {% endfor %} 
+    </tbody>  
+</table>

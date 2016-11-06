@@ -46,3 +46,11 @@ gs_street_redirect_edit:
         _controller: GSUserBundle:Street:edit
         path:   /edit/{id}
         permanent: true
+        
+gs_street_searchstreet:
+    path:     /searchstreet
+    defaults: { _controller: GSUserBundle:Street:searchstreet}
+    
+gs_street_selectzone:
+    path:     /selectzone
+    defaults: { _controller: GSUserBundle:Street:selectzone}

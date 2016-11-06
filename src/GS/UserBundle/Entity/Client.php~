@@ -16,6 +16,11 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Client implements UserInterface
 {
+   /**
+     * @ORM\OneToMany(targetEntity="Bill", mappedBy="client")
+    */
+    protected $bills;
+   
     /**
      * @ORM\OneToMany(targetEntity="Claims", mappedBy="client")
     */
@@ -236,6 +241,8 @@ class Client implements UserInterface
     public function __construct()
     {
         $this->claimss =  new \Doctrine\Common\Collections\ArrayCollection();
+        $this->contracts1 =  new \Doctrine\Common\Collections\ArrayCollection();
+        $this->bills =  new \Doctrine\Common\Collections\ArrayCollection();
     }
     
       public function getPassword()
@@ -332,5 +339,38 @@ class Client implements UserInterface
     public function getContracts1()
     {
         return $this->contracts1;
+    }
+
+    /**
+     * Add bills
+     *
+     * @param \GS\UserBundle\Entity\Bill $bills
+     * @return Client
+     */
+    public function addBill(\GS\UserBundle\Entity\Bill $bills)
+    {
+        $this->bills[] = $bills;
+
+        return $this;
+    }
+
+    /**
+     * Remove bills
+     *
+     * @param \GS\UserBundle\Entity\Bill $bills
+     */
+    public function removeBill(\GS\UserBundle\Entity\Bill $bills)
+    {
+        $this->bills->removeElement($bills);
+    }
+
+    /**
+     * Get bills
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getBills()
+    {
+        return $this->bills;
     }
 }

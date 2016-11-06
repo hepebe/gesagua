@@ -3,6 +3,7 @@
 namespace GS\UserBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\EntityManager;
 
 /**
  * ClaimsRepository
@@ -12,4 +13,10 @@ use Doctrine\ORM\EntityRepository;
  */
 class ClaimsRepository extends EntityRepository
 {
+    public function findByLetters($string){
+        return $this->getEntityManager()->createQuery('SELECT c FROM GSUserBundle:Claims c  
+                WHERE c.titulo LIKE :string')
+                ->setParameter('string','%'.$string.'%')
+                ->getResult();
+    }
 }

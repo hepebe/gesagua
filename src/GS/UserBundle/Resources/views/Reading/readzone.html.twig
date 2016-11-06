@@ -1,0 +1,49 @@
+{% extends 'layout.html.twig' %}
+
+{% block body %}
+    {{ parent() }}
+    <div class="container well">
+	    <div id="readDiv" class="col-md-12">
+	    <h2>Lectura Zona: {{ zones.nombre }}</h2>
+	        <br>
+	        <dl>
+	            <dt>{{'Nº Contador:'}}</dt>
+	            <dd>
+	                {% for counter in counters %}
+    	                {{ counter.nContador }}
+    	                &nbsp;
+	            </dd>
+	            <br>
+	            
+                <dt>{{'Calle:'}}</dt>
+	            <dd>
+	                {{ contracts.street.fullstreet }}
+	                &nbsp;
+	            </dd>
+	            <br>
+                
+	            <dt>{{'Nº Vivienda:'}}</dt>
+	            <dd>
+	                {{ contracts.nVivienda }}
+	                &nbsp;
+	            </dd>
+	            <br>
+                
+                <dt>{{'Lectura:'}}</dt>
+	            <dd>
+	                <input type="text" id="lectura" name="lectura">
+	                <a href="#" class="btn btn-sm btn-info" onclick="guardarLectura({{ counter.nContador }}, {{ zones.id }})">Guardar</a>
+	                &nbsp;
+	            </dd>
+	            <br>
+                    {% endfor %}
+	        </dl>
+	    </div>
+	</div> 
+    
+{% endblock %}
+
+{% block javascripts%}
+    {{ parent() }}
+    <script src="{{ asset('bundles/gsuser/js/reading.js') }}"></script>
+{% endblock %}

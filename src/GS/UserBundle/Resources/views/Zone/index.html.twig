@@ -19,7 +19,8 @@
             <div class="page-header margin-none">
                 <h2 class="padding-none">Zonas</h2>
             </div>
-            <div class="table-responsive">
+            Buscar: <input type="text" id="searchzone" name="searchzone" class="input-medium search-query" placeholder="nombre de la zona..."><br><br>
+            <div id="zoneDivList" class="table-responsive">
                 <table class="table table-stripted table-hover">
                     <thead>
                         <tr>
@@ -27,7 +28,7 @@
                             <th>Municipio</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="zoneTable">
                        {% for zone in zones %}
                             <tr data-id="{{ zone.id }}">
                                 <td>{{ zone.nombre }}</td>
@@ -49,5 +50,6 @@
 {% block javascripts%}
     {{ parent() }}
     <script src="{{ asset('bundles/gsuser/js/delete-zone.js') }}"></script>
+    <script src="{{ asset('bundles/gsuser/js/searchzone.js') }}"></script>
 {% endblock %}
 

@@ -49,6 +49,8 @@ class ClaimsController extends Controller
         if($form->isValid())
         {
             $gs = $this->getDoctrine()->getManager();
+            $user = $this->get('security.token_storage')->getToken()->getUser();
+            $claims->setUser($user);
             $gs-> persist($claims);
             $gs-> flush();
             
@@ -169,5 +171,35 @@ class ClaimsController extends Controller
             ->setAction($this->generateUrl($route, array('id'=>$id)))
             ->setMethod($method)
             ->getForm();
-    }   
+    } 
+    
+    public function searchclaimsAction()
+    {
+        $gs = $this->getDoctrine()->getManager(); 
+        $request = $this->get('request');
+        $searchParameter = $request->request->get('id');
+        $claimss = $gs->getRepository('GSUserBundle:Claims')
+                     ->findByLetters($searchParameter);
+        
+        $status = 'error';
+        $html = '';
+        if($claimss){
+            $data = $this->render('GSUserBundle:Claims:ajax_template.html.twig', array(
+                'claimss' => $claimss,
+            ));
+            $status = 'success';
+            $html = $data->getContent();
+        }
+    
+    
+        $jsonArray = array(
+            'status' => $status,
+            'data' => $html,
+        );
+        
+        $response = new Response(json_encode($jsonArray));
+        $response->headers->set('Content-Type', 'application/json; charset=utf-8');
+        return $response;
+
+    }
 }

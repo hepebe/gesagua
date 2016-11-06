@@ -3,6 +3,7 @@
 namespace GS\UserBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\EntityManager;
 
 /**
  * CounterRepository
@@ -12,4 +13,10 @@ use Doctrine\ORM\EntityRepository;
  */
 class CounterRepository extends EntityRepository
 {
+    public function findByLetters($integer){
+        return $this->getEntityManager()->createQuery('SELECT c FROM GSUserBundle:Counter c  
+                WHERE c.nContador LIKE :integer')
+                ->setParameter('integer','%'.$integer.'%')
+                ->getResult();
+    }
 }

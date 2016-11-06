@@ -46,3 +46,7 @@ gs_client_redirect_edit:
         _controller: GSUserBundle:Client:edit
         path:   /edit/{id}
         permanent: true
+
+gs_client_search:
+    path:     /search
+    defaults: { _controller: GSUserBundle:Client:search }

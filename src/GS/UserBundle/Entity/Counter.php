@@ -17,6 +17,13 @@ use Symfony\Component\Validator\Constraints as Assert;
 class Counter
 {
     /**
+     * @ORM\OneToMany(targetEntity="Reading", mappedBy="counter")
+    */
+    
+    protected $readings1;
+    
+    
+    /**
      * @ORM\ManyToOne(targetEntity="Contract", inversedBy="counters")
      * @ORM\JoinColumn(name="contract_id", referencedColumnName="id", onDelete="CASCADE")
      * @Assert\NotBlank(message="Este campo es obligatorio")
@@ -127,6 +134,11 @@ class Counter
         return $this->fBaja;
     }
 
+    public function __construct()
+    {
+        $this->readings1 = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+    
     /**
      * Set contract
      *
@@ -164,5 +176,38 @@ class Counter
     public function setinactivoValue()
     {
         $this->contract->setActivo(0);
+    }
+
+    /**
+     * Add readings1
+     *
+     * @param \GS\UserBundle\Entity\Reading $readings1
+     * @return Counter
+     */
+    public function addReadings1(\GS\UserBundle\Entity\Reading $readings1)
+    {
+        $this->readings1[] = $readings1;
+
+        return $this;
+    }
+
+    /**
+     * Remove readings1
+     *
+     * @param \GS\UserBundle\Entity\Reading $readings1
+     */
+    public function removeReadings1(\GS\UserBundle\Entity\Reading $readings1)
+    {
+        $this->readings1->removeElement($readings1);
+    }
+
+    /**
+     * Get readings1
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getReadings1()
+    {
+        return $this->readings1;
     }
 }

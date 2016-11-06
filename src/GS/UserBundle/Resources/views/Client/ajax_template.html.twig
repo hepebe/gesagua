@@ -1,0 +1,28 @@
+<table class="table table-stripted table-hover">
+    <thead> 
+        <tr>
+            <th>Nombre</th>
+            <th>Apellidos</th>
+            <th>Email</th>
+            <th>Teléfono</th>
+            <th>Empadronado</th> 
+            <th>Dirección</th>
+        </tr>
+    </thead>
+    <tbody id="clientTable">
+       {% for client in clients %}
+            <tr data-id="{{ client.id }}">
+                <td>{{ client.nombre }}</td>
+                <td>{{ client.apellidos }}</td>
+                <td>{{ client.email }}</td>
+                <td>{{ client.telefono }}</td>
+                <td>{{ client.empadronado }}</td>
+                <td>{{ client.direccion }}</td>
+                <td class="actions">
+                    <a href="{{ path('gs_client_view', {id: client.id}) }}" class="btn btn-sm btn-info">Ver</a>
+                    <a href="{{ path('gs_client_edit', {id: client.id}) }}" class="btn btn-sm btn-primary">Editar</a>
+                </td>
+            </tr>
+        {% endfor %} 
+    </tbody>  
+</table>

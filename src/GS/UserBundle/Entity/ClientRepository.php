@@ -3,6 +3,8 @@
 namespace GS\UserBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\EntityManager;
+
 
 /**
  * ClientRepository
@@ -12,4 +14,10 @@ use Doctrine\ORM\EntityRepository;
  */
 class ClientRepository extends EntityRepository
 {
+    public function findByLetters($string){
+        return $this->getEntityManager()->createQuery('SELECT c FROM GSUserBundle:Client c  
+                WHERE c.nombre LIKE :string OR c.apellidos LIKE :string')
+                ->setParameter('string','%'.$string.'%')
+                ->getResult();
+    }
 }

@@ -25,10 +25,12 @@ class StreetController extends Controller
     
     public function addAction()
     {
+        $gs = $this->getDoctrine()->getManager();
         $street = new Street();
         $form = $this->createCreateForm($street);
+        $zones = $gs->getRepository('GSUserBundle:Zone')->findAll();
         
-        return $this->render('GSUserBundle:Street:add.html.twig', array('form'=>$form->createView()));
+        return $this->render('GSUserBundle:Street:add.html.twig', array('zones'=>$zones,'form'=>$form->createView()));
     }
     
     private function createCreateForm(Street $entity)
@@ -170,4 +172,64 @@ class StreetController extends Controller
             ->setMethod($method)
             ->getForm();
     }   
+    
+    public function searchstreetAction()
+    {
+        $gs = $this->getDoctrine()->getManager(); 
+        $request = $this->get('request');
+        $searchParameter = $request->request->get('id');
+        $streets = $gs->getRepository('GSUserBundle:Street')
+                     ->findByLetters($searchParameter);
+        
+        $status = 'error';
+        $html = '';
+        if($streets){
+            $data = $this->render('GSUserBundle:Street:ajax_template.html.twig', array(
+                'streets' => $streets,
+            ));
+            $status = 'success';
+            $html = $data->getContent();
+        }
+    
+    
+        $jsonArray = array(
+            'status' => $status,
+            'data' => $html,
+        );
+        
+        $response = new Response(json_encode($jsonArray));
+        $response->headers->set('Content-Type', 'application/json; charset=utf-8');
+        return $response;
+
+    }
+    
+    public function selectzoneAction()
+    {
+        $gs = $this->getDoctrine()->getManager(); 
+        $request = $this->get('request');
+        $searchParameter = $request->request->get('text');
+        $zones = $gs->getRepository('GSUserBundle:Street')
+                     ->findZone($searchParameter);
+        
+        $status = 'error';
+        $html = '';
+        if($zones){
+            $data = $this->render('GSUserBundle:Street:ajax_template_selectZone.html.twig', array(
+                'zones' => $zones,
+            ));
+            $status = 'success';
+            $html = $data->getContent();
+        }
+    
+    
+        $jsonArray = array(
+            'status' => $status,
+            'data' => $html,
+        );
+        
+        $response = new Response(json_encode($jsonArray));
+        $response->headers->set('Content-Type', 'application/json; charset=utf-8');
+        return $response;
+
+    }
 }

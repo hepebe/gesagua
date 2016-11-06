@@ -55,6 +55,20 @@ class Zone implements UserInterface
     private $inicio;
     
     /**
+     * @var integer
+     *
+     * @ORM\Column(name="fin", type="integer")
+     */
+    private $fin;
+    
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="fultimaLectura", type="date")
+     */
+    private $fultimaLectura;
+  
+    /**
      * Get id
      *
      * @return integer 
@@ -133,6 +147,29 @@ class Zone implements UserInterface
         return $this->inicio;
     }
     
+    /**
+     * Set fin
+     *
+     * @param integer $fin
+     * @return Zone
+     */
+    public function setfin($fin)
+    {
+        $this->fin = $fin;
+
+        return $this;
+    }
+
+    /**
+     * Get fin
+     *
+     * @return integer 
+     */
+    public function getfin()
+    {
+        return $this->fin;
+    }
+    
     public function __construct()
     {
         $this->streets =  new ArrayCollection();
@@ -198,6 +235,31 @@ class Zone implements UserInterface
     
     public function getfullzone()
     {
-        return $this-> nombre . " " . $this->municipio;
+        return $this-> nombre . " (" . $this->municipio . ")";
     }
+
+
+   /**
+     * Set fultimaLectura
+     *
+     * @param \DateTime $fultimaLectura
+     * @return Zone
+     */
+    public function setFultimaLectura($fultimaLectura)
+    {
+        $this->fultimaLectura = $fultimaLectura;
+
+        return $this;
+    }
+
+    /**
+     * Get fultimaLectura
+     *
+     * @return \DateTime 
+     */
+    public function getFultimaLectura()
+    {
+        return $this->fultimaLectura;
+    }
+
 }

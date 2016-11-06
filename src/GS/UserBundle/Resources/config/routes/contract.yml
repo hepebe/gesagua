@@ -41,3 +41,7 @@ gs_contract_redirect_edit:
         _controller: GSUserBundle:Contract:edit
         path:   /edit/{id}
         permanent: true
+
+gs_contract_searchcontract:
+    path:     /searchcontract
+    defaults: { _controller: GSUserBundle:Contract:searchcontract }

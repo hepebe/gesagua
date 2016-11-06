@@ -136,4 +136,34 @@ class CounterController extends Controller
             ->setMethod($method)
             ->getForm();
     } 
+    
+    public function searchcounterAction()
+    {
+        $gs = $this->getDoctrine()->getManager(); 
+        $request = $this->get('request');
+        $searchParameter = $request->request->get('id');
+        $counters = $gs->getRepository('GSUserBundle:Counter')
+                     ->findByLetters($searchParameter);
+        
+        $status = 'error';
+        $html = '';
+        if($counters){
+            $data = $this->render('GSUserBundle:Counter:ajax_template.html.twig', array(
+                'counters' => $counters,
+            ));
+            $status = 'success';
+            $html = $data->getContent();
+        }
+    
+    
+        $jsonArray = array(
+            'status' => $status,
+            'data' => $html,
+        );
+    
+        $response = new Response(json_encode($jsonArray));
+        $response->headers->set('Content-Type', 'application/json; charset=utf-8');
+        return $response;
+
+    }
 }

@@ -1,0 +1,51 @@
+{% extends 'layout.html.twig' %}
+
+{% block body %}
+    {{ parent() }}
+    <div class="main container">
+        <div class="row well">
+            <div class="col-md-6">
+                <div class="page-header">
+                    <h2>Resolver Incidencia</h2>
+                </div>
+                {{ form_start(form, {'attr' : {'novalidate':'novalidate', 'role' : 'form'} }) }}
+                <div class="hidden">
+                    <div class="form-group">
+                        <b>Tipo</b>
+                        {{ form_widget(form.tipo, {'attr' : {'class' : 'form-control', 'placeholder' : 'tipo'} }) }}
+                        <span class="text-danger">{{ form_errors(form.tipo) }}</span>
+                    </div>
+                    
+                    <div class="form-group">
+                        <b>Gravedad</b>
+                        {{ form_widget(form.gravedad, {'attr' : {'class' : 'form-control', 'placeholder' : 'Gravedad'} }) }}
+                        <span class="text-danger">{{ form_errors(form.gravedad) }}</span>
+                    </div>
+                    
+                    <div class="form-group">
+                        <b>Información</b>
+                        {{ form_widget(form.informacion, {'attr' : {'class' : 'form-control', 'placeholder' : 'Información'} }) }}
+                        <span class="text-danger">{{ form_errors(form.informacion) }}</span>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <b>Estado:</b>
+                    {{ form_widget(form.estado, {'attr' : {'class' : 'form-control', 'placeholder' : 'Estado'} }) }}
+                    <span class="text-danger">{{ form_errors(form.estado) }}</span>
+                </div>
+                
+                <div class="form-group">
+                    <b>Resolución:</b>
+                    {{ form_widget(form.resolucion, {'attr' : {'class' : 'form-control', 'placeholder' : 'Resolución'} }) }}
+                    <span class="text-danger">{{ form_errors(form.resolucion) }}</span>
+                </div>
+        
+                <p>
+                    {{ form_widget(form.save, {'label': 'Resolver Incidencia', 'attr':{'class':'btn btn-success'}}) }}
+                </p>
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

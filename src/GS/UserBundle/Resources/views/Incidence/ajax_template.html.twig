@@ -1,0 +1,34 @@
+<table class="table table-stripted table-hover">
+    <thead>
+        <tr>
+            <th>Registrado por</th>
+            <th>Tipo</th>
+            <th>Gravedad</th>
+            <th>Fecha</th>
+            <th>Estado</th>
+            <th>Resuelto por</th>
+        </tr>
+    </thead>
+    <tbody>
+       {% for incidence in incidences %}
+            <tr data-id="{{ incidence.id }}">
+                <td>{{ incidence.userReg.fulluser }}</td>
+                <td>{{ incidence.tipo }}</td>
+                <td>{{ incidence.gravedad }}</td>
+                <td>{{ incidence.fIncidencia |date('d-m-Y') }}</td>
+                <td>{{ incidence.estado }}</td>
+                <td>
+                {% if incidence.userRes != null %}
+                    {{ incidence.userRes.fulluser }}
+                {% endif %}
+                </td>
+                <td class="actions">
+                    <a href="{{ path('gs_incidence_view', {id: incidence.id}) }}" class="btn btn-sm btn-info">Ver</a>
+                    {% if incidence.estado == "Pendiente" %}
+                        <a href="{{ path('gs_claims_edit', {id: incidence.id}) }}" class="btn btn-sm btn-primary">Editar</a>
+                    {% endif %}
+                </td>
+            </tr>
+        {% endfor %} 
+    </tbody>  
+</table>

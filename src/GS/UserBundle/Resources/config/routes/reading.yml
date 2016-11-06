@@ -1,0 +1,36 @@
+gs_reading_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: GSUserBundle:Default:index }
+
+gs_reading_index:
+    path:     /index
+    defaults: { _controller: GSUserBundle:Reading:index }
+
+gs_reading_adminroutes:
+    path:   /adminroutes
+    defaults: { _controller: GSUserBundle:Reading:adminroutes }
+    
+gs_reading_readzone:
+    path:   /readzone/{id}
+    defaults: { _controller: GSUserBundle:Reading:readzone }
+    
+gs_reading_searchzone:
+    path:     /searchzone
+    defaults: { _controller: GSUserBundle:Reading:searchzone }
+    
+gs_reading_upcontract:
+    path:     /upcontract
+    defaults: { _controller: GSUserBundle:Reading:upcontract }
+    
+gs_reading_downcontract:
+    path:     /downcontract
+    defaults: { _controller: GSUserBundle:Reading:downcontract }
+
+gs_reading_viewzones:
+    path:     /viewzones
+    defaults: { _controller: GSUserBundle:Reading:viewzones }
+    
+gs_reading_savereading:
+    path:   /savereading
+    defaults: { _controller: GSUserBundle:Reading:savereading }
+    

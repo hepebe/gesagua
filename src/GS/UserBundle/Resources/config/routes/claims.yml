@@ -46,3 +46,7 @@ gs_claims_redirect_edit:
         _controller: GSUserBundle:Claims:edit
         path:   /edit/{id}
         permanent: true
+        
+gs_claims_searchclaims:
+    path:     /searchclaims
+    defaults: { _controller: GSUserBundle:Claims:searchclaims }

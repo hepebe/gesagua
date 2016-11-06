@@ -1,0 +1,88 @@
+{% extends 'layout.html.twig' %}
+
+{% block body %}
+    {{ parent() }}
+    {% if flashMessage is not defined %}
+        <div class="alert alert-success hidden" id="message" role="alert">
+            <div class="container"> 
+                <span id="user-message"></span>
+            </div>
+        </div>
+    {% endif %}
+    {% for flashMessage in app.session.flashbag.get('mensaje') %}
+        <div class="alert alert-success" role="alert">
+            <div class="container"> {{ flashMessage }}</div>
+        </div>
+    {% endfor %}
+    <div class="container">
+        <div class="col-md-12">
+            <div class="page-header margin-none">
+                <h2 class="padding-none">Incidencias</h2>
+            </div>
+            Buscar: <input type="text" id="searchincidence" name="searchincidence" class="input-medium search-query" placeholder="Tipo de incidencia..."><br><br>
+            <div id="incidenceDivList" class="table-responsive">
+                <table class="table table-stripted table-hover">
+                    <thead>
+                        <tr>
+                            <th>Registrado por</th>
+                            <th>Tipo</th>
+                            <th>Gravedad</th>
+                            <th>Fecha</th>
+                            <th>Estado</th>
+                            <th>Resuelto por</th>
+                        </tr>
+                    </thead>
+                    <tbody id="incidenceTable">
+                       {% for incidence in incidences %}
+                            {%if (incidence.tipo == "Consumo negativo" or incidence.tipo == "Cambio de dirección") and (app.user.tipo == "Gestor")%}
+                                <tr data-id="{{ incidence.id }}">
+                                    <td>{{ incidence.userReg.fulluser }}</td>
+                                    <td>{{ incidence.tipo }}</td>
+                                    <td>{{ incidence.gravedad }}</td>
+                                    <td>{{ incidence.fIncidencia |date('d-m-Y') }}</td>
+                                    <td>{{ incidence.estado }}</td>
+                                    <td>
+                                    {% if incidence.userRes != null %}
+                                        {{ incidence.userRes.fulluser }}
+                                    {% endif %}
+                                    </td>
+                                    <td class="actions">
+                                        <a href="{{ path('gs_incidence_view', {id: incidence.id}) }}" class="btn btn-sm btn-info">Ver</a>
+                                        {% if incidence.estado == "Pendiente" %}
+                                            <a href="{{ path('gs_incidence_edit', {id: incidence.id}) }}" class="btn btn-sm btn-primary">Resolver</a>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                            {% elseif (incidence.tipo != "Consumo negativo" and incidence.tipo != "Cambio de dirección") and (app.user.tipo=="Fontanero") %}
+                                <tr data-id="{{ incidence.id }}">
+                                    <td>{{ incidence.userReg.fulluser }}</td>
+                                    <td>{{ incidence.tipo }}</td>
+                                    <td>{{ incidence.gravedad }}</td>
+                                    <td>{{ incidence.fIncidencia |date('d-m-Y') }}</td>
+                                    <td>{{ incidence.estado }}</td>
+                                    <td>
+                                    {% if incidence.userRes != null %}
+                                        {{ incidence.userRes.fulluser }}
+                                    {% endif %}
+                                    </td>
+                                    <td class="actions">
+                                        <a href="{{ path('gs_incidence_view', {id: incidence.id}) }}" class="btn btn-sm btn-info">Ver</a>
+                                        {% if incidence.estado == "Pendiente" %}
+                                            <a href="{{ path('gs_incidence_edit', {id: incidence.id}) }}" class="btn btn-sm btn-primary">Resolver</a>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                            {% endif %}
+                        {% endfor %} 
+                    </tbody>  
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts%}
+    {{ parent() }}
+    <script src="{{ asset('bundles/gsuser/js/searchincidence.js') }}"></script>
+{% endblock %}
+

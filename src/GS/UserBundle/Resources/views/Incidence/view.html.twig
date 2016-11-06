@@ -1,0 +1,83 @@
+{% extends 'layout.html.twig' %}
+
+{% block body %}
+	{{ parent() }}
+	<div class="container well">
+	    <div class="col-md-9">
+	    <h2>{{ incidences.tipo }}</h2>
+	        <br>
+	        <dl>
+	            <dt>{{'Datos del contrato'}}</dt>
+	            <dd>
+	                {{ incidences.contract.fullcontract }}
+	                &nbsp;
+	            </dd>
+	            <br>
+	            
+	            <dt>{{'Registrado por'}}</dt>
+	            <dd>
+	                {{ incidences.userReg.fulluser }}
+	                &nbsp;
+	            </dd>
+	            <br>
+
+	            <dt>{{'Gravedad'}}</dt>
+	            <dd>
+	                {{ incidences.gravedad }}
+	                &nbsp;
+	            </dd>
+	            <br>
+                
+	            <dt>{{'Fecha Incidencia'}}</dt>
+	            <dd>
+	                {{ incidences.fIncidencia |date('d-m-Y') }}
+	                &nbsp;
+	            </dd>
+	            <br>
+                
+                <dt>{{'Información'}}</dt>
+	            <dd>
+	                {{ incidences.informacion }}
+	                &nbsp;
+	            </dd>
+	            <br>
+                
+                <dt>{{'Estado'}}</dt>
+	            <dd>
+	                {{ incidences.estado }}
+	                &nbsp;
+	            </dd>
+	            <br>
+	            
+	            <dt>{{'Resuelto por'}}</dt>
+	            <dd>
+	                {% if incidences.userRes != null %}
+    	                {{ incidences.userRes.fulluser }}
+    	                &nbsp;
+	                {% endif %}
+	            </dd>
+	            <br>
+	            
+	            <dt>{{'Resolución'}}</dt>
+	            <dd>
+                	 {{ incidences.resolucion }}
+	                &nbsp;
+	            </dd>
+	            <br>
+
+	        </dl>
+	    </div>
+	    <div class="col-md-3">
+	    	{% if incidences.estado == "Pendiente" %}
+	    	<h3>{{ 'Acciones'}}:</h3>
+			
+			<p>
+		    	<a href="{{ path('gs_incidence_edit', { id: incidences.id }) }}" class="btn btn-primary btn-lg btn-block">
+		    		<span class="glyphicon glyphicon-edit"></span>
+		        	{{ 'Resolver incidencia' }}
+				 </a>
+			</p>
+			{% endif %}
+	    </div>
+	</div>
+{% endblock %}

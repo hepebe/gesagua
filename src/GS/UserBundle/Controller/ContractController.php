@@ -9,6 +9,8 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Form\FormError;
 use GS\UserBundle\Entity\Contract;
 use GS\UserBundle\Form\ContractType;
+use GS\UserBundle\Entity\Incidence;
+use GS\UserBundle\Form\IncidenceType;
 
 class ContractController extends Controller
 {
@@ -47,10 +49,34 @@ class ContractController extends Controller
         if($form->isValid())
         {
             $gs = $this->getDoctrine()->getManager();
+            $incidence = new Incidence();
+            $incidence ->setTipo("Colocar contador");
+            $incidence ->setGravedad("Alta");
+            $incidence ->setEstado("Pendiente");
+            $incidence -> setContract($contract);
+            $user = $this->get('security.token_storage')->getToken()->getUser();
+            $incidence->setUserReg($user);
+            $incidence->setInformacion("Colocar un nuevo contador");
+            $gs->persist($incidence);
             $gs-> persist($contract);
             $gs-> flush();
             
+            $inicio = $contract->getStreet()->getZone()->getInicio();
+            $fin = $contract->getStreet()->getZone()->getFin();
+            $lastid = $contract->getId();
+            if(is_null($inicio) && is_null($fin)){
+               $contract->getStreet()->getZone()->setInicio($lastid);
+               $contract->getStreet()->getZone()->setFin($lastid);
+              
+            }else{
+                $lastContract = $gs->getRepository('GSUserBundle:Contract')->find($fin);
+                $lastContract->setNext($lastid);
+                $contract->getStreet()->getZone()->setFin($lastid);
+            }
+             $gs-> flush();
+            
             $this->addFlash('mensaje','El contrato se ha creado correctamente.');
+            //$this->addFlash('mensaje',$lastid . 'El contrato se ha creado correctamente.' . $inicio);
             
             return $this->redirectToRoute('gs_contract_index');
         }
@@ -115,6 +141,36 @@ class ContractController extends Controller
         
         return $this->render('GSUserBundle:Contract:view.html.twig', array('contract'=>$contract));
         
+    }
+    
+    public function searchcontractAction()
+    {
+        $gs = $this->getDoctrine()->getManager(); 
+        $request = $this->get('request');
+        $searchParameter = $request->request->get('id');
+        $contracts = $gs->getRepository('GSUserBundle:Contract')
+                     ->findByLetters($searchParameter);
+        
+        $status = 'error';
+        $html = '';
+        if($contracts){
+            $data = $this->render('GSUserBundle:Contract:ajax_template.html.twig', array(
+                'contracts' => $contracts,
+            ));
+            $status = 'success';
+            $html = $data->getContent();
+        }
+    
+    
+        $jsonArray = array(
+            'status' => $status,
+            'data' => $html,
+        );
+    
+        $response = new Response(json_encode($jsonArray));
+        $response->headers->set('Content-Type', 'application/json; charset=utf-8');
+        return $response;
+
     }
     
 }

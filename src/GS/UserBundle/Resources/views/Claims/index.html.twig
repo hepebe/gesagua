@@ -19,19 +19,20 @@
             <div class="page-header margin-none">
                 <h2 class="padding-none">Reclamaciones</h2>
             </div>
-            <div class="table-responsive">
+            Buscar: <input type="text" id="searchclaims" name="searchclaims" class="input-medium search-query" placeholder="Título reclamación..."><br><br>
+            <div id="claimsDivList" class="table-responsive">
                 <table class="table table-stripted table-hover">
                     <thead>
                         <tr>
                             <th>Usuario</th>
                             <th>Cliente</th>
-                            <th>Fecha Reclamación</th>
+                            <th>Fecha</th>
                             <th>Título</th>
                             <th>Estado</th>
                             <th>Resolución</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="claimsTable">
                        {% for claims in claimss %}
                             <tr data-id="{{ claims.id }}">
                                 <td>{{ claims.user.fulluser }}</td>
@@ -43,7 +44,7 @@
                                 <td class="actions">
                                     <a href="{{ path('gs_claims_view', {id: claims.id}) }}" class="btn btn-sm btn-info">Ver</a>
                                     {% if claims.estado == "Pendiente" %}
-                                        <a href="{{ path('gs_claims_edit', {id: claims.id}) }}" class="btn btn-sm btn-primary">Editar</a>
+                                        <a href="{{ path('gs_claims_edit', {id: claims.id}) }}" class="btn btn-sm btn-primary">Resolver</a>
                                     {% endif %}
                                     <a href="#" class="btn btn-sm btn-danger btn-delete">Eliminar</a>
                                 </td>
@@ -60,5 +61,6 @@
 {% block javascripts%}
     {{ parent() }}
     <script src="{{ asset('bundles/gsuser/js/delete-claims.js') }}"></script>
+    <script src="{{ asset('bundles/gsuser/js/searchclaims.js') }}"></script>
 {% endblock %}
 

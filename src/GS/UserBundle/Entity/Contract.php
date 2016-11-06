@@ -19,6 +19,18 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 class Contract
 {
     /**
+     * @ORM\OneToMany(targetEntity="Bill", mappedBy="contract")
+    */
+    
+    protected $bills1;
+    
+    /**
+     * @ORM\OneToMany(targetEntity="Incidence", mappedBy="contract")
+    */
+    
+    protected $incidences2;
+    
+    /**
      * @ORM\ManyToOne(targetEntity="Street", inversedBy="contracts")
      * @ORM\JoinColumn(name="street_id", referencedColumnName="id", onDelete="CASCADE")
      */
@@ -155,6 +167,8 @@ class Contract
     public function __construct()
     {
         $this->counters = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->incidences2 = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->bills1 = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -247,5 +261,81 @@ class Contract
     public function setactivodefaultValue()
     {
         $this->setActivo(false);
+    }
+
+    
+    /**
+     * Add bills1
+     *
+     * @param \GS\UserBundle\Entity\Bill $bills1
+     * @return Contract
+     */
+    public function addBills1(\GS\UserBundle\Entity\Bill $bills1)
+    {
+        $this->bills1[] = $bills1;
+
+        return $this;
+    }
+
+    /**
+     * Remove bills1
+     *
+     * @param \GS\UserBundle\Entity\Bill $bills1
+     */
+    public function removeBills1(\GS\UserBundle\Entity\Bill $bills1)
+    {
+        $this->bills1->removeElement($bills1);
+    }
+
+    /**
+     * Get bills1
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getBills1()
+    {
+        return $this->bills1;
+    }
+
+    /**
+     * Add incidences2
+     *
+     * @param \GS\UserBundle\Entity\Incidence $incidences2
+     * @return Contract
+     */
+    public function addIncidences2(\GS\UserBundle\Entity\Incidence $incidences2)
+    {
+        $this->incidences2[] = $incidences2;
+
+        return $this;
+    }
+
+    /**
+     * Remove incidences2
+     *
+     * @param \GS\UserBundle\Entity\Incidence $incidences2
+     */
+    public function removeIncidences2(\GS\UserBundle\Entity\Incidence $incidences2)
+    {
+        $this->incidences2->removeElement($incidences2);
+    }
+
+    /**
+     * Get incidences2
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getIncidences2()
+    {
+        return $this->incidences2;
+    }
+    
+    public function getnCounter()
+    {
+        for( $i=0; $i<count($this->counters); $i++){
+            if($this->counters[$i].fBaja==null){
+                return $this->counters[$i].nContador;
+            }
+        }    
     }
 }

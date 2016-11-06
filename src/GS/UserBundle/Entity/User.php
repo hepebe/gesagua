@@ -19,6 +19,24 @@ use Symfony\Component\Security\Core\User\AdvancedUserInterface;
 class User implements AdvancedUserInterface, \Serializable
 {
     /**
+     * @ORM\OneToMany(targetEntity="Incidence", mappedBy="userReg")
+    */
+    
+    protected $incidences;
+    
+    /**
+     * @ORM\OneToMany(targetEntity="Incidence", mappedBy="userRes")
+    */
+    
+    protected $incidences1;
+    
+    /**
+     * @ORM\OneToMany(targetEntity="Reading", mappedBy="user")
+    */
+    
+    protected $readings;
+    
+    /**
      * @ORM\OneToMany(targetEntity="Claims", mappedBy="user")
     */
     protected $claimss1;
@@ -326,6 +344,9 @@ class User implements AdvancedUserInterface, \Serializable
     public function __construct()
     {
         $this->claimss1 =  new \Doctrine\Common\Collections\ArrayCollection();
+        $this->readings = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->incidences = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->incidences1 = new \Doctrine\Common\Collections\ArrayCollection();
     }
     
     public function getUsername()
@@ -425,5 +446,104 @@ class User implements AdvancedUserInterface, \Serializable
     {
            return $this-> nombre . " " . $this->apellidos . " (" . $this->tipo . ")"; 
         
+    }
+
+    /**
+     * Add readings
+     *
+     * @param \GS\UserBundle\Entity\Reading $readings
+     * @return User
+     */
+    public function addReading(\GS\UserBundle\Entity\Reading $readings)
+    {
+        $this->readings[] = $readings;
+
+        return $this;
+    }
+
+    /**
+     * Remove readings
+     *
+     * @param \GS\UserBundle\Entity\Reading $readings
+     */
+    public function removeReading(\GS\UserBundle\Entity\Reading $readings)
+    {
+        $this->readings->removeElement($readings);
+    }
+
+    /**
+     * Get readings
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getReadings()
+    {
+        return $this->readings;
+    }
+
+    /**
+     * Add incidences
+     *
+     * @param \GS\UserBundle\Entity\Incidence $incidences
+     * @return User
+     */
+    public function addIncidence(\GS\UserBundle\Entity\Incidence $incidences)
+    {
+        $this->incidences[] = $incidences;
+
+        return $this;
+    }
+
+    /**
+     * Remove incidences
+     *
+     * @param \GS\UserBundle\Entity\Incidence $incidences
+     */
+    public function removeIncidence(\GS\UserBundle\Entity\Incidence $incidences)
+    {
+        $this->incidences->removeElement($incidences);
+    }
+
+    /**
+     * Get incidences
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getIncidences()
+    {
+        return $this->incidences;
+    }
+
+    /**
+     * Add incidences1
+     *
+     * @param \GS\UserBundle\Entity\Incidence $incidences1
+     * @return User
+     */
+    public function addIncidences1(\GS\UserBundle\Entity\Incidence $incidences1)
+    {
+        $this->incidences1[] = $incidences1;
+
+        return $this;
+    }
+
+    /**
+     * Remove incidences1
+     *
+     * @param \GS\UserBundle\Entity\Incidence $incidences1
+     */
+    public function removeIncidences1(\GS\UserBundle\Entity\Incidence $incidences1)
+    {
+        $this->incidences1->removeElement($incidences1);
+    }
+
+    /**
+     * Get incidences1
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getIncidences1()
+    {
+        return $this->incidences1;
     }
 }

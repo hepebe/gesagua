@@ -170,6 +170,36 @@ class ClientController extends Controller
             ->setAction($this->generateUrl($route, array('id'=>$id)))
             ->setMethod($method)
             ->getForm();
-    }   
+    }  
+    
+    public function searchAction()
+    {
+        $gs = $this->getDoctrine()->getManager(); 
+        $request = $this->get('request');
+        $searchParameter = $request->request->get('id');
+        $clients = $gs->getRepository('GSUserBundle:Client')
+                     ->findByLetters($searchParameter);
+        
+        $status = 'error';
+        $html = '';
+        if($clients){
+            $data = $this->render('GSUserBundle:Client:ajax_template.html.twig', array(
+                'clients' => $clients,
+            ));
+            $status = 'success';
+            $html = $data->getContent();
+        }
+    
+    
+        $jsonArray = array(
+            'status' => $status,
+            'data' => $html,
+        );
+    
+        $response = new Response(json_encode($jsonArray));
+        $response->headers->set('Content-Type', 'application/json; charset=utf-8');
+        return $response;
+        
+    }
  
 }

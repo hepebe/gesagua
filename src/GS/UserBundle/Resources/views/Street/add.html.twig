@@ -16,17 +16,25 @@
                     <span class="text-danger">{{ form_errors(form.nombre) }}</span>
                 </div>
             
-                <div class="form-group">
-                    {{ form_label(form.zone) }}
-                    {{ form_widget(form.zone, {'attr' : {'class' : 'form-control', 'placeholder' : 'Zona'} }) }}
-                    <span class="text-danger">{{ form_errors(form.zone) }}</span>
-                </div>
+                <div class="select-editable">
+                    <select id="selectZone">
+                        {% for zone in zones %}
+                            <option value="{{ zone.id }}"> {{ zone.fullzone }} </option>
+                        {% endfor %}
+                    </select>
+                    <input type="text" id="textZone" name="format" value="" />
+                </div><br><br>
                 
                 <p>
-                    {{ form_widget(form.save, {'label': 'Crear calle', 'attr':{'class':'btn btn-success'}}) }}
+                    {{ form_widget(form.save, {'label': 'Crear calle', 'id': 'zone.id', 'attr':{'class':'btn btn-success'}}) }}
                 </p>
                 {{ form_end(form) }}
             </div>
         </div>
     </div>
+{% endblock %}
+
+{% block javascripts%}
+    {{ parent() }}
+    <script src="{{ asset('bundles/gsuser/js/selectZone.js') }}"></script>
 {% endblock %}

@@ -46,3 +46,7 @@ gs_zone_redirect_edit:
         _controller: GSUserBundle:Zone:edit
         path:   /edit/{id}
         permanent: true
+
+gs_contract_searchzone:
+    path:     /searchzone
+    defaults: { _controller: GSUserBundle:Zone:searchzone }

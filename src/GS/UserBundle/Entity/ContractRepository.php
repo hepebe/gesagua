@@ -3,6 +3,7 @@
 namespace GS\UserBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\EntityManager;
 
 /**
  * ContractRepository
@@ -12,4 +13,10 @@ use Doctrine\ORM\EntityRepository;
  */
 class ContractRepository extends EntityRepository
 {
+    public function findByLetters($integer){
+        return $this->getEntityManager()->createQuery('SELECT c FROM GSUserBundle:Contract c  
+                WHERE c.id LIKE :integer')
+                ->setParameter('integer','%'.$integer.'%')
+                ->getResult();
+    }
 }

@@ -42,3 +42,7 @@ gs_counter_redirect_edit:
         _controller: GSUserBundle:Counter:edit
         path:   /edit/{id}
         permanent: true
+        
+gs_contract_searchcounter:
+    path:     /searchcounter
+    defaults: { _controller: GSUserBundle:Counter:searchcounter }

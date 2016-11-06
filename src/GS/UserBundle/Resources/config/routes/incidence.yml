@@ -1,0 +1,47 @@
+gs_incidence_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: GSUserBundle:Default:index }
+
+gs_incidence_index:
+    path:     /index
+    defaults: { _controller: GSUserBundle:Incidence:index }
+
+gs_incidence_add:
+    path:     /add/{id}
+    defaults: { _controller: GSUserBundle:Incidence:add }
+
+gs_incidence_create:
+    path:     /create/{id}
+    defaults: { _controller: GSUserBundle:Incidence:create }
+    methods: POST
+    
+gs_incidence_edit:
+    path:     /edit/{id}
+    defaults: { _controller: GSUserBundle:Incidence:edit }
+
+gs_incidence_update:
+    path:     /update/{id}
+    defaults: { _controller: GSUserBundle:Incidence:update }
+    methods: [POST, PUT]
+
+gs_incidence_view:
+    path:     /view/{id}
+    defaults: { _controller: GSUserBundle:Incidence:view }
+
+gs_incidence_redirect_add:
+    path:     /create
+    defaults: 
+        _controller: GSUserBundle:Incidence:add
+        path:   /add
+        permanent: true
+
+gs_incidence_redirect_edit:
+    path:     /update/{id}
+    defaults: 
+        _controller: GSUserBundle:Incidence:edit
+        path:   /edit/{id}
+        permanent: true
+        
+gs_incidence_searchincidence:
+    path:     /searchincidence
+    defaults: { _controller: GSUserBundle:Incidence:searchincidence }

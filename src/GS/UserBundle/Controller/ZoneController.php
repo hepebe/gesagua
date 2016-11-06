@@ -168,6 +168,36 @@ class ZoneController extends Controller
             ->setAction($this->generateUrl($route, array('id'=>$id)))
             ->setMethod($method)
             ->getForm();
-    }   
+    }  
+    
+    public function searchzoneAction()
+    {
+        $gs = $this->getDoctrine()->getManager(); 
+        $request = $this->get('request');
+        $searchParameter = $request->request->get('id');
+        $zones = $gs->getRepository('GSUserBundle:Zone')
+                     ->findByLetters($searchParameter);
+        
+        $status = 'error';
+        $html = '';
+        if($zones){
+            $data = $this->render('GSUserBundle:Zone:ajax_template.html.twig', array(
+                'zones' => $zones,
+            ));
+            $status = 'success';
+            $html = $data->getContent();
+        }
+    
+    
+        $jsonArray = array(
+            'status' => $status,
+            'data' => $html,
+        );
+    
+        $response = new Response(json_encode($jsonArray));
+        $response->headers->set('Content-Type', 'application/json; charset=utf-8');
+        return $response;
+        
+    }
  
 }

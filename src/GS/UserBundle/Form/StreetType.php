@@ -17,10 +17,6 @@ class StreetType extends AbstractType
     {
         $builder
             ->add('nombre')
-            ->add('zone', 'entity', array(
-                'class' => 'GSUserBundle:Zone',
-                'choice_label' => 'getfullzone'
-                ))
             ->add('save', 'submit', array('label'=>'Crear Calle'))
         ;
     }

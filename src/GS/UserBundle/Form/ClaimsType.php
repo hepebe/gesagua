@@ -16,15 +16,6 @@ class ClaimsType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('user','entity', array(
-                'class' => 'GSUserBundle:User',
-                'query_builder' => function (EntityRepository $gs) {
-                    return $gs->createQueryBuilder('u')
-                        ->where('u.tipo = :only')
-                        ->setParameter('only', 'Auxiliar');
-                },
-                'choice_label' => 'getfulluser'
-                ))
             ->add('client', 'entity', array(
                 'class' => 'GSUserBundle:Client',
                 'choice_label' => 'getfullclient'

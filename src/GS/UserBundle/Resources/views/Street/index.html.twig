@@ -19,7 +19,8 @@
             <div class="page-header margin-none">
                 <h2 class="padding-none">Calles</h2>
             </div>
-            <div class="table-responsive">
+            Buscar: <input type="text" id="searchstreet" name="searchstreet" class="input-medium search-query" placeholder="nombre de la calle..."><br><br>
+            <div id="streetDivList" class="table-responsive">
                 <table class="table table-stripted table-hover">
                     <thead>
                         <tr>
@@ -27,7 +28,7 @@
                             <th>Zona</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="streetTable">
                        {% for street in streets %}
                             <tr data-id="{{ street.id }}">
                                 <td>{{ street.nombre }}</td>
@@ -49,5 +50,6 @@
 {% block javascripts%}
     {{ parent() }}
     <script src="{{ asset('bundles/gsuser/js/delete-street.js') }}"></script>
+    <script src="{{ asset('bundles/gsuser/js/searchstreet.js') }}"></script>
 {% endblock %}
 

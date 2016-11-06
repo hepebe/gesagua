@@ -1,0 +1,24 @@
+<table class="table table-stripted table-hover">
+    <thead>
+        <tr>
+            <th>Nº del contrato</th>
+            <th>Cliente</th>
+            <th>Calle</th>
+            <th>Nº de la vivienda</th>
+        </tr>
+    </thead>
+    <tbody>
+       {% for contract in contracts %}
+        <tr data-id="{{ contract.id }}">
+            <td>{{ contract.id }}</td>
+            <td>{{ contract.client.fullclient }}</td>
+            <td>{{ contract.street.fullstreet}}</td>
+            <td>{{ contract.nVivienda }}</td>
+            <td class="actions">
+                <a href="{{ path('gs_contract_view', {id: contract.id}) }}" class="btn btn-sm btn-info">Ver</a>
+                <a href="{{ path('gs_contract_edit', {id: contract.id}) }}" class="btn btn-sm btn-primary">Editar titular</a>
+            </td>
+        </tr>
+        {% endfor %} 
+    </tbody>  
+</table>

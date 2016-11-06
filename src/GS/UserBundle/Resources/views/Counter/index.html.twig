@@ -19,17 +19,18 @@
             <div class="page-header margin-none">
                 <h2 class="padding-none">Contadores</h2>
             </div>
-            <div class="table-responsive">
+            Buscar: <input type="text" id="searchcounter" name="searchcounter" class="input-medium search-query" placeholder="número de contador..."><br><br>
+            <div id="counterDivList" class="table-responsive">
                 <table class="table table-stripted table-hover">
                     <thead>
                         <tr>
                             <th>Número del Contador</th>
                             <th>Fecha de Alta</th>
                             <th>Fecha de Baja</th>
-                            <th>Número de Referencia del Contrato</th>
+                            <th>Número del Contrato</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="counterTable">
                        {% for counter in counters %}
                             <tr data-id="{{ counter.nContador }}">
                                 <td>{{ counter.nContador }}</td>
@@ -60,6 +61,7 @@
 {% block javascripts%}
     {{ parent() }}
     <script src="{{ asset('bundles/gsuser/js/delete-counter.js') }}"></script>
+    <script src="{{ asset('bundles/gsuser/js/searchcounter.js') }}"></script>
 {% endblock %}
 
 

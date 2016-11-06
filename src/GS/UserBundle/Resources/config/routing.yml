@@ -25,7 +25,18 @@ gs_contract_contract:
 gs_counter_counter:
     resource: "@GSUserBundle/Resources/config/routes/counter.yml"
     prefix: /counter
+        
+gs_reading_reading:
+    resource: "@GSUserBundle/Resources/config/routes/reading.yml"
+    prefix: /reading
+
+gs_incidence_incidence:
+    resource: "@GSUserBundle/Resources/config/routes/incidence.yml"
+    prefix: /incidence
     
+gs_bill_bill:
+    resource: "@GSUserBundle/Resources/config/routes/bill.yml"
+    prefix: /bill
 # Autentication
 
 gs_user_homepage:

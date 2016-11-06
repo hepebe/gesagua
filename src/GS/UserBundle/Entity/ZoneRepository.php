@@ -3,6 +3,7 @@
 namespace GS\UserBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\EntityManager;
 
 /**
  * ZoneRepository
@@ -12,4 +13,10 @@ use Doctrine\ORM\EntityRepository;
  */
 class ZoneRepository extends EntityRepository
 {
+    public function findByLetters($string){
+        return $this->getEntityManager()->createQuery('SELECT z FROM GSUserBundle:Zone z  
+                WHERE z.nombre LIKE :string')
+                ->setParameter('string','%'.$string.'%')
+                ->getResult();
+    }
 }

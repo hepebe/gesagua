@@ -1,0 +1,30 @@
+<table class="table table-stripted table-hover">
+    <thead>
+        <tr>
+            <th>Número del Contador</th>
+            <th>Fecha de Alta</th>
+            <th>Fecha de Baja</th>
+            <th>Número de Referencia del Contrato</th>
+        </tr>
+    </thead>
+    <tbody>
+       {% for counter in counters %}
+        <tr data-id="{{ counter.nContador }}">
+            <td>{{ counter.nContador }}</td>
+            <td>{{ counter.fAlta |date('d-m-Y') }}</td>
+            <td>
+            {% if counter.fBaja != null %}
+                {{ counter.fBaja |date('d-m-Y') }}
+            {% endif %}
+            </td>
+            <td>{{ counter.contract.fullcontract }}</td>
+            <td class="actions">
+                <a href="{{ path('gs_counter_view', {id: counter.nContador}) }}" class="btn btn-sm btn-info">Ver</a>
+                {% if counter.fBaja == null %}
+                    <a href="{{ path('gs_counter_edit', {id: counter.nContador}) }}" class="btn btn-sm btn-danger btn-delete">Dar de Baja</a>
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %} 
+    </tbody>  
+</table>

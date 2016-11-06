@@ -19,18 +19,21 @@
             <div class="page-header margin-none">
                 <h2 class="padding-none">Contratos</h2>
             </div>
-            <div class="table-responsive">
+            Buscar: <input type="text" id="searchcontract" name="searchcontract" class="input-medium search-query" placeholder="número de contrato..."><br><br>
+            <div id="contractDivList" class="table-responsive">
                 <table class="table table-stripted table-hover">
                     <thead>
                         <tr>
+                            <th>Nº del contrato</th>
                             <th>Cliente</th>
                             <th>Calle</th>
-                            <th>Número de la vivienda</th>
+                            <th>Nº de la vivienda</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="contractTable">
                        {% for contract in contracts %}
                             <tr data-id="{{ contract.id }}">
+                                <td>{{ contract.id }}</td>
                                 <td>{{ contract.client.fullclient }}</td>
                                 <td>{{ contract.street.fullstreet}}</td>
                                 <td>{{ contract.nVivienda }}</td>
@@ -47,4 +50,8 @@
     </div>
 {% endblock %}
 
+{% block javascripts%}
+    {{ parent() }}
+    <script src="{{ asset('bundles/gsuser/js/searchcontract.js') }}"></script>
+{% endblock %}
 

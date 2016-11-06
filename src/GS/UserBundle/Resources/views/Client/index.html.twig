@@ -19,7 +19,8 @@
             <div class="page-header margin-none">
                 <h2 class="padding-none">Clientes</h2>
             </div>
-            <div class="table-responsive">
+            Buscar: <input type="text" id="search" name="search" class="input-medium search-query" placeholder="nombre del cliente..."><br><br>
+            <div id="clientDivList" class="table-responsive">
                 <table class="table table-stripted table-hover">
                     <thead>
                         <tr>
@@ -31,7 +32,7 @@
                             <th>Dirección</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="clientTable">
                        {% for client in clients %}
                             <tr data-id="{{ client.id }}">
                                 <td>{{ client.nombre }}</td>
@@ -57,5 +58,6 @@
 {% block javascripts%}
     {{ parent() }}
     <script src="{{ asset('bundles/gsuser/js/delete-client.js') }}"></script>
+    <script src="{{ asset('bundles/gsuser/js/search.js') }}"></script>
 {% endblock %}
 

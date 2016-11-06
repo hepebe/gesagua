@@ -1,0 +1,29 @@
+<table class="table table-stripted table-hover">
+    <thead>
+        <tr>
+            <th>Número del contrato</th>
+            <th>Calle</th>
+            <th>Número de la vivienda</th>
+        </tr>
+    </thead>
+    <tbody>
+       {% for contract in contracts %}
+        <tr data-id="{{ contract.id }}">
+            <td>{{ contract.id }}</td>
+            <td>{{ contract.street.fullstreet}}</td>
+            <td>{{ contract.nVivienda }}</td>
+            <td>
+                <a href="{{ path('gs_incidence_add', { id:contract.id }) }}" class="btn btn-sm btn-info">Crear Incidencia</a>
+             </td>
+            <td>
+                {% if loop.index!=1  %}
+                    <span class="glyphicon glyphicon-chevron-up" onclick="up({{ contract.id }})"></span><br>
+                {% endif %}
+                {% if contract.next!=null  %}
+                    <span class="glyphicon glyphicon-chevron-down" onclick="down({{ contract.id }})"></span>
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %} 
+    </tbody>  
+</table>
