@@ -15,18 +15,27 @@
                     {{ form_widget(form.nombre, {'attr' : {'class' : 'form-control', 'placeholder' : 'Nombre'} }) }}
                     <span class="text-danger">{{ form_errors(form.nombre) }}</span>
                 </div>
-            
+                
+                <div class="hidden">
+                    <div class="form-group">
+                        {{ form_label(form.zone) }}
+                        {{ form_widget(form.zone, {'attr' : {'class' : 'form-control', 'placeholder' : 'Zona'} }) }}
+                        <span class="text-danger">{{ form_errors(form.zone) }}</span>
+                    </div>
+                </div>
+                <b>Zona</b>
                 <div class="select-editable">
                     <select id="selectZone">
+                        <option value="">Selecciona una zona...</option>
                         {% for zone in zones %}
                             <option value="{{ zone.id }}"> {{ zone.fullzone }} </option>
                         {% endfor %}
                     </select>
-                    <input type="text" id="textZone" name="format" value="" />
+                    <input type="text" class="form-control" id="textZone" name="format" value="" placeholder="Buscar..." />
                 </div><br><br>
                 
                 <p>
-                    {{ form_widget(form.save, {'label': 'Crear calle', 'id': 'zone.id', 'attr':{'class':'btn btn-success'}}) }}
+                    {{ form_widget(form.save, {'label': 'Crear calle', 'attr':{'class':'btn btn-success'}}) }}
                 </p>
                 {{ form_end(form) }}
             </div>

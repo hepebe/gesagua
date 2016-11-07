@@ -1,7 +1,7 @@
 $(function(){
     var searchField = $('#textZone');
     var selectZone = $('#selectZone');
-
+    
     searchField.keyup(function(evt){
 
         $.ajax({
@@ -16,7 +16,8 @@ $(function(){
                     selectZone.empty();
                     selectZone.html(parsedData.data);
                     if(selectZone.children().size()==1){
-                        searchField.val($( "#selectZone option:selected" ).text());
+                        searchField.val($("#selectZone option:selected").text());
+                        $("#street_zone").val($("#selectZone option:selected").val());
                     }
                 }else{
                     selectZone.empty();
@@ -27,9 +28,9 @@ $(function(){
     });
     
     selectZone.change(function (evt){
-        searchField.val($( "#selectZone option:selected" ).text());
+        searchField.val($("#selectZone option:selected").text());
+        $("#street_zone").val($("#selectZone option:selected").val());
         console.log(evt);
     });
-    
                     
 });
