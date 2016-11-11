@@ -3,12 +3,14 @@
 namespace GS\UserBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Bill
  *
  * @ORM\Table(name="Facturas")
  * @ORM\Entity(repositoryClass="GS\UserBundle\Entity\BillRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 class Bill
 {
@@ -43,9 +45,9 @@ class Bill
     private $fFactura;
 
     /**
-     * @var integer
+     * @var float
      *
-     * @ORM\Column(name="consumo", type="integer")
+     * @ORM\Column(name="consumo", type="float")
      */
     private $consumo;
 
@@ -55,7 +57,35 @@ class Bill
      * @ORM\Column(name="total", type="float")
      */
     private $total;
+    
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="estado", type="boolean", columnDefinition="ENUM('Pendiente','Pagado')")
+     */
+    private $estado;
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="tarifa", type="string", columnDefinition="ENUM('Consumo doméstico','Consumo industrial','Consumo construcciones', 'Consumo municipal')")
+     * @Assert\NotBlank(message="Este campo es obligatorio")
+     */
+    private $tarifa;
 
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="lectActual", type="float")
+     */
+    private $lectActual;
+    
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="lectAnterior", type="float")
+     */
+    private $lectAnterior;
 
     /**
      * Get id
@@ -93,7 +123,7 @@ class Bill
     /**
      * Set consumo
      *
-     * @param integer $consumo
+     * @param float $consumo
      * @return Bill
      */
     public function setConsumo($consumo)
@@ -106,7 +136,7 @@ class Bill
     /**
      * Get consumo
      *
-     * @return integer 
+     * @return float 
      */
     public function getConsumo()
     {
@@ -180,5 +210,113 @@ class Bill
     public function getContract()
     {
         return $this->contract;
+    }
+
+    /**
+     * Set estado
+     *
+     * @param boolean $estado
+     * @return Bill
+     */
+    public function setEstado($estado)
+    {
+        $this->estado = $estado;
+
+        return $this;
+    }
+
+    /**
+     * Get estado
+     *
+     * @return boolean 
+     */
+    public function getEstado()
+    {
+        return $this->estado;
+    }
+
+    /**
+     * Set tarifa
+     *
+     * @param string $tarifa
+     * @return Bill
+     */
+    public function setTarifa($tarifa)
+    {
+        $this->tarifa = $tarifa;
+
+        return $this;
+    }
+
+    /**
+     * Get tarifa
+     *
+     * @return string 
+     */
+    public function getTarifa()
+    {
+        return $this->tarifa;
+    }
+    
+    /**
+     * @ORM\PrePersist 
+     */
+    public function setfFacturaValue()
+    {
+        $this->fFactura = new \DateTime();
+    }
+    
+    /**
+     * @ORM\PrePersist 
+     */
+    public function setestadodefaultValue()
+    {
+        $this->setEstado('Pendiente');
+    }
+
+    /**
+     * Set lectActual
+     *
+     * @param float $lectActual
+     * @return Bill
+     */
+    public function setLectActual($lectActual)
+    {
+        $this->lectActual = $lectActual;
+
+        return $this;
+    }
+
+    /**
+     * Get lectActual
+     *
+     * @return float 
+     */
+    public function getLectActual()
+    {
+        return $this->lectActual;
+    }
+
+    /**
+     * Set lectAnterior
+     *
+     * @param float $lectAnterior
+     * @return Bill
+     */
+    public function setLectAnterior($lectAnterior)
+    {
+        $this->lectAnterior = $lectAnterior;
+
+        return $this;
+    }
+
+    /**
+     * Get lectAnterior
+     *
+     * @return float 
+     */
+    public function getLectAnterior()
+    {
+        return $this->lectAnterior;
     }
 }

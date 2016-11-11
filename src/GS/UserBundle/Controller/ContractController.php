@@ -25,10 +25,13 @@ class ContractController extends Controller
     
     public function addAction()
     {
+        $gs = $this->getDoctrine()->getManager();
         $contract = new Contract();
         $form = $this->createCreateForm($contract);
+        $clients = $gs->getRepository('GSUserBundle:Client')->findAll();
+        $streets = $gs->getRepository('GSUserBundle:Street')->findAll();
         
-        return $this->render('GSUserBundle:Contract:add.html.twig', array('form'=>$form->createView()));
+        return $this->render('GSUserBundle:Contract:add.html.twig', array('clients'=>$clients, 'streets'=>$streets, 'form'=>$form->createView()));
     }
     
     private function createCreateForm(Contract $entity)
@@ -173,4 +176,65 @@ class ContractController extends Controller
 
     }
     
+    public function selectclientAction()
+    {
+        $gs = $this->getDoctrine()->getManager(); 
+        $request = $this->get('request');
+        
+        $searchParameter = $request->request->get('text');
+        $clients = $gs->getRepository('GSUserBundle:Contract')
+                     ->findClient($searchParameter);
+        
+        $status = 'error';
+        $html = '';
+        if($clients){
+            $data = $this->render('GSUserBundle:Contract:ajax_template_selectClient.html.twig', array(
+                'clients' => $clients,
+            ));
+            $status = 'success';
+            $html = $data->getContent();
+        }
+    
+    
+        $jsonArray = array(
+            'status' => $status,
+            'data' => $html,
+        );
+        
+        $response = new Response(json_encode($jsonArray));
+        $response->headers->set('Content-Type', 'application/json; charset=utf-8');
+        return $response;
+
+    }
+    
+    public function selectstreetAction()
+    {
+        $gs = $this->getDoctrine()->getManager(); 
+        $request = $this->get('request');
+        
+        $searchParameter = $request->request->get('text');
+        $streets = $gs->getRepository('GSUserBundle:Contract')
+                     ->findStreet($searchParameter);
+        
+        $status = 'error';
+        $html = '';
+        if($streets){
+            $data = $this->render('GSUserBundle:Contract:ajax_template_selectStreet.html.twig', array(
+                'streets' => $streets,
+            ));
+            $status = 'success';
+            $html = $data->getContent();
+        }
+    
+    
+        $jsonArray = array(
+            'status' => $status,
+            'data' => $html,
+        );
+        
+        $response = new Response(json_encode($jsonArray));
+        $response->headers->set('Content-Type', 'application/json; charset=utf-8');
+        return $response;
+
+    }
 }

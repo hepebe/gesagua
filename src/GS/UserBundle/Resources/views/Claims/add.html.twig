@@ -10,13 +10,24 @@
                 </div>
                 {{ form_start(form, {'attr' : {'novalidate':'novalidate', 'role' : 'form'} }) }}
                 
-                
-                
-                <div class="form-group">
-                    <b>Cliente</b>
-                    {{ form_widget(form.client, {'attr' : {'class' : 'form-control', 'placeholder' : 'cliente'} }) }}
-                    <span class="text-danger">{{ form_errors(form.client) }}</span>
+                <div class="hidden">
+                    <div class="form-group">
+                        <b>Cliente</b>
+                        {{ form_widget(form.client, {'attr' : {'class' : 'form-control', 'placeholder' : 'cliente'} }) }}
+                        <span class="text-danger">{{ form_errors(form.client) }}</span>
+                    </div>
                 </div>
+                
+                <b>Cliente</b>
+                <div class="select-editable">
+                    <select id="selectClient">
+                        <option value="">Selecciona un cliente...</option>
+                        {% for client in clients %}
+                            <option value="{{ client.id }}"> {{ client.fullclient }} </option>
+                        {% endfor %}
+                    </select>
+                    <input type="text" class="form-control" id="textClient" name="format" value="" placeholder="Buscar..." />
+                </div><br>
                 
                 <div class="form-group">
                     <b>Título</b>
@@ -31,13 +42,13 @@
                 </div>
                 
                 <div class="form-group">
-                    <b>Estado:</b>
+                    <b>Estado</b>
                     {{ form_widget(form.estado, {'attr' : {'class' : 'form-control', 'placeholder' : 'Estado'} }) }}
                     <span class="text-danger">{{ form_errors(form.estado) }}</span>
                 </div>
                 
                 <div class="form-group">
-                    <b>Resolución:</b>
+                    <b>Resolución</b>
                     {{ form_widget(form.resolucion, {'attr' : {'class' : 'form-control', 'placeholder' : 'Resolución'} }) }}
                     <span class="text-danger">{{ form_errors(form.resolucion) }}</span>
                 </div>
@@ -49,4 +60,9 @@
             </div>
         </div>
     </div>
+{% endblock %}
+
+{% block javascripts%}
+    {{ parent() }}
+    <script src="{{ asset('bundles/gsuser/js/selectClient.js') }}"></script>
 {% endblock %}

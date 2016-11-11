@@ -15,11 +15,17 @@ class BillType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('fFactura')
-            ->add('consumo')
-            ->add('total')
-            ->add('client')
-            ->add('contract')
+            
+            ->add('client','entity', array(
+                'class' => 'GSUserBundle:Client',
+                'choice_label' => 'getfullclient'
+                ))
+            ->add('contract','entity', array(
+                'class' => 'GSUserBundle:Contract',
+                'choice_label' => 'getfullcontract'
+                ))
+            ->add('tarifa','choice',array('choices'=>array('Consumo doméstico'=>'Consumo doméstico', 'Consumo industrial'=>'Consumo industrial', 'Consumo construcciones'=>'Consumo construcciones', 'Consumo municipal'=>'Consumo municipal'), 'placeholder'=>'Selecciona tarifa'))
+            ->add('save', 'submit', array('label'=>'Crear Factura'))
         ;
     }
     

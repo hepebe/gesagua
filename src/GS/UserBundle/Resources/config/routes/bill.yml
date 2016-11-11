@@ -1,0 +1,59 @@
+gs_bill_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: GSUserBundle:Default:index }
+
+gs_bill_index:
+    path:     /index
+    defaults: { _controller: GSUserBundle:Bill:index }
+
+gs_bill_add:
+    path:     /add
+    defaults: { _controller: GSUserBundle:Bill:add }
+
+gs_bill_create:
+    path:     /create
+    defaults: { _controller: GSUserBundle:Bill:create }
+    methods: POST
+    
+gs_bill_edit:
+    path:     /edit/{id}
+    defaults: { _controller: GSUserBundle:Bill:edit }
+
+gs_bill_update:
+    path:     /update/{id}
+    defaults: { _controller: GSUserBundle:Bill:update }
+    methods: [POST, PUT]
+
+gs_bill_view:
+    path:     /view/{id}
+    defaults: { _controller: GSUserBundle:Bill:view }
+
+gs_bill_redirect_add:
+    path:     /create
+    defaults: 
+        _controller: GSUserBundle:Bill:add
+        path:   /add
+        permanent: true
+
+gs_bill_redirect_edit:
+    path:     /update/{id}
+    defaults: 
+        _controller: GSUserBundle:Bill:edit
+        path:   /edit/{id}
+        permanent: true
+
+gs_bill_searchbill:
+    path:     /searchbill
+    defaults: { _controller: GSUserBundle:Bill:searchbill }
+    
+gs_bill_selectclient:
+    path:     /selectclient
+    defaults: { _controller: GSUserBundle:Bill:selectclient }
+    
+gs_bill_selectcontract:
+    path:     /selectcontract
+    defaults: { _controller: GSUserBundle:Bill:selectcontract }
+
+gs_bill_fillcontract:
+    path:     /fillcontract
+    defaults: { _controller: GSUserBundle:Bill:fillcontract }

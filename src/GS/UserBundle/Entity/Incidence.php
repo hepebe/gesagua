@@ -312,4 +312,3 @@ class Incidence
         $this->fIncidencia = new \DateTime();
     }
 }
-

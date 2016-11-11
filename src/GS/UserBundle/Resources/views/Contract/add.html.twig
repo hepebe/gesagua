@@ -10,17 +10,43 @@
                 </div>
                 {{ form_start(form, {'attr' : {'novalidate':'novalidate', 'role' : 'form'} }) }}
                 
-                <div class="form-group">
-                    <b>Cliente</b>
-                    {{ form_widget(form.client, {'attr' : {'class' : 'form-control', 'placeholder' : 'cliente'} }) }}
-                    <span class="text-danger">{{ form_errors(form.client) }}</span>
+                <div class="hidden">
+                    <div class="form-group">
+                        <b>Cliente</b>
+                        {{ form_widget(form.client, {'attr' : {'class' : 'form-control', 'placeholder' : 'cliente'} }) }}
+                        <span class="text-danger">{{ form_errors(form.client) }}</span>
+                    </div>
                 </div>
-            
-                <div class="form-group">
-                    <b>Calle</b>
-                    {{ form_widget(form.street, {'attr' : {'class' : 'form-control', 'placeholder' : 'calle'} }) }}
-                    <span class="text-danger">{{ form_errors(form.street) }}</span>
+                
+                <b>Cliente</b>
+                <div class="select-editable">
+                    <select id="selectClient">
+                        <option value="">Selecciona un cliente...</option>
+                        {% for client in clients %}
+                            <option value="{{ client.id }}"> {{ client.fullclient }} </option>
+                        {% endfor %}
+                    </select>
+                    <input type="text" class="form-control" id="textClient" name="format" value="" placeholder="Buscar..." />
+                </div><br>
+                
+                <div class="hidden">
+                    <div class="form-group">
+                        <b>Calle</b>
+                        {{ form_widget(form.street, {'attr' : {'class' : 'form-control', 'placeholder' : 'calle'} }) }}
+                        <span class="text-danger">{{ form_errors(form.street) }}</span>
+                    </div>
                 </div>
+                
+                <b>Calle</b>
+                <div class="select-editable">
+                    <select id="selectStreet">
+                        <option value="">Selecciona una calle...</option>
+                        {% for street in streets %}
+                            <option value="{{ street.id }}"> {{ street.nombre }} </option>
+                        {% endfor %}
+                    </select>
+                    <input type="text" class="form-control" id="textStreet" name="format" value="" placeholder="Buscar..." />
+                </div><br>
                 
                 <div class="form-group">
                     <b>Número de la vivienda</b>
@@ -35,4 +61,10 @@
             </div>
         </div>
     </div>
+{% endblock %}
+
+{% block javascripts%}
+    {{ parent() }}
+    <script src="{{ asset('bundles/gsuser/js/selectClientContract.js') }}"></script>
+    <script src="{{ asset('bundles/gsuser/js/selectStreet.js') }}"></script>
 {% endblock %}

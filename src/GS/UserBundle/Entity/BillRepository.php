@@ -3,6 +3,7 @@
 namespace GS\UserBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\EntityManager;
 
 /**
  * BillRepository
@@ -12,4 +13,46 @@ use Doctrine\ORM\EntityRepository;
  */
 class BillRepository extends EntityRepository
 {
+    public function findByLetters($integer){
+        return $this->getEntityManager()->createQuery('SELECT b FROM GSUserBundle:Bill b  
+                WHERE b.id LIKE :integer')
+                ->setParameter('integer','%'.$integer.'%')
+                ->getResult();
+    }
+    
+    public function findClient($string){
+        return $this->getEntityManager()->createQuery('SELECT c FROM GSUserBundle:Client c 
+                WHERE c.nombre LIKE :string')
+                ->setParameter('string','%'.$string.'%')
+                ->getResult();
+    }
+    
+    public function findContract($integer, $id){
+        return $this->getEntityManager()->createQuery('SELECT c FROM GSUserBundle:Contract c
+                WHERE c.id LIKE :integer AND c.client= :id')
+                ->setParameter('integer','%'.$integer.'%')
+                ->setParameter('id', $id)
+                ->getResult();
+    }
+    
+    public function fillContract($id){
+        return $this->getEntityManager()->createQuery('SELECT c FROM GSUserBundle:Contract c 
+                WHERE c.client= :id')
+                ->setParameter('id',$id)
+                ->getResult();
+    }
+    
+    public function findCounter($id){
+        return $this->getEntityManager()->createQuery('SELECT c FROM GSUserBundle:Counter c 
+                WHERE c.contract= :id AND c.fBaja IS NULL')
+                ->setParameter('id',$id)
+                ->getResult();
+    }
+    
+    public function findReading($id){
+        return $this->getEntityManager()->createQuery('SELECT r FROM GSUserBundle:Reading r 
+                WHERE r.counter= :id')
+                ->setParameter('id',$id)
+                ->getResult();
+    }
 }

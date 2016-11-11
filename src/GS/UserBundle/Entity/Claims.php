@@ -252,5 +252,5 @@ class Claims
     {
         $this->fReclamacion = new \DateTime();
     }
-    
+
 }

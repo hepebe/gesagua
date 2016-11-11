@@ -25,10 +25,12 @@ class CounterController extends Controller
     
     public function addAction()
     {
+        $gs = $this->getDoctrine()->getManager();
         $counter = new Counter();
         $form = $this->createCreateForm($counter);
+        $contracts = $gs->getRepository('GSUserBundle:Contract')->findAll();
         
-        return $this->render('GSUserBundle:Counter:add.html.twig', array('form'=>$form->createView()));
+        return $this->render('GSUserBundle:Counter:add.html.twig', array('contracts'=>$contracts, 'form'=>$form->createView()));
     }
     
     private function createCreateForm(Counter $entity)
@@ -161,6 +163,37 @@ class CounterController extends Controller
             'data' => $html,
         );
     
+        $response = new Response(json_encode($jsonArray));
+        $response->headers->set('Content-Type', 'application/json; charset=utf-8');
+        return $response;
+
+    }
+    
+     public function selectcontractAction()
+    {
+        $gs = $this->getDoctrine()->getManager(); 
+        $request = $this->get('request');
+        
+        $searchParameter = $request->request->get('text');
+        $contracts = $gs->getRepository('GSUserBundle:Counter')
+                     ->findContract($searchParameter);
+        
+        $status = 'error';
+        $html = '';
+        if($contracts){
+            $data = $this->render('GSUserBundle:Counter:ajax_template_selectContract.html.twig', array(
+                'contracts' => $contracts,
+            ));
+            $status = 'success';
+            $html = $data->getContent();
+        }
+    
+    
+        $jsonArray = array(
+            'status' => $status,
+            'data' => $html,
+        );
+        
         $response = new Response(json_encode($jsonArray));
         $response->headers->set('Content-Type', 'application/json; charset=utf-8');
         return $response;

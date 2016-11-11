@@ -30,12 +30,24 @@
                     </div>
                 </div>
                 
-                
-                 <div class="form-group">
-                    <b>Número del Contrato</b>
-                    {{ form_widget(form.contract, {'attr' : {'class' : 'form-control', 'placeholder' : 'Número de Referencia del Contrato'} }) }}
-                    <span class="text-danger">{{ form_errors(form.contract) }}</span>
+                <div class=hidden>
+                    <div class="form-group">
+                        <b>Número del Contrato</b>
+                        {{ form_widget(form.contract, {'attr' : {'class' : 'form-control', 'placeholder' : 'Número de Referencia del Contrato'} }) }}
+                        <span class="text-danger">{{ form_errors(form.contract) }}</span>
+                    </div>
                 </div>
+                
+                <b>Número del Contrato</b>
+                <div class="select-editable">
+                    <select id="selectContract">
+                        <option value="">Selecciona un contrato...</option>
+                        {% for contract in contracts %}
+                            <option value="{{ contract.id }}"> {{ contract.fullcontract }} </option>
+                        {% endfor %}
+                    </select>
+                    <input type="text" class="form-control" id="textContract" name="format" value="" placeholder="Buscar..." />
+                </div><br>
         
                 <p>
                     {{ form_widget(form.save, {'label': 'Crear Contador', 'attr':{'class':'btn btn-success'}}) }}
@@ -44,4 +56,9 @@
             </div>
         </div>
     </div>
+{% endblock %}
+
+{% block javascripts%}
+    {{ parent() }}
+    <script src="{{ asset('bundles/gsuser/js/selectContract.js') }}"></script>
 {% endblock %}

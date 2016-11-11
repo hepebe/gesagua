@@ -1,0 +1,82 @@
+{% extends 'layout.html.twig' %}
+
+{% block body %}
+	{{ parent() }}
+	<div class="container well">
+	    <div class="col-md-9">
+	    <h2>Número factura: {{ bill.id }}</h2>
+	        <br>
+	        <dl>
+	            <dt>{{'Cliente'}}</dt>
+	            <dd>
+	                {{ bill.client.fullclient }}
+	                &nbsp;
+	            </dd>
+	            <br>
+
+	            <dt>{{'Datos del contrato'}}</dt>
+	            <dd>
+	                {{ bill.contract.fullcontract }}
+	                &nbsp;
+	            </dd>
+	            <br>
+                
+	            <dt>{{'Fecha factura'}}</dt>
+	            <dd>
+	                {{ bill.fFactura |date('d-m-Y') }}
+	                &nbsp;
+	            </dd>
+	            <br>
+                
+                <div class="table-responsive">
+                <table class="table table-stripted table-hover">
+                    <thead>
+                        <tr>
+                            <th>Lectura anterior</th>
+                            <th>Lectura actual</th>
+                            <th>Tarifa</th>
+                            <th>Cuota fija</th>
+                            <th>Consumo</th>
+                        </tr>
+                    </thead>
+                    <tbody id="billTable">
+                        <tr data-id="{{ bill.id }}">
+                            <td>{{ bill.lectAnterior }}</td>
+                            <td>{{ bill.lectActual }}</td>
+                            <td>{{ bill.tarifa }}</td>
+                            <td> 1.35€ </td>
+                            <td>{{ bill.consumo }} m<sup>3</sup></td>
+                        </tr>
+                    </tbody>  
+                </table>
+            </div>
+	            
+	            <dt>{{'Total'}}</dt>
+	            <dd>
+                	 {{ bill.total }} €
+	                &nbsp;
+	            </dd>
+	            <br>
+	            
+	            <dt>{{'Estado'}}</dt>
+	            <dd>
+                	 {{ bill.estado }}
+	                &nbsp;
+	            </dd>
+	            <br>
+
+	        </dl>
+	    </div>
+	    <div class="col-md-3">
+	        {% if bill.estado == "Pendiente" %}
+	    	<h3>{{ 'Acciones'}}:</h3>
+			<p>
+		    	<a href="{{ path('gs_bill_edit', { id: bill.id }) }}" class="btn btn-primary btn-lg btn-block">
+		    		<span class="glyphicon glyphicon-edit"></span>
+		        	{{ 'Marcar como cobrado' }}
+				 </a>
+			</p>
+			{% endif %}
+	    </div>
+	</div>
+{% endblock %}

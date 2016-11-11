@@ -30,7 +30,6 @@ $(function(){
     selectZone.change(function (evt){
         searchField.val($("#selectZone option:selected").text());
         $("#street_zone").val($("#selectZone option:selected").val());
-        console.log(evt);
     });
                     
 });

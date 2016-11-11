@@ -46,3 +46,7 @@ gs_counter_redirect_edit:
 gs_contract_searchcounter:
     path:     /searchcounter
     defaults: { _controller: GSUserBundle:Counter:searchcounter }
+    
+gs_claims_selectcontract:
+    path:     /selectcontract
+    defaults: { _controller: GSUserBundle:Counter:selectcontract }

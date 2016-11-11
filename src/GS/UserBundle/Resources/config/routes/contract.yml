@@ -45,3 +45,11 @@ gs_contract_redirect_edit:
 gs_contract_searchcontract:
     path:     /searchcontract
     defaults: { _controller: GSUserBundle:Contract:searchcontract }
+    
+gs_contract_selectclient:
+    path:     /selectclient
+    defaults: { _controller: GSUserBundle:Contract:selectclient }
+    
+gs_contract_selectstreet:
+    path:     /selectstreet
+    defaults: { _controller: GSUserBundle:Contract:selectstreet }

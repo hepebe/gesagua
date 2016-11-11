@@ -1,0 +1,30 @@
+<table class="table table-stripted table-hover">
+    <thead>
+        <tr>
+            <th>Número factura</th>
+            <th>Cliente</th>
+            <th>Nº del contrato</th>
+            <th>Fecha</th>
+            <th>Tarifa</th>
+            <th>Consumo</th>
+            <th>Estado</th>
+        </tr>
+    </thead>
+    <tbody>
+       {% for bill in bills %}
+            <tr data-id="{{ bill.id }}">
+                <td>{{ bill.id }}</td>
+                <td>{{ bill.client.fullclient }}</td>
+                <td>{{ bill.contract.fullcontract}}</td>
+                <td>{{ bill.fFactura |date('d-m-Y') }}</td>
+                <td>{{ bill.tarifa }}</td>
+                <td>{{ bill.consumo }}</td>
+                <td>{{ bill.estado }}</td>
+                <td class="actions">
+                    <a href="{{ path('gs_bill_view', {id: bill.id}) }}" class="btn btn-sm btn-info">Ver</a>
+                    <a href="{{ path('gs_bill_edit', {id: bill.id}) }}" class="btn btn-sm btn-primary">Cobrar</a>
+                </td>
+            </tr>
+        {% endfor %} 
+    </tbody>  
+</table>

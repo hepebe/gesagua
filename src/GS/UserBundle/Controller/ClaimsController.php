@@ -25,10 +25,12 @@ class ClaimsController extends Controller
     
     public function addAction()
     {
+        $gs = $this->getDoctrine()->getManager();
         $claims = new Claims();
         $form = $this->createCreateForm($claims);
+        $clients = $gs->getRepository('GSUserBundle:Client')->findAll();
         
-        return $this->render('GSUserBundle:Claims:add.html.twig', array('form'=>$form->createView()));
+        return $this->render('GSUserBundle:Claims:add.html.twig', array('clients'=>$clients,'form'=>$form->createView()));
     }
     
     private function createCreateForm(Claims $entity)
@@ -186,6 +188,36 @@ class ClaimsController extends Controller
         if($claimss){
             $data = $this->render('GSUserBundle:Claims:ajax_template.html.twig', array(
                 'claimss' => $claimss,
+            ));
+            $status = 'success';
+            $html = $data->getContent();
+        }
+    
+    
+        $jsonArray = array(
+            'status' => $status,
+            'data' => $html,
+        );
+        
+        $response = new Response(json_encode($jsonArray));
+        $response->headers->set('Content-Type', 'application/json; charset=utf-8');
+        return $response;
+
+    }
+    
+    public function selectclientAction()
+    {
+        $gs = $this->getDoctrine()->getManager(); 
+        $request = $this->get('request');
+        $searchParameter = $request->request->get('text');
+        $clients = $gs->getRepository('GSUserBundle:Claims')
+                     ->findClient($searchParameter);
+        
+        $status = 'error';
+        $html = '';
+        if($clients){
+            $data = $this->render('GSUserBundle:Claims:ajax_template_selectClient.html.twig', array(
+                'clients' => $clients,
             ));
             $status = 'success';
             $html = $data->getContent();

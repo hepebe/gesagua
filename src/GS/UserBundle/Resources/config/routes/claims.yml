@@ -50,3 +50,7 @@ gs_claims_redirect_edit:
 gs_claims_searchclaims:
     path:     /searchclaims
     defaults: { _controller: GSUserBundle:Claims:searchclaims }
+    
+gs_claims_selectclient:
+    path:     /selectclient
+    defaults: { _controller: GSUserBundle:Claims:selectclient }

@@ -19,4 +19,11 @@ class ClaimsRepository extends EntityRepository
                 ->setParameter('string','%'.$string.'%')
                 ->getResult();
     }
+    
+    public function findClient($string){
+        return $this->getEntityManager()->createQuery('SELECT c FROM GSUserBundle:Client c 
+                WHERE c.nombre LIKE :string')
+                ->setParameter('string','%'.$string.'%')
+                ->getResult();
+    }
 }

@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\Table(name="Incidencias")
  * @ORM\Entity(repositoryClass="GS\UserBundle\Entity\IncidenceRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 class Incidence
 {
@@ -46,7 +47,7 @@ class Incidence
     /**
      * @var string
      *
-     * @ORM\Column(name="tipo", type="string", columnDefinition="ENUM('Parado','Cambio de contador','Avería fontanero','Consumo elevado','Manipulado', 'Consumo negativo', 'Cambio de dirección')", length=255)
+     * @ORM\Column(name="tipo", type="string", columnDefinition="ENUM('Parado','Cambio de contador','Avería fontanero','Consumo elevado','Manipulado', 'Consumo negativo', 'Cambio de dirección', 'Colocar contador')", length=255)
      */
     private $tipo;
 
@@ -60,12 +61,12 @@ class Incidence
     /**
      * @var boolean
      *
-     * @ORM\Column(name="estado", type="boolean")
+     * @ORM\Column(name="estado", type="string", columnDefinition="ENUM('Pendiente','Resuelto')")
      */
     private $estado;
 
     /**
-     * @var \DateTime
+     * @var \Date
      *
      * @ORM\Column(name="fIncidencia", type="date")
      */
@@ -301,5 +302,13 @@ class Incidence
     public function getContract()
     {
         return $this->contract;
+    }
+
+    /**
+     * @ORM\PrePersist 
+     */
+    public function setFIncidenciaValue()
+    {
+        $this->fIncidencia = new \DateTime();
     }
 }

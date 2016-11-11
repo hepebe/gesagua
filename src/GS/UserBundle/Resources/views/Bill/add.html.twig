@@ -1,0 +1,69 @@
+{% extends 'layout.html.twig' %}
+
+{% block body %}
+    {{ parent() }}
+    <div class="main container">
+        <div class="row well">
+            <div class="col-md-6">
+                <div class="page-header">
+                    <h2>Nueva Factura</h2>
+                </div>
+                {{ form_start(form, {'attr' : {'novalidate':'novalidate', 'role' : 'form'} }) }}
+                
+                <div class="hidden">
+                    <div class="form-group">
+                        <b>Cliente</b>
+                        {{ form_widget(form.client, {'attr' : {'class' : 'form-control', 'placeholder' : 'cliente'} }) }}
+                        <span class="text-danger">{{ form_errors(form.client) }}</span>
+                    </div>
+                </div>
+                
+                <b>Cliente</b>
+                <div class="select-editable">
+                    <select id="selectClient">
+                        <option value="">Selecciona un cliente...</option>
+                        {% for client in clients %}
+                            <option value="{{ client.id }}"> {{ client.fullclient }} </option>
+                        {% endfor %}
+                    </select>
+                    <input type="text" class="form-control" id="textClient" name="format" value="" placeholder="Buscar..."/>
+                </div><br>
+                
+                <div class="hidden">
+                    <div class="form-group">
+                        <b>Contrato</b>
+                        {{ form_widget(form.contract, {'attr' : {'class' : 'form-control', 'placeholder' : 'contrato'} }) }}
+                        <span class="text-danger">{{ form_errors(form.contract) }}</span>
+                    </div>
+                </div>
+                
+                <b>Contrato</b>
+                <div class="select-editable">
+                    <select id="selectContract" disabled>
+                        <option value="">Selecciona un contrato...</option>
+                        {% for contract in contracts %}
+                            <option value="{{ contract.id }}"> {{ contract.fullcontract }} </option>
+                        {% endfor %}
+                    </select>
+                    <input type="text" class="form-control" id="textContract" name="format" value="" placeholder="Buscar..." disabled/>
+                </div><br>
+                
+                <div class="form-group">
+                    <b>Tarifa</b>
+                    {{ form_widget(form.tarifa, {'attr' : {'class' : 'form-control', 'placeholder' : 'tarifa'} }) }}
+                    <span class="text-danger">{{ form_errors(form.tarifa) }}</span>
+                </div>
+                <p>
+                    {{ form_widget(form.save, {'label': 'Crear Contrato', 'attr':{'class':'btn btn-success', 'disabled':'disabled'}}) }}
+                </p>
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts%}
+    {{ parent() }}
+    <script src="{{ asset('bundles/gsuser/js/selectClientBill.js') }}"></script>
+    <script src="{{ asset('bundles/gsuser/js/selectContractBill.js') }}"></script>
+{% endblock %}

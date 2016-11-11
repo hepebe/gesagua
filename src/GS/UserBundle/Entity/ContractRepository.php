@@ -19,4 +19,18 @@ class ContractRepository extends EntityRepository
                 ->setParameter('integer','%'.$integer.'%')
                 ->getResult();
     }
+    
+    public function findClient($string){
+        return $this->getEntityManager()->createQuery('SELECT c FROM GSUserBundle:Client c 
+                WHERE c.nombre LIKE :string')
+                ->setParameter('string','%'.$string.'%')
+                ->getResult();
+    }
+    
+    public function findStreet($string){
+        return $this->getEntityManager()->createQuery('SELECT s FROM GSUserBundle:Street s
+                WHERE s.nombre LIKE :string')
+                ->setParameter('string','%'.$string.'%')
+                ->getResult();
+    }
 }
