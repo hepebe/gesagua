@@ -14,27 +14,18 @@ use Doctrine\ORM\EntityManager;
 class BillRepository extends EntityRepository
 {
     public function findByLetters($integer){
-        return $this->getEntityManager()->createQuery('SELECT b FROM GSUserBundle:Bill b  
-                WHERE b.id LIKE :integer')
-                ->setParameter('integer','%'.$integer.'%')
-                ->getResult();
+        return $this->getEntityManager()
+        ->createQueryBuilder()
+        ->select('b')
+        ->from('GSUserBundle:Bill', 'b')
+        ->innerJoin('b.contract','bc')
+        ->where('bc.id LIKE :integer')
+        ->setParameter('integer','%'.$integer.'%')
+        ->getQuery()
+        ->getResult();
     }
     
-    public function findClient($string){
-        return $this->getEntityManager()->createQuery('SELECT c FROM GSUserBundle:Client c 
-                WHERE c.nombre LIKE :string')
-                ->setParameter('string','%'.$string.'%')
-                ->getResult();
-    }
-    
-    public function findContract($integer, $id){
-        return $this->getEntityManager()->createQuery('SELECT c FROM GSUserBundle:Contract c
-                WHERE c.id LIKE :integer AND c.client= :id')
-                ->setParameter('integer','%'.$integer.'%')
-                ->setParameter('id', $id)
-                ->getResult();
-    }
-    
+   
     public function fillContract($id){
         return $this->getEntityManager()->createQuery('SELECT c FROM GSUserBundle:Contract c 
                 WHERE c.client= :id')
@@ -55,4 +46,17 @@ class BillRepository extends EntityRepository
                 ->setParameter('id',$id)
                 ->getResult();
     }
+    
+    public function findByLettersContract($string){
+        return $this->getEntityManager()
+        ->createQueryBuilder()
+        ->select('c')
+        ->from('GSUserBundle:Contract', 'c')
+        ->innerJoin('c.client','cc')
+        ->where('cc.nombre LIKE :string OR cc.apellidos LIKE :string OR c.id LIKE :string')
+        ->setParameter('string','%'.$string.'%')
+        ->getQuery()
+        ->getResult();
+    }
+    
 }

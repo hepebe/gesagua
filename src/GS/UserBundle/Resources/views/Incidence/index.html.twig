@@ -34,7 +34,7 @@
                     </thead>
                     <tbody id="incidenceTable">
                        {% for incidence in incidences %}
-                            {%if (incidence.tipo == "Consumo negativo" or incidence.tipo == "Cambio de dirección") and (app.user.tipo == "Gestor")%}
+                            {%if (incidence.tipo == "Consumo negativo(Gestor)" or incidence.tipo == "Cambio de dirección(Gestor)") and (app.user.tipo == "Gestor")%}
                                 <tr data-id="{{ incidence.id }}">
                                     <td>{{ incidence.userReg.fulluser }}</td>
                                     <td>{{ incidence.tipo }}</td>
@@ -53,7 +53,7 @@
                                         {% endif %}
                                     </td>
                                 </tr>
-                            {% elseif (incidence.tipo != "Consumo negativo" and incidence.tipo != "Cambio de dirección") and (app.user.tipo=="Fontanero") %}
+                            {% elseif (incidence.tipo != "Consumo negativo(Gestor)" and incidence.tipo != "Cambio de dirección(Gestor)") and (app.user.tipo=="Fontanero") %}
                                 <tr data-id="{{ incidence.id }}">
                                     <td>{{ incidence.userReg.fulluser }}</td>
                                     <td>{{ incidence.tipo }}</td>

@@ -11,24 +11,45 @@
     </thead>
     <tbody>
        {% for incidence in incidences %}
-            <tr data-id="{{ incidence.id }}">
-                <td>{{ incidence.userReg.fulluser }}</td>
-                <td>{{ incidence.tipo }}</td>
-                <td>{{ incidence.gravedad }}</td>
-                <td>{{ incidence.fIncidencia |date('d-m-Y') }}</td>
-                <td>{{ incidence.estado }}</td>
-                <td>
-                {% if incidence.userRes != null %}
-                    {{ incidence.userRes.fulluser }}
-                {% endif %}
-                </td>
-                <td class="actions">
-                    <a href="{{ path('gs_incidence_view', {id: incidence.id}) }}" class="btn btn-sm btn-info">Ver</a>
-                    {% if incidence.estado == "Pendiente" %}
-                        <a href="{{ path('gs_claims_edit', {id: incidence.id}) }}" class="btn btn-sm btn-primary">Editar</a>
+            {%if (incidence.tipo == "Consumo negativo" or incidence.tipo == "Cambio de dirección") and (app.user.tipo == "Gestor")%}
+                <tr data-id="{{ incidence.id }}">
+                    <td>{{ incidence.userReg.fulluser }}</td>
+                    <td>{{ incidence.tipo }}</td>
+                    <td>{{ incidence.gravedad }}</td>
+                    <td>{{ incidence.fIncidencia |date('d-m-Y') }}</td>
+                    <td>{{ incidence.estado }}</td>
+                    <td>
+                    {% if incidence.userRes != null %}
+                        {{ incidence.userRes.fulluser }}
                     {% endif %}
-                </td>
-            </tr>
+                    </td>
+                    <td class="actions">
+                        <a href="{{ path('gs_incidence_view', {id: incidence.id}) }}" class="btn btn-sm btn-info">Ver</a>
+                        {% if incidence.estado == "Pendiente" %}
+                            <a href="{{ path('gs_incidence_edit', {id: incidence.id}) }}" class="btn btn-sm btn-primary">Resolver</a>
+                        {% endif %}
+                    </td>
+                </tr>
+            {% elseif (incidence.tipo != "Consumo negativo" and incidence.tipo != "Cambio de dirección") and (app.user.tipo=="Fontanero") %}
+                <tr data-id="{{ incidence.id }}">
+                    <td>{{ incidence.userReg.fulluser }}</td>
+                    <td>{{ incidence.tipo }}</td>
+                    <td>{{ incidence.gravedad }}</td>
+                    <td>{{ incidence.fIncidencia |date('d-m-Y') }}</td>
+                    <td>{{ incidence.estado }}</td>
+                    <td>
+                    {% if incidence.userRes != null %}
+                        {{ incidence.userRes.fulluser }}
+                    {% endif %}
+                    </td>
+                    <td class="actions">
+                        <a href="{{ path('gs_incidence_view', {id: incidence.id}) }}" class="btn btn-sm btn-info">Ver</a>
+                        {% if incidence.estado == "Pendiente" %}
+                            <a href="{{ path('gs_incidence_edit', {id: incidence.id}) }}" class="btn btn-sm btn-primary">Resolver</a>
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endif %}
         {% endfor %} 
     </tbody>  
 </table>

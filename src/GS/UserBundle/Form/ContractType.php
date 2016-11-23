@@ -24,6 +24,7 @@ class ContractType extends AbstractType
                 'class' => 'GSUserBundle:Client',
                 'choice_label' => 'getfullclient'
                 ))
+            ->add('tarifa','choice',array('choices'=>array('Consumo doméstico'=>'Consumo doméstico', 'Consumo industrial'=>'Consumo industrial', 'Consumo construcciones'=>'Consumo construcciones', 'Consumo municipal'=>'Consumo municipal'), 'placeholder'=>'Selecciona tarifa'))
             ->add('save', 'submit', array('label'=>'Crear Contrato'))
         ;
     }

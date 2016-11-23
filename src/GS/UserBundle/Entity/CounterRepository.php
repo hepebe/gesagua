@@ -26,4 +26,10 @@ class CounterRepository extends EntityRepository
                 ->setParameter('integer','%'.$integer.'%')
                 ->getResult();
     }
+    
+    public function findActivoContract(){
+        return $this->getEntityManager()->createQuery('SELECT c FROM GSUserBundle:Contract c 
+                WHERE c.activo = 0')
+                ->getResult();
+    }
 }

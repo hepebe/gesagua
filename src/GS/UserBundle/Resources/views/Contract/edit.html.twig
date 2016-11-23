@@ -32,10 +32,15 @@
                         {{ form_widget(form.nVivienda, {'attr' : {'class' : 'form-control', 'placeholder' : 'Número de la vivienda'} }) }}
                         <span class="text-danger">{{ form_errors(form.nVivienda) }}</span>
                     </div>
+                    
+                    <div class="form-group">
+                        <b>Tarifa</b>
+                        {{ form_widget(form.tarifa, {'attr' : {'class' : 'form-control', 'placeholder' : 'tarifa'} }) }}
+                        <span class="text-danger">{{ form_errors(form.tarifa) }}</span>
+                    </div>
                 </div>
-        
                 <p>
-                    {{ form_widget(form.save, {'label': 'Editar Titular', 'attr':{'class':'btn btn-success'}}) }}
+                    {{ form_widget(form.save, {'label': 'Editar titular', 'attr':{'class':'btn btn-success'}}) }}
                 </p>
                 {{ form_end(form) }}
             </div>

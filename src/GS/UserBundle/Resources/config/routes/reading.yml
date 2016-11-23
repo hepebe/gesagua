@@ -13,6 +13,10 @@ gs_reading_adminroutes:
 gs_reading_readzone:
     path:   /readzone/{id}
     defaults: { _controller: GSUserBundle:Reading:readzone }
+
+gs_reading_returnIncidence:
+    path:   /returnIncidence/{id}-{zone}
+    defaults: { _controller: GSUserBundle:Reading:returnIncidence }
     
 gs_reading_searchzone:
     path:     /searchzone

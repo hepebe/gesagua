@@ -28,6 +28,7 @@
                             <th>Fecha de Alta</th>
                             <th>Fecha de Baja</th>
                             <th>Número del Contrato</th>
+                            <th>Calle</th>
                         </tr>
                     </thead>
                     <tbody id="counterTable">
@@ -40,7 +41,8 @@
                                     {{ counter.fBaja |date('d-m-Y') }}
                                 {% endif %}
                                 </td>
-                                <td>{{ counter.contract.fullcontract }}</td>
+                                <td>{{ counter.contract.id }}</td>
+                                <td>{{ counter.contract.street.fullstreet }}</td>
                                 <td class="actions">
                                     <a href="{{ path('gs_counter_view', {id: counter.nContador}) }}" class="btn btn-sm btn-info">Ver</a>
                                     {% if counter.fBaja == null %}

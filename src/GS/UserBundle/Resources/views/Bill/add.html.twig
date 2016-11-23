@@ -2,61 +2,50 @@
 
 {% block body %}
     {{ parent() }}
-    <div class="main container">
-        <div class="row well">
-            <div class="col-md-6">
-                <div class="page-header">
-                    <h2>Nueva Factura</h2>
-                </div>
-                {{ form_start(form, {'attr' : {'novalidate':'novalidate', 'role' : 'form'} }) }}
-                
-                <div class="hidden">
-                    <div class="form-group">
-                        <b>Cliente</b>
-                        {{ form_widget(form.client, {'attr' : {'class' : 'form-control', 'placeholder' : 'cliente'} }) }}
-                        <span class="text-danger">{{ form_errors(form.client) }}</span>
-                    </div>
-                </div>
-                
-                <b>Cliente</b>
-                <div class="select-editable">
-                    <select id="selectClient">
-                        <option value="">Selecciona un cliente...</option>
-                        {% for client in clients %}
-                            <option value="{{ client.id }}"> {{ client.fullclient }} </option>
-                        {% endfor %}
-                    </select>
-                    <input type="text" class="form-control" id="textClient" name="format" value="" placeholder="Buscar..."/>
-                </div><br>
-                
-                <div class="hidden">
-                    <div class="form-group">
-                        <b>Contrato</b>
-                        {{ form_widget(form.contract, {'attr' : {'class' : 'form-control', 'placeholder' : 'contrato'} }) }}
-                        <span class="text-danger">{{ form_errors(form.contract) }}</span>
-                    </div>
-                </div>
-                
-                <b>Contrato</b>
-                <div class="select-editable">
-                    <select id="selectContract" disabled>
-                        <option value="">Selecciona un contrato...</option>
-                        {% for contract in contracts %}
-                            <option value="{{ contract.id }}"> {{ contract.fullcontract }} </option>
-                        {% endfor %}
-                    </select>
-                    <input type="text" class="form-control" id="textContract" name="format" value="" placeholder="Buscar..." disabled/>
-                </div><br>
-                
-                <div class="form-group">
-                    <b>Tarifa</b>
-                    {{ form_widget(form.tarifa, {'attr' : {'class' : 'form-control', 'placeholder' : 'tarifa'} }) }}
-                    <span class="text-danger">{{ form_errors(form.tarifa) }}</span>
-                </div>
-                <p>
-                    {{ form_widget(form.save, {'label': 'Crear Contrato', 'attr':{'class':'btn btn-success', 'disabled':'disabled'}}) }}
-                </p>
-                {{ form_end(form) }}
+    {% if flashMessage is not defined %}
+        <div class="alert alert-success hidden" id="message" role="alert">
+            <div class="container"> 
+                <span id="user-message"></span>
+            </div>
+        </div>
+    {% endif %}
+    {% for flashMessage in app.session.flashbag.get('mensaje') %}
+        <div class="alert alert-success" role="alert">
+            <div class="container"> {{ flashMessage }}</div>
+        </div>
+    {% endfor %}
+    <div class="container">
+        <div class="col-md-12">
+            <div class="page-header margin-none">
+                <h2 class="padding-none">Contratos</h2>
+            </div>
+            Buscar: <input type="text" id="searchcontract" name="searchcontract" class="input-medium search-query" placeholder="Nº del contrato o Nombre del cliente..."><br><br>
+            <div id="contractDivList" class="table-responsive">
+                <table class="table table-stripted table-hover">
+                    <thead>
+                        <tr>
+                            <th>Número del contrato</th>
+                            <th>Cliente</th>
+                            <th>Fecha última factura</th>
+                        </tr>
+                    </thead>
+                    <tbody id="contractTable">
+                       {% for contract in contracts %}
+                            <tr data-id="{{ contract.id }}">
+                                <td>{{ contract.id }}</td>
+                                <td>{{ contract.client.fullclient }}</td>
+                                <td>
+                                {% if contract.fultimaFactura != null %}
+                                   {{ contract.fultimaFactura |date('d-m-Y')}}
+                                {% endif %}
+                                </td>
+                                <td class="actions">
+                                    <a href="{{ path('gs_bill_create', {id: contract.id, client: contract.client.id}) }}" class="btn btn-sm btn-primary">Facturar</a>
+                                </td>
+                            </tr>
+                        {% endfor %} 
+                    </tbody>  
+                </table>
             </div>
         </div>
     </div>
@@ -64,6 +53,6 @@
 
 {% block javascripts%}
     {{ parent() }}
-    <script src="{{ asset('bundles/gsuser/js/selectClientBill.js') }}"></script>
-    <script src="{{ asset('bundles/gsuser/js/selectContractBill.js') }}"></script>
+    <script src="{{ asset('bundles/gsuser/js/searchcontractBill.js') }}"></script>
+    <script src="{{ asset('bundles/gsuser/js/searchclientBill.js') }}"></script>
 {% endblock %}

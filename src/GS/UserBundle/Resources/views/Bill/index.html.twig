@@ -19,7 +19,7 @@
             <div class="page-header margin-none">
                 <h2 class="padding-none">Facturas</h2>
             </div>
-            Buscar: <input type="text" id="searchbill" name="searchbill" class="input-medium search-query" placeholder="Número de la factura..."><br><br>
+            Buscar: <input type="text" id="searchbill" name="searchbill" class="input-medium search-query" placeholder="Número del contador..."><br><br>
             <div id="billDivList" class="table-responsive">
                 <table class="table table-stripted table-hover">
                     <thead>
@@ -27,9 +27,8 @@
                             <th>Número factura</th>
                             <th>Cliente</th>
                             <th>Nº del contrato</th>
+                            <th>Calle</th>
                             <th>Fecha</th>
-                            <th>Tarifa</th>
-                            <th>Consumo</th>
                             <th>Estado</th>
                         </tr>
                     </thead>
@@ -37,11 +36,10 @@
                        {% for bill in bills %}
                             <tr data-id="{{ bill.id }}">
                                 <td>{{ bill.id }}</td>
-                                <td>{{ bill.client.fullclient }}</td>
-                                <td>{{ bill.contract.fullcontract}}</td>
+                                <td>{{ bill.contract.client.fullclient }}</td>
+                                <td>{{ bill.contract.id}}</td>
+                                <td>{{ bill.contract.street.fullstreet}}</td>
                                 <td>{{ bill.fFactura |date('d-m-Y') }}</td>
-                                <td>{{ bill.tarifa }}</td>
-                                <td>{{ bill.consumo }}</td>
                                 <td>{{ bill.estado }}</td>
                                 <td class="actions">
                                     <a href="{{ path('gs_bill_view', {id: bill.id}) }}" class="btn btn-sm btn-info">Ver</a>

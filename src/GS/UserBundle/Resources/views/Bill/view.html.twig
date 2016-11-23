@@ -9,7 +9,7 @@
 	        <dl>
 	            <dt>{{'Cliente'}}</dt>
 	            <dd>
-	                {{ bill.client.fullclient }}
+	                {{ bill.contract.client.fullclient }}
 	                &nbsp;
 	            </dd>
 	            <br>
@@ -43,8 +43,8 @@
                         <tr data-id="{{ bill.id }}">
                             <td>{{ bill.lectAnterior }}</td>
                             <td>{{ bill.lectActual }}</td>
-                            <td>{{ bill.tarifa }}</td>
-                            <td> 1.35€ </td>
+                            <td>{{ bill.contract.tarifa }}</td>
+                            <td> 1.35 € </td>
                             <td>{{ bill.consumo }} m<sup>3</sup></td>
                         </tr>
                     </tbody>  

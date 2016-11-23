@@ -4,6 +4,7 @@ namespace GS\UserBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Contract
@@ -40,7 +41,7 @@ class Contract
    
     /**
      * @ORM\ManyToOne(targetEntity="Client", inversedBy="contracts1")
-     * @ORM\JoinColumn(name="client_id", referencedColumnName="id", onDelete="CASCADE")
+     * @ORM\JoinColumn(name="client_id", referencedColumnName="id", onDelete="CASCADE")     
      */
      
     protected $client;
@@ -82,7 +83,20 @@ class Contract
      */
     private $next;
 
-
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="tarifa", type="string", columnDefinition="ENUM('Consumo doméstico','Consumo industrial','Consumo construcciones', 'Consumo municipal')")  
+     */
+    private $tarifa;
+    
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="fultimaFactura", type="date")
+     */
+    private $fultimaFactura;
+    
     /**
      * Get id
      *
@@ -161,6 +175,54 @@ class Contract
     {
         return $this->next;
     }
+    
+    /**
+     * Set tarifa
+     *
+     * @param string $tarifa
+     * @return Bill
+     */
+    public function setTarifa($tarifa)
+    {
+        $this->tarifa = $tarifa;
+
+        return $this;
+    }
+
+    /**
+     * Get tarifa
+     *
+     * @return string 
+     */
+    public function getTarifa()
+    {
+        return $this->tarifa;
+    }
+    
+    /**
+     * Set fultimaFactura
+     *
+     * @param \DateTime $fultimaFactura
+     * @return Zone
+     */
+    public function setFultimaFactura($fultimaFactura)
+    {
+        $this->fultimaFactura = $fultimaFactura;
+
+        return $this;
+    }
+
+    /**
+     * Get fultimaFactura
+     *
+     * @return \DateTime 
+     */
+    public function getFultimaFactura()
+    {
+        return $this->fultimaFactura;
+    }
+    
+    
     /**
      * Constructor
      */

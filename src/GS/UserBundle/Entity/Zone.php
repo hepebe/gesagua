@@ -261,4 +261,5 @@ class Zone implements UserInterface
     {
         return $this->fultimaLectura;
     }
+
 }

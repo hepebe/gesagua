@@ -42,6 +42,8 @@
                 <p>
                     {{ form_widget(form.save, {'label': 'Crear Incidencia', 'attr':{'class':'btn btn-success'}}) }}
                 </p>
+                <a href="{{ path('gs_reading_returnIncidence', { id:id, zone: zone })}}" class="btn btn-sm btn-warning">Atrás</a>
+                
                 {{ form_end(form) }}
             </div>
         </div>

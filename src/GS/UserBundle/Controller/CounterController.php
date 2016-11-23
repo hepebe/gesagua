@@ -28,7 +28,7 @@ class CounterController extends Controller
         $gs = $this->getDoctrine()->getManager();
         $counter = new Counter();
         $form = $this->createCreateForm($counter);
-        $contracts = $gs->getRepository('GSUserBundle:Contract')->findAll();
+        $contracts = $gs->getRepository('GSUserBundle:Counter')->findActivoContract();
         
         return $this->render('GSUserBundle:Counter:add.html.twig', array('contracts'=>$contracts, 'form'=>$form->createView()));
     }

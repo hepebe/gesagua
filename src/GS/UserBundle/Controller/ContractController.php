@@ -53,7 +53,7 @@ class ContractController extends Controller
         {
             $gs = $this->getDoctrine()->getManager();
             $incidence = new Incidence();
-            $incidence ->setTipo("Colocar contador");
+            $incidence ->setTipo("Colocar contador(Fontanero)");
             $incidence ->setGravedad("Alta");
             $incidence ->setEstado("Pendiente");
             $incidence -> setContract($contract);

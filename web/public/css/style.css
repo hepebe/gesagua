@@ -6,6 +6,10 @@ input[type=radio] {
     margin: 2px -2px 0px 10px !important;
 }
 
+#searchcontract{
+    width:250px !important;
+}
+
  .select-editable {
      position:relative;
      background-color:white;

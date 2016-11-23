@@ -18,105 +18,105 @@
       {% if(app.user.tipo=='Administrador') %}
       <ul class="nav navbar-nav">
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Usuarios <span class="caret"></span></a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-users" aria-hidden="true"></i> Usuarios <span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="{{path('gs_user_index')}}">Lista usuarios</a></li>
-            <li><a href="{{path('gs_user_add')}}">Nuevo usuario</a></li>
+            <li><a href="{{path('gs_user_index')}}"><i class="fa fa-list-ul" aria-hidden="true"></i> Lista usuarios</a></li>
+            <li><a href="{{path('gs_user_add')}}"><i class="fa fa-user-plus" aria-hidden="true"></i> Nuevo usuario</a></li>
           </ul>
         </li>
       </ul>
       <ul class="nav navbar-nav">
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Zonas <span class="caret"></span></a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-map-o" aria-hidden="true"></i> Zonas <span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="{{path('gs_zone_index')}}">Lista zonas</a></li>
-            <li><a href="{{path('gs_zone_add')}}">Nueva zona</a></li>
+            <li><a href="{{path('gs_zone_index')}}"><i class="fa fa-list-ul" aria-hidden="true"></i> Lista zonas</a></li>
+            <li><a href="{{path('gs_zone_add')}}"><i class="fa fa-plus"></i> Nueva zona</a></li>
           </ul>
         </li>
       </ul>
       <ul class="nav navbar-nav">
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Calles <span class="caret"></span></a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-map-marker" aria-hidden="true"></i> Calles <span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="{{path('gs_street_index')}}">Lista calles</a></li>
-            <li><a href="{{path('gs_street_add')}}">Nueva calle</a></li>
+            <li><a href="{{path('gs_street_index')}}"><i class="fa fa-list-ul" aria-hidden="true"></i> Lista calles</a></li>
+            <li><a href="{{path('gs_street_add')}}"><i class="fa fa-plus"></i> Nueva calle</a></li>
           </ul>
         </li>
       </ul>
       {% elseif(app.user.tipo=='Gestor') %}
       <ul class="nav navbar-nav">
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Clientes <span class="caret"></span></a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-users" aria-hidden="true"></i> Clientes <span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="{{path('gs_client_index')}}">Lista clientes</a></li>
-            <li><a href="{{path('gs_client_add')}}">Nuevo clientes</a></li>
+            <li><a href="{{path('gs_client_index')}}"><i class="fa fa-list-ul" aria-hidden="true"></i> Lista clientes</a></li>
+            <li><a href="{{path('gs_client_add')}}"><i class="fa fa-user-plus" aria-hidden="true"></i> Nuevo cliente</a></li>
           </ul>
         </li>
       </ul>
       <ul class="nav navbar-nav">
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Contratos <span class="caret"></span></a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-file-text-o" aria-hidden="true"></i> Contratos <span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="{{path('gs_contract_index')}}">Lista contratos</a></li>
-            <li><a href="{{path('gs_contract_add')}}">Nuevo contrato</a></li>
+            <li><a href="{{path('gs_contract_index')}}"><i class="fa fa-list-ul" aria-hidden="true"></i> Lista contratos</a></li>
+            <li><a href="{{path('gs_contract_add')}}"><i class="fa fa-plus" aria-hidden="true"></i> Nuevo contrato</a></li>
           </ul>
         </li>
       </ul>
       <ul class="nav navbar-nav">
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Facturas <span class="caret"></span></a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa fa-file-excel-o" aria-hidden="true"></i> Facturas <span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="{{path('gs_bill_index')}}">Lista facturas</a></li>
-            <li><a href="{{path('gs_bill_add')}}">Nueva factura</a></li>
+            <li><a href="{{path('gs_bill_index')}}"><i class="fa fa-list-ul" aria-hidden="true"></i> Lista facturas</a></li>
+            <li><a href="{{path('gs_bill_add')}}"><i class="fa fa-list-ul" aria-hidden="true"></i> Lista Contratos</a></li>
           </ul>
         </li>
       </ul>
       <ul class="nav navbar-nav">
         <li>
-          <a href="{{path('gs_incidence_index')}}">Incidencias</a>
+          <a href="{{path('gs_incidence_index')}}"><i class="fa fa-warning" aria-hidden="true"></i> Incidencias</a>
         </li>
       </ul>
       {% elseif(app.user.tipo=='Lecturista') %}
       <ul class="nav navbar-nav">
         <li>
-          <a href="{{path('gs_reading_adminroutes')}}">Administrar rutas</a>
+          <a href="{{path('gs_reading_adminroutes')}}"><i class="fa fa-map-signs" aria-hidden="true"></i> Administrar rutas</a>
         </li>
       </ul>
       <ul class="nav navbar-nav">
         <li>
-          <a href="{{path('gs_reading_viewzones')}}">Leer zona</a>
+          <a href="{{path('gs_reading_viewzones')}}"><i class="fa fa-list" aria-hidden="true"></i> Leer zona</a>
         </li>
       </ul>
       
       {% elseif(app.user.tipo=='Fontanero') %}
       <ul class="nav navbar-nav">
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Contadores <span class="caret"></span></a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-clock-o" aria-hidden="true"></i> Contadores <span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="{{path('gs_counter_index')}}">Lista contadores</a></li>
-            <li><a href="{{path('gs_counter_add')}}">Nuevo contador</a></li>
+            <li><a href="{{path('gs_counter_index')}}"><i class="fa fa-list-ul" aria-hidden="true"></i> Lista contadores</a></li>
+            <li><a href="{{path('gs_counter_add')}}"><i class="fa fa-plus" aria-hidden="true"></i> Nuevo contador</a></li>
           </ul>
         </li>
       </ul>     
       <ul class="nav navbar-nav">
         <li>
-          <a href="{{path('gs_incidence_index')}}">Incidencias</a>
+          <a href="{{path('gs_incidence_index')}}"><i class="fa fa-warning" aria-hidden="true"></i> Incidencias</a>
         </li>
       </ul>
       {% elseif(app.user.tipo=='Auxiliar') %}
       <ul class="nav navbar-nav">
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Reclamaciones <span class="caret"></span></a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-file-text-o" aria-hidden="true"></i> Reclamaciones <span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="{{ path('gs_claims_index') }}">Lista reclamaciones</a></li>
-            <li><a href="{{ path('gs_claims_add') }}">Nueva reclamación</a></li>
+            <li><a href="{{ path('gs_claims_index') }}"><i class="fa fa-list-ul" aria-hidden="true"></i> Lista reclamaciones</a></li>
+            <li><a href="{{ path('gs_claims_add') }}"><i class="fa fa-plus" aria-hidden="true"></i> Nueva reclamación</a></li>
           </ul>
         </li>
       </ul>
       {% endif %}
       <ul class="nav navbar-nav navbar-right">
         <li>
-          <a href="{{ path('gs_user_logout') }}">Cerrar sesión</a>
+          <a href="{{ path('gs_user_logout') }}"><i class="fa fa-power-off" aria-hidden="true"></i> Cerrar sesión</a>
         </li>
       </ul>
     </div><!-- /.navbar-collapse -->

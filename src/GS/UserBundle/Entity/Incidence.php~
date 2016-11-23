@@ -47,7 +47,7 @@ class Incidence
     /**
      * @var string
      *
-     * @ORM\Column(name="tipo", type="string", columnDefinition="ENUM('Parado','Cambio de contador','Avería fontanero','Consumo elevado','Manipulado', 'Consumo negativo', 'Cambio de dirección', 'Colocar contador')", length=255)
+     * @ORM\Column(name="tipo", type="string", columnDefinition="ENUM('Contador parado(Fontanero)','Cambio de contador(Fontanero)','Avería fontanero(Fontanero)','Consumo elevado(Fontanero)','Manipulado(Fontanero)', 'Consumo negativo(Gestor)', 'Cambio de dirección(Gestor)', 'Colocar contador(Fontanero)', 'Otras(Fontanero)', 'Otras(Gestor)')", length=255)
      */
     private $tipo;
 
@@ -311,4 +311,5 @@ class Incidence
     {
         $this->fIncidencia = new \DateTime();
     }
+   
 }

@@ -16,7 +16,7 @@ class IncidenceType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('tipo', 'choice',array('choices'=>array('Parado'=>'Parado', 'Cambio de contador'=>'Cambio de contador', 'Avería fontanero'=>'Avería fontanero', 'Consumo elevado'=>'Consumo elevado', 'Manipulado'=>'Manipulado', 'Consumo negativo'=>'Consumo negativo', 'Cambio de dirección'=>'Cambio de dirección'), 'placeholder'=>'Selecciona tipo'))
+            ->add('tipo', 'choice',array('choices'=>array('Contador parado(Fontanero)'=>'Contador parado(Fontanero)', 'Cambio de contador(Fontanero)'=>'Cambio de contador(Fontanero)', 'Avería fontanero(Fontanero)'=>'Avería fontanero(Fontanero)', 'Consumo elevado(Fontanero)'=>'Consumo elevado(Fontanero)', 'Manipulado(Fontanero)'=>'Manipulado(Fontanero)', 'Consumo negativo(Gestor)'=>'Consumo negativo(Gestor)', 'Cambio de dirección(Gestor)'=>'Cambio de dirección(Gestor)', 'Colocar contador(Fontanero)'=>'Colocar contador(Fontanero)','Otras(Gestor)'=>'Otras(Gestor)', 'Otras(Fontanero)'=>'Otras(Fontanero)'), 'placeholder'=>'Selecciona tipo'))
             ->add('gravedad', 'choice',array('choices'=>array('Alta'=>'Alta', 'Media'=>'Media', 'Baja'=>'Baja'), 'placeholder'=>'Selecciona gravedad'))
             
             ->add('informacion', 'textarea', array('attr' => array('class' => 'tinymce')))

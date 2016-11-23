@@ -2,8 +2,20 @@
 
 {% block body %}
     {{ parent() }}
+    {% if flashMessage is not defined %}
+        <div class="alert alert-success hidden" id="message" role="alert">
+            <div class="container"> 
+                <span id="user-message"></span>
+            </div>
+        </div>
+    {% endif %}
+    {% for flashMessage in app.session.flashbag.get('mensaje') %}
+        <div class="alert alert-success" role="alert">
+            <div class="container"> {{ flashMessage }}</div>
+        </div>
+    {% endfor %}
     <div class="container well">
-	    <div id="readDiv" class="col-md-12">
+	    <div id="readDiv" class="col-md-9">
 	    <h2>Lectura Zona: {{ zones.nombre }}</h2>
 	        <br>
 	        <dl>
@@ -36,10 +48,20 @@
 	                &nbsp;
 	            </dd>
 	            <br>
-                    {% endfor %}
+                
+                {% endfor %}    
 	        </dl>
 	    </div>
-	</div> 
+	<div id="readActions" class="col-md-3">
+		<h3>{{ 'Acciones'}}:</h3>
+		<p>
+	    	<a href="{{ path('gs_incidence_add', { id:contracts.id, zone: zones.id }) }}" class="btn btn-primary btn-lg btn-block">
+	    		<span class="glyphicon glyphicon-edit"></span>
+	        	{{ 'Crear incidencia' }}
+			 </a>
+		</p>
+	</div>
+</div>
     
 {% endblock %}
 

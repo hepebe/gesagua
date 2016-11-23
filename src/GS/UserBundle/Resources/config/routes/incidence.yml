@@ -7,11 +7,11 @@ gs_incidence_index:
     defaults: { _controller: GSUserBundle:Incidence:index }
 
 gs_incidence_add:
-    path:     /add/{id}
+    path:     /add/{id}-{zone}
     defaults: { _controller: GSUserBundle:Incidence:add }
 
 gs_incidence_create:
-    path:     /create/{id}
+    path:     /create/{id}-{zone}
     defaults: { _controller: GSUserBundle:Incidence:create }
     methods: POST
     

@@ -24,7 +24,6 @@ class BillType extends AbstractType
                 'class' => 'GSUserBundle:Contract',
                 'choice_label' => 'getfullcontract'
                 ))
-            ->add('tarifa','choice',array('choices'=>array('Consumo doméstico'=>'Consumo doméstico', 'Consumo industrial'=>'Consumo industrial', 'Consumo construcciones'=>'Consumo construcciones', 'Consumo municipal'=>'Consumo municipal'), 'placeholder'=>'Selecciona tarifa'))
             ->add('save', 'submit', array('label'=>'Crear Factura'))
         ;
     }

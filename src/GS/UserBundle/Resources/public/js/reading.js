@@ -1,6 +1,7 @@
 function guardarLectura(ncontador, zone){
     var lectura = $('#lectura').val();
     var readDiv = $('#readDiv');
+    var readActions = $('#readActions');
     
     if(lectura==""){
         alert("Por favor, introduzca el valor de la lectura")
@@ -18,6 +19,7 @@ function guardarLectura(ncontador, zone){
                     readDiv.html(parsedData.data);
                 }else{
                     readDiv.empty();
+                    readActions.empty();
                     readDiv.html("<p>Zona finalizada</p><br><br><a href='http://gesagua-helenapbe.c9users.io/web/app_dev.php/reading/viewzones' class='btn btn-sm btn-info'>Atrás</a>");
                 }
             }

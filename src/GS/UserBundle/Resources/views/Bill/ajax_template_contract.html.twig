@@ -1,0 +1,21 @@
+<table class="table table-stripted table-hover">
+    <thead>
+        <tr>
+            <th>Número del contrato</th>
+            <th>Cliente</th>
+            <th>Fecha última factura</th>
+        </tr>
+    </thead>
+    <tbody>
+       {% for contract in contracts %}
+            <tr data-id="{{ contract.id }}">
+                <td>{{ contract.id }}</td>
+                <td>{{ contract.client.fullclient }}</td>
+                <td>{{ contract.fultimaFactura |date('d-m-Y')}}</td>
+                <td class="actions">
+                    <a href="{{ path('gs_bill_create', {id: contract.id, client: contract.client.id}) }}" class="btn btn-sm btn-primary">Facturar</a>
+                </td>
+            </tr>
+        {% endfor %} 
+    </tbody>  
+</table>

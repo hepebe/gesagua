@@ -14,14 +14,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Bill
 {
-     /**
-     * @ORM\ManyToOne(targetEntity="Client", inversedBy="bills")
-     * @ORM\JoinColumn(name="client_id", referencedColumnName="id", onDelete="CASCADE")
-     */
-     
-    protected $client;
-    
-     /**
+    /**
      * @ORM\ManyToOne(targetEntity="Contract", inversedBy="bills1")
      * @ORM\JoinColumn(name="contract_id", referencedColumnName="id", onDelete="CASCADE")
      */
@@ -61,17 +54,11 @@ class Bill
     /**
      * @var boolean
      *
-     * @ORM\Column(name="estado", type="boolean", columnDefinition="ENUM('Pendiente','Pagado')")
+     * @ORM\Column(name="estado", type="string", columnDefinition="ENUM('Pendiente','Cobrado')")
      */
     private $estado;
     
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="tarifa", type="string", columnDefinition="ENUM('Consumo doméstico','Consumo industrial','Consumo construcciones', 'Consumo municipal')")
-     * @Assert\NotBlank(message="Este campo es obligatorio")
-     */
-    private $tarifa;
+    
 
     /**
      * @var float
@@ -167,29 +154,6 @@ class Bill
     }
 
     /**
-     * Set client
-     *
-     * @param \GS\UserBundle\Entity\Client $client
-     * @return Bill
-     */
-    public function setClient(\GS\UserBundle\Entity\Client $client = null)
-    {
-        $this->client = $client;
-
-        return $this;
-    }
-
-    /**
-     * Get client
-     *
-     * @return \GS\UserBundle\Entity\Client 
-     */
-    public function getClient()
-    {
-        return $this->client;
-    }
-
-    /**
      * Set contract
      *
      * @param \GS\UserBundle\Entity\Contract $contract
@@ -235,28 +199,6 @@ class Bill
         return $this->estado;
     }
 
-    /**
-     * Set tarifa
-     *
-     * @param string $tarifa
-     * @return Bill
-     */
-    public function setTarifa($tarifa)
-    {
-        $this->tarifa = $tarifa;
-
-        return $this;
-    }
-
-    /**
-     * Get tarifa
-     *
-     * @return string 
-     */
-    public function getTarifa()
-    {
-        return $this->tarifa;
-    }
     
     /**
      * @ORM\PrePersist 

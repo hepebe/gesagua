@@ -28,7 +28,7 @@
                 </div>
                 
                 <div class="form-group">
-                    {{ form_label(form.fNacimiento) }}
+                    <b>Fecha de nacimiento</b>
                     {{ form_widget(form.fNacimiento, {'attr' : {'class' : 'form-control', 'placeholder' : 'fecha de nacimiento'} }) }}
                     <span class="text-danger">{{ form_errors(form.fNacimiento) }}</span>
                 </div>
@@ -64,7 +64,7 @@
                 </div>
                 
                 <div class="form-group">
-                    {{ form_label(form.password) }}
+                    <b>Contraseña</b>
                     {{ form_widget(form.password, {'attr' : {'class' : 'form-control', 'placeholder' : 'password'} }) }}
                     <span class="text-danger">{{ form_errors(form.password) }}</span>
                 </div>

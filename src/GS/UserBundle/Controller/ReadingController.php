@@ -223,6 +223,23 @@ class ReadingController extends Controller
         return $this->render('GSUserBundle:Reading:readzone.html.twig', array('contracts' => $contracts, 'counters'=>$counters, 'zones'=>$zones));
     }
     
+   public function returnIncidenceAction($id, $zone){
+        $gs = $this->getDoctrine()->getManager();
+        $zones = $gs->getRepository('GSUserBundle:Zone')->find($zone);
+        $contracts = $gs->getRepository('GSUserBundle:Contract')->find($id);
+        $repository = $this->getDoctrine()->getRepository('GSUserBundle:Counter');
+        
+        $query = $repository->createQueryBuilder('c')
+        ->innerJoin('c.contract','cc')
+        ->where('cc.id = :contract_id AND c.fBaja IS NULL')
+        ->setParameter('contract_id',$id)
+        ->getQuery();
+     
+        $counters = $query->getResult();
+        
+        return $this->render('GSUserBundle:Reading:readzone.html.twig', array('contracts' => $contracts, 'counters'=>$counters, 'zones'=>$zones));
+    }
+    
     public function savereadingAction(){
         $gs = $this->getDoctrine()->getManager(); 
         $request = $this->get('request');

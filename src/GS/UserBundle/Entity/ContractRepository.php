@@ -13,11 +13,16 @@ use Doctrine\ORM\EntityManager;
  */
 class ContractRepository extends EntityRepository
 {
-    public function findByLetters($integer){
-        return $this->getEntityManager()->createQuery('SELECT c FROM GSUserBundle:Contract c  
-                WHERE c.id LIKE :integer')
-                ->setParameter('integer','%'.$integer.'%')
-                ->getResult();
+    public function findByLetters($string){
+        return $this->getEntityManager()
+        ->createQueryBuilder()
+        ->select('c')
+        ->from('GSUserBundle:Contract', 'c')
+        ->innerJoin('c.client','cc')
+        ->where('cc.nombre LIKE :string OR cc.apellidos LIKE :string OR c.id LIKE :string')
+        ->setParameter('string','%'.$string.'%')
+        ->getQuery()
+        ->getResult();
     }
     
     public function findClient($string){

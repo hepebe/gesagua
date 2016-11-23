@@ -21,27 +21,27 @@ class IncidenceController extends Controller
         return $this->render('GSUserBundle:Incidence:index.html.twig', array('incidences' => $incidences));
     }
     
-    public function addAction($id)
+    public function addAction($id, $zone)
     {
         $incidence = new Incidence();
-        $form = $this->createCreateForm($incidence, $id);
+        $form = $this->createCreateForm($incidence, $id, $zone);
         
-        return $this->render('GSUserBundle:Incidence:add.html.twig', array('form'=>$form->createView()));
+        return $this->render('GSUserBundle:Incidence:add.html.twig', array('id'=>$id,'zone'=>$zone,'form'=>$form->createView()));
     }
     
-    private function createCreateForm(Incidence $entity, $id)
+    private function createCreateForm(Incidence $entity, $id, $zone)
     {
         $form = $this->createForm(new IncidenceType(), $entity, array(
-            'action' => $this->generateUrl('gs_incidence_create', array('id'=> $id)),
+            'action' => $this->generateUrl('gs_incidence_create', array('id'=> $id, 'zone'=> $zone)),
             'method' => 'POST'
             ));
         return $form;
     }
     
-    public function createAction($id, Request $request)
+    public function createAction($id, $zone, Request $request)
     {
         $incidence = new Incidence();
-        $form = $this->createCreateForm($incidence, $id);
+        $form = $this->createCreateForm($incidence, $id, $zone);
         $form -> handleRequest($request);
         
         if($form->isValid())
@@ -56,7 +56,7 @@ class IncidenceController extends Controller
             
             $this->addFlash('mensaje','La incidencia se ha creado correctamente.');
             
-            return $this->redirectToRoute('gs_reading_adminroutes');
+            return $this->redirectToRoute('gs_reading_returnIncidence', array('id'=> $id, 'zone'=> $zone));
         }
         
         return $this->render('GSUserBundle:Incidence:add.html.twig', array('form'=>$form->createView()));
@@ -100,6 +100,8 @@ class IncidenceController extends Controller
         {
             $user = $this->get('security.token_storage')->getToken()->getUser();
             $incidences->setUserRes($user);
+            $incidences->setEstado("Resuelto");
+            $incidences->getTipo();
             $gs-> persist($incidences);
             $gs->flush();
             $this->addFlash('mensaje','La incidencia se ha editado correctamente.');
